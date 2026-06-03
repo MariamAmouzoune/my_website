@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mariam Amouzoune | Plant Scientist &amp; Bioinformatician</title>
+  <meta name="description" content="PhD Plant Breeding &amp; Molecular Biology – GWAS, NGS, barley disease resistance, bioinformatics.">
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: rgb(245, 240, 232);
+      font-family: Inter, sans-serif;
+      color: rgb(26, 58, 42);
+    }
+    a { text-decoration: none; }
+
+    /* ── Header ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background-color: rgba(26, 58, 42, 0.85);
+      backdrop-filter: blur(12px);
+      transition: all 300ms;
+    }
+    .header-inner {
+      max-width: 72rem; margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 4rem;
+    }
+    .logo-link {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo-link svg { flex-shrink: 0; }
+    .logo-name {
+      font-weight: 700; font-size: 1.125rem;
+      font-family: 'Playfair Display', serif;
+      color: #f5f0e8;
+    }
+    nav {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      nav { display: flex; align-items: center; gap: 0.25rem; }
+    }
+    nav a {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem; font-weight: 500;
+      font-family: Inter, sans-serif;
+      color: rgb(232, 224, 208);
+      border-bottom: 2px solid transparent;
+      transition: all 200ms;
+    }
+    nav a:hover { color: rgb(200, 168, 75); }
+    nav a.active {
+      color: rgb(200, 168, 75);
+      background-color: rgba(200, 168, 75, 0.1);
+    }
+    .menu-btn {
+      display: block;
+      padding: 0.5rem; border-radius: 0.375rem;
+      background: none; border: none; cursor: pointer;
+      color: #f5f0e8;
+    }
+    @media (min-width: 768px) { .menu-btn { display: none; } }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      padding: 6rem 1rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgb(26, 58, 42) 0%, rgb(45, 92, 66) 100%);
+    }
+    .page-badge {
+      display: inline-block;
+      margin-bottom: 0.75rem; padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+      background-color: rgba(200, 168, 75, 0.2);
+      color: rgb(200, 168, 75);
+      border: 1px solid rgba(200, 168, 75, 0.4);
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: rgb(245, 240, 232);
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      max-width: 42rem; margin: 0 auto;
+      color: rgb(168, 196, 176);
+      font-family: Inter, sans-serif;
+    }
+
+    /* ── Stats ── */
+    .stats-grid {
+      max-width: 28rem; margin: 0 auto;
+      padding: 1rem;
+    }
+    .stats-inner {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 3.5rem;
+    }
+    .stat-card {
+      border-radius: 0.75rem; padding: 1.25rem;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(26, 58, 42, 0.1);
+    }
+    .stat-num {
+      font-size: 1.875rem; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: rgb(26, 58, 42);
+    }
+    .stat-label {
+      font-size: 0.75rem; margin-top: 0.25rem;
+      color: rgb(200, 168, 75);
+      font-family: Inter, sans-serif;
+    }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.5rem; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: rgb(26, 58, 42);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Publications container ── */
+    .pub-container {
+      max-width: 56rem; margin: 0 auto;
+      padding: 1rem 1.5rem 4rem;
+    }
+
+    /* ── Publication card ── */
+    .pub-card {
+      background-color: rgb(255, 255, 255);
+      border-radius: 0.75rem; padding: 1.5rem;
+      box-shadow: rgba(26, 58, 42, 0.06) 0px 2px 12px;
+      margin-bottom: 1rem;
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .pub-card.in-prep {
+      border: 2px dashed rgba(200, 168, 75, 0.4);
+      box-shadow: rgba(26, 58, 42, 0.04) 0px 2px 12px;
+    }
+    .pub-meta {
+      flex: 1; min-width: 0;
+    }
+    .pub-journal {
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: rgb(200, 168, 75);
+      font-family: Inter, sans-serif;
+    }
+    .pub-journal.in-prep-label { color: rgb(138, 104, 32); }
+    .pub-title {
+      font-size: 1.125rem; font-weight: 700; line-height: 1.35;
+      margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      color: rgb(26, 58, 42);
+    }
+    .pub-authors {
+      font-size: 0.875rem; margin-bottom: 0.75rem;
+      color: rgb(74, 106, 90);
+      font-family: Inter, sans-serif;
+    }
+    .pub-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .tag {
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px; font-size: 0.75rem;
+      background-color: rgba(26, 58, 42, 0.08);
+      color: rgb(26, 58, 42);
+      font-family: Inter, sans-serif;
+    }
+    .tag.in-prep {
+      background-color: rgba(200, 168, 75, 0.12);
+      color: rgb(138, 104, 32);
+    }
+    .doi-btn {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500;
+      background-color: rgb(26, 58, 42);
+      color: rgb(245, 240, 232);
+      font-family: Inter, sans-serif;
+      transition: background 200ms, color 200ms;
+      white-space: nowrap;
+    }
+    .doi-btn:hover { background-color: rgb(45, 92, 66); }
+    .doi-btn svg { width: 14px; height: 14px; }
+
+    /* ── Footer ── */
+    footer {
+      background-color: #1a3a2a;
+      color: #e8e0d0;
+      margin-top: 5rem;
+    }
+    .footer-inner {
+      max-width: 72rem; margin: 0 auto;
+      padding: 1rem 1.5rem 3rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem; margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .footer-name {
+      font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', serif;
+      color: #c8a84b;
+    }
+    .footer-desc { font-size: 0.875rem; line-height: 1.6; color: #a8c4b0; }
+    .footer-heading {
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      color: #c8a84b;
+      font-family: Inter, sans-serif;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
+    .footer-links a { color: #a8c4b0; transition: color 200ms; }
+    .footer-links a:hover { color: rgb(200, 168, 75); }
+    .footer-links a.active { color: rgb(200, 168, 75); }
+    .footer-bottom {
+      border-top: 1px solid rgba(200, 168, 75, 0.2);
+      padding-top: 1.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: space-between; gap: 0.75rem;
+      font-size: 0.75rem; color: #6a9a7a;
+    }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; } }
+    .footer-bottom span { color: #c8a84b; }
+
+    /* ── Fonts ── */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 3C14 3 6 8 6 16C20.4 9.6 24 14 24C18.4 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+        <path d="M14 24V14C14 14 10 11 8M14 14C14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-name">Mariam Amouzoune</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/research">Research</a>
+      <a href="/publications" class="active" aria-current="page">Publications</a>
+      <a href="/projects">Portfolio</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-label="Toggle menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="page-hero">
+  <div class="page-badge">Publications</div>
+  <h1>Peer-Reviewed Research</h1>
+  <p>Published research on barley genomics, disease resistance, and bioinformatics in leading international journals.</p>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stats-inner">
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Published Papers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">In Preparation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Journals</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PUBLICATIONS ═══════════════════ -->
+<div class="pub-container">
+
+  <h2 class="section-title">Published</h2>
+
+  <!-- Paper 1 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Scientific Reports &nbsp;·&nbsp; 2024</div>
+      <h3 class="pub-title">Genome-wide association study for seedling and adult plant resistance to leaf rust in barley</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">GWAS</span>
+        <span class="tag">Barley</span>
+        <span class="tag">Leaf Rust</span>
+        <span class="tag">Adult Plant Resistance</span>
+        <span class="tag">Puccinia hordei</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1038/s41598-024-53149-2" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 2 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Agriculture, 12, 1829 &nbsp;·&nbsp; 2022</div>
+      <h3 class="pub-title">Genome-wide association study for leaf rust resistance in a global barley panel</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">GWAS</span>
+        <span class="tag">Barley</span>
+        <span class="tag">Global Panel</span>
+        <span class="tag">Genetic Diversity</span>
+        <span class="tag">Leaf Rust</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.3390/agriculture12111829" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 3 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Genetic Resources and Crop Evolution &nbsp;·&nbsp; 2022</div>
+      <h3 class="pub-title">Mining resistance to leaf rust (Puccinia hordei) in barley landraces and wild relatives</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">Landraces</span>
+        <span class="tag">Wild Relatives</span>
+        <span class="tag">Resistance Mining</span>
+        <span class="tag">Germplasm</span>
+        <span class="tag">Barley</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1007/s10722-021-01268-4" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 4 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Crop Science, 61(1), 219–233 &nbsp;·&nbsp; 2021</div>
+      <h3 class="pub-title">Traits discovery in Hordeum vulgare using genome-wide association mapping</h3>
+      <p class="pub-authors">Rehman S., Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">Hordeum vulgare</span>
+        <span class="tag">GWAS</span>
+        <span class="tag">Trait Discovery</span>
+        <span class="tag">Crop Science</span>
+        <span class="tag">Genomics</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1002/csc2.20360" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- ── In Preparation ── -->
+  <h2 class="section-title" style="margin-top:2.5rem;">In Preparation</h2>
+
+  <!-- Prep 1 -->
+  <div class="pub-card in-prep">
+    <div class="pub-meta">
+      <div class="pub-journal in-prep-label">Target: Plants &nbsp;·&nbsp; In Preparation</div>
+      <h3 class="pub-title">Genomic diversity and population structure of wild barley germplasm from North Africa</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag in-prep">Wild Barley</span>
+        <span class="tag in-prep">Genetic Diversity</span>
+        <span class="tag in-prep">Population Structure</span>
+        <span class="tag in-prep">North Africa</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prep 2 -->
+  <div class="pub-card in-prep">
+    <div class="pub-meta">
+      <div class="pub-journal in-prep-label">Target: Crop Science &nbsp;·&nbsp; In Preparation</div>
+      <h3 class="pub-title">GWAS for disease resistance in Hordeum bulbosum: insights for barley improvement</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag in-prep">Hordeum bulbosum</span>
+        <span class="tag in-prep">GWAS</span>
+        <span class="tag in-prep">Disease Resistance</span>
+        <span class="tag in-prep">Pre-breeding</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pub-container -->
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <!-- Col 1: Bio -->
+      <div>
+        <h3 class="footer-name">Mariam Amouzoune</h3>
+        <p class="footer-desc">
+          PhD Plant Breeding &amp; Molecular Biology<br>
+          Bioinformatician · GWAS · NGS<br>
+          Ibn Tofail University × ICARDA
+        </p>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/publications" class="active">Publications</a></li>
+          <li><a href="/projects">Portfolio</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Connect -->
+      <div>
+        <h4 class="footer-heading">Connect</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:mariam.amouzoune@gmail.com">Email</a></li>
+          <li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener noreferrer">ResearchGate</a></li>
+          <li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Mariam Amouzoune. All rights reserved.</span>
+      <span>Plant Science &amp; Bioinformatics</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

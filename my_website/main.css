@@ -1,0 +1,570 @@
+/* ============================================================
+   main.css  –  Mariam Amouzoune | Plant Scientist & Bioinformatician
+   Shared stylesheet for all pages
+   ============================================================ */
+
+/* ── 1. CUSTOM PROPERTIES (Design Tokens) ── */
+:root {
+  /* Brand colours */
+  --forest-green:        #1a3a2a;
+  --forest-green-light:  #2d5c42;
+  --off-white:           #f5f0e8;
+  --amber:               #c8a84b;
+  --amber-light:         #d9bb6e;
+
+  /* Semantic colour system (oklch) */
+  --background:          oklch(96.8% .015 80);
+  --foreground:          oklch(18%  .06  155);
+  --card:                oklch(99%  .005 80);
+  --card-foreground:     oklch(18%  .06  155);
+  --popover:             oklch(99%  .005 80);
+  --popover-foreground:  oklch(18%  .06  155);
+  --primary:             oklch(27%  .08  155);
+  --primary-foreground:  oklch(97%  .01  80);
+  --secondary:           oklch(91%  .02  80);
+  --secondary-foreground:oklch(27%  .08  155);
+  --muted:               oklch(93%  .015 80);
+  --muted-foreground:    oklch(48%  .05  155);
+  --accent:              oklch(72%  .1   75);
+  --accent-foreground:   oklch(15%  .06  155);
+  --destructive:         oklch(57.7% .245 27.325);
+  --destructive-foreground: oklch(57.7% .245 27.325);
+  --border:              oklch(88%  .02  80);
+  --input:               oklch(88%  .02  80);
+  --ring:                oklch(72%  .1   75);
+
+  /* Chart colours */
+  --chart-1: oklch(64.6% .222 41.116);
+  --chart-2: oklch(60%   .118 184.704);
+  --chart-3: oklch(39.8% .07  227.392);
+  --chart-4: oklch(82.8% .189 84.429);
+  --chart-5: oklch(76.9% .188 70.08);
+
+  /* Sidebar tokens */
+  --sidebar:                   oklch(98.5% 0 0);
+  --sidebar-foreground:        oklch(18%  .06  155);
+  --sidebar-primary:           oklch(27%  .08  155);
+  --sidebar-primary-foreground:oklch(97%  .01  80);
+  --sidebar-accent:            oklch(93%  .015 80);
+  --sidebar-accent-foreground: oklch(27%  .08  155);
+  --sidebar-border:            oklch(88%  .02  80);
+  --sidebar-ring:              oklch(72%  .1   75);
+
+  /* Theme / spacing tokens */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace;
+
+  --color-amber-300:  oklch(87.9% .169 91.605);
+  --color-blue-600:   oklch(54.6% .245 262.881);
+  --color-gray-500:   oklch(55.1% .027 264.364);
+  --color-gray-600:   oklch(44.6% .03  256.802);
+  --color-gray-900:   oklch(21%   .034 264.665);
+  --color-white:      #ffffff;
+
+  --spacing: .25rem;
+
+  /* Container widths */
+  --container-md:  28rem;
+  --container-xl:  36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-4xl: 56rem;
+  --container-5xl: 64rem;
+  --container-6xl: 72rem;
+
+  /* Type scale */
+  --text-xs:            .75rem;
+  --text-xs--line-height: calc(1 / .75);
+  --text-sm:            .875rem;
+  --text-sm--line-height: calc(1.25 / .875);
+  --text-base:          1rem;
+  --text-base--line-height: 1.5;
+  --text-lg:            1.125rem;
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl:            1.25rem;
+  --text-xl--line-height: calc(1.75 / 1.25);
+  --text-2xl:           1.5rem;
+  --text-2xl--line-height: calc(2 / 1.5);
+  --text-3xl:           1.875rem;
+  --text-3xl--line-height: 1.2;
+  --text-4xl:           2.25rem;
+  --text-4xl--line-height: calc(2.5 / 2.25);
+  --text-5xl:           3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl:           3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl:           4.5rem;
+  --text-7xl--line-height: 1;
+
+  /* Font weights */
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* Letter spacing */
+  --tracking-wide:   .025em;
+  --tracking-wider:  .05em;
+  --tracking-widest: .1em;
+
+  /* Line heights */
+  --leading-tight:   1.25;
+  --leading-snug:    1.375;
+  --leading-relaxed: 1.625;
+
+  /* Border radius */
+  --radius:    .625rem;
+  --radius-2xl: 1rem;
+
+  /* Animation */
+  --animate-bounce: bounce 1s infinite;
+  --default-transition-duration: .15s;
+}
+
+/* ── 2. BASE RESET ── */
+*, ::after, ::before, ::backdrop {
+  box-sizing: border-box;
+  border-width: 0px;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* ── 3. HTML / HOST DEFAULTS ── */
+html, :host {
+  text-size-adjust: 100%;
+  tab-size: 4;
+  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 4. SCROLLBAR STYLING ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(26, 58, 42);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(245, 240, 232);
+}
+
+/* ── 5. BODY ── */
+body {
+  font-family: 'Inter', var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: var(--leading-relaxed);
+  overflow-x: hidden;
+}
+
+/* ── 6. LINKS ── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--amber);
+}
+
+/* ── 7. FOCUS RING ── */
+@supports (color: color-mix(in lab, red, red)) {
+  * {
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+}
+* {
+  outline-color: var(--ring);
+  border-color: var(--border);
+}
+
+/* ── 8. TYPOGRAPHY UTILITIES ── */
+.font-playfair   { font-family: 'Playfair Display', serif; }
+.font-inter      { font-family: 'Inter', var(--font-sans); }
+
+.text-xs         { font-size: var(--text-xs);   line-height: var(--text-xs--line-height); }
+.text-sm         { font-size: var(--text-sm);   line-height: var(--text-sm--line-height); }
+.text-base       { font-size: var(--text-base); line-height: var(--text-base--line-height); }
+.text-lg         { font-size: var(--text-lg);   line-height: var(--text-lg--line-height); }
+.text-xl         { font-size: var(--text-xl);   line-height: var(--text-xl--line-height); }
+.text-2xl        { font-size: var(--text-2xl);  line-height: var(--text-2xl--line-height); }
+.text-3xl        { font-size: var(--text-3xl);  line-height: var(--text-3xl--line-height); }
+.text-4xl        { font-size: var(--text-4xl);  line-height: var(--text-4xl--line-height); }
+.text-5xl        { font-size: var(--text-5xl);  line-height: var(--text-5xl--line-height); }
+
+.font-medium     { font-weight: var(--font-weight-medium); }
+.font-semibold   { font-weight: var(--font-weight-semibold); }
+.font-bold       { font-weight: var(--font-weight-bold); }
+
+.tracking-wide   { letter-spacing: var(--tracking-wide); }
+.tracking-wider  { letter-spacing: var(--tracking-wider); }
+.tracking-widest { letter-spacing: var(--tracking-widest); }
+
+.leading-tight   { line-height: var(--leading-tight); }
+.leading-snug    { line-height: var(--leading-snug); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+
+.uppercase       { text-transform: uppercase; }
+
+/* ── 9. COLOUR UTILITIES ── */
+.text-forest-green       { color: var(--forest-green); }
+.text-forest-green-light { color: var(--forest-green-light); }
+.text-amber              { color: var(--amber); }
+.text-amber-light        { color: var(--amber-light); }
+.text-off-white          { color: var(--off-white); }
+.text-muted              { color: var(--muted-foreground); }
+
+.bg-forest-green       { background-color: var(--forest-green); }
+.bg-forest-green-light { background-color: var(--forest-green-light); }
+.bg-amber              { background-color: var(--amber); }
+.bg-off-white          { background-color: var(--off-white); }
+.bg-card               { background-color: var(--card); }
+.bg-muted              { background-color: var(--muted); }
+
+/* ── 10. SHARED HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background-color: rgba(26, 58, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: none;
+  transition: all var(--default-transition-duration) ease;
+}
+.header-inner {
+  max-width: var(--container-6xl);
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+}
+.logo-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--off-white);
+  letter-spacing: var(--tracking-wide);
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+nav a {
+  font-family: 'Inter', var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: rgb(232, 224, 208);
+  text-decoration: none;
+  padding: .375rem .75rem;
+  border-radius: .25rem;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  transition: all 200ms;
+}
+nav a:hover,
+nav a.active {
+  color: var(--amber);
+  background-color: rgba(200, 168, 75, 0.12);
+  border-bottom-color: var(--amber);
+}
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--off-white);
+  padding: .5rem;
+  border-radius: .25rem;
+}
+@media (max-width: 768px) {
+  nav { display: none; }
+  .menu-btn { display: block; }
+}
+
+/* ── 11. SHARED FOOTER ── */
+footer {
+  background-color: var(--forest-green);
+  color: #e8e0d0;
+}
+.footer-inner {
+  max-width: var(--container-6xl);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.footer-brand h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--amber);
+  margin-bottom: .75rem;
+}
+.footer-brand p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: #a8c4b0;
+}
+.footer-col h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--amber);
+  margin-bottom: .75rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: .5rem; }
+.footer-col ul li a {
+  font-size: var(--text-sm);
+  color: #a8c4b0;
+  text-decoration: none;
+  transition: color 200ms;
+}
+.footer-col ul li a:hover { color: var(--amber); }
+.footer-bottom {
+  border-top: 1px solid rgba(200, 168, 75, 0.2);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: #6a9a7a;
+}
+@media (min-width: 640px) {
+  .footer-bottom { flex-direction: row; }
+}
+.footer-tagline { color: var(--amber); }
+
+/* ── 12. SHARED PAGE HERO BANNERS ── */
+.page-hero {
+  padding: 7rem 1rem 4rem;
+  background: linear-gradient(135deg, rgb(26, 58, 42) 0%, rgb(45, 92, 66) 100%);
+  text-align: center;
+}
+.page-badge {
+  display: inline-block;
+  margin-bottom: .75rem;
+  padding: .25rem .875rem;
+  border-radius: 9999px;
+  background-color: rgba(200, 168, 75, 0.2);
+  border: 1px solid rgba(200, 168, 75, 0.4);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--off-white);
+  margin-top: .5rem;
+}
+.page-subtitle {
+  color: rgb(168, 196, 176);
+  font-size: 1rem;
+  max-width: 40rem;
+  margin: .75rem auto 0;
+  line-height: var(--leading-relaxed);
+}
+
+/* ── 13. CARD UTILITIES ── */
+.card {
+  background-color: var(--card);
+  border: 1px solid rgba(26, 58, 42, 0.1);
+  border-radius: var(--radius);
+  box-shadow: rgba(26, 58, 42, 0.06) 0px 2px 12px;
+  transition: transform 200ms, box-shadow 200ms;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: rgba(26, 58, 42, 0.12) 0px 6px 24px;
+}
+.card-gold-top {
+  border-top: 3px solid var(--amber);
+  border-right: 1px solid rgba(26, 58, 42, 0.1);
+  border-bottom: 1px solid rgba(26, 58, 42, 0.1);
+  border-left: 1px solid rgba(26, 58, 42, 0.1);
+}
+
+/* ── 14. BUTTON UTILITIES ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .875rem 2rem;
+  border-radius: .5rem;
+  background-color: var(--amber);
+  color: var(--forest-green);
+  font-family: 'Inter', var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.btn-primary:hover { transform: scale(1.05); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .875rem 2rem;
+  border-radius: .5rem;
+  border: 2px solid rgba(200, 168, 75, 0.6);
+  color: var(--off-white);
+  font-family: 'Inter', var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.btn-outline:hover { transform: scale(1.05); }
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .875rem 2rem;
+  border-radius: .5rem;
+  background-color: var(--forest-green);
+  color: var(--off-white);
+  font-family: 'Inter', var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.btn-dark:hover { transform: scale(1.05); background-color: var(--forest-green-light); }
+
+/* ── 15. FORM UTILITIES ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  margin-bottom: 1rem;
+}
+.form-group label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--forest-green);
+}
+.form-group label .required { color: var(--amber); margin-left: .1rem; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: .625rem 1rem;
+  border: 2px solid rgba(26, 58, 42, 0.15);
+  border-radius: .5rem;
+  font-family: 'Inter', var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--forest-green);
+  background-color: rgb(250, 250, 248);
+  outline: none;
+  transition: border-color 200ms, box-shadow 200ms;
+  resize: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(26, 58, 42, 0.4);
+  box-shadow: 0 0 0 3px rgba(26, 58, 42, 0.06);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgb(154, 171, 138); }
+
+/* ── 16. TAG / BADGE UTILITIES ── */
+.tag {
+  display: inline-block;
+  padding: .25rem .625rem;
+  border-radius: 9999px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  background-color: rgba(26, 58, 42, 0.08);
+  color: rgb(45, 92, 66);
+}
+
+/* ── 17. SECTION UTILITIES ── */
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--forest-green);
+}
+.section-heading span { color: var(--amber); }
+.section-desc {
+  text-align: center;
+  color: var(--muted-foreground);
+  max-width: 42rem;
+  margin: 0 auto 3rem;
+  line-height: var(--leading-relaxed);
+}
+
+/* ── 18. ANIMATION KEYFRAMES ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── 19. RESPONSIVE HELPERS ── */
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+}
+@media (min-width: 641px) {
+  .show-sm-only { display: none; }
+}
