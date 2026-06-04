@@ -1308,7 +1308,7 @@ resLFC &lt;- <span class="rf">lfcShrink</span>(dds, coef = <span class="rs">"con
   </div>
   <div class="fig-wrap">
     <figure>
-      <img src="figures/MAplot.png" alt="MA Plot" onclick="openLB(this.src,'Fig. 4 — MA Plot. Red dots = significant DEGs (padj < 0.05).')">
+      <img src="figures/MAplot.png" alt="MAplot" onclick="openLB(this.src,'Fig. 4 — MA Plot. Red dots = significant DEGs (padj < 0.05).')">
       <figcaption><strong>Fig. 4</strong> — MA Plot. Each dot is a gene. Red = significant (padj &lt; 0.05). Upward shift = genes overexpressed in Treated.</figcaption>
     </figure>
   </div>
@@ -1347,17 +1347,11 @@ zscore_subset &lt;- zscore_all[<span class="rf">row.names</span>(DEG[<span class
   <div class="fig-2col">
     <div class="fig-wrap">
       <figure>
-        <img src="figures/heatmap_plot.png" alt="Heatmap of top DEGs" onclick="openLB(this.src,'Fig. 5 — Heatmap of top 50 DEGs, hierarchically clustered.')">
-        <figcaption><strong>Fig. 5</strong> — Heatmap of top 50 DEGs. Row-centred rlog expression. Hierarchical clustering groups co-regulated genes.</figcaption>
+        <img src="figures/heatmap_top10_genes.png" alt="Heatmap of top DEGs" onclick="openLB(this.src,'Fig. 5 — Heatmap of top 10 DEGs, hierarchically clustered.')">
+        <figcaption><strong>Fig. 5</strong> — Heatmap of top 10 DEGs. Row-centred rlog expression. Hierarchical clustering groups co-regulated genes.</figcaption>
       </figure>
     </div>
-    <div class="fig-wrap">
-      <figure>
-        <img src="figures/simple_heatmap.png" alt="Simple Heatmap" onclick="openLB(this.src,'Fig. 6 — Simplified expression heatmap across all conditions.')">
-        <figcaption><strong>Fig. 6</strong> — Simplified heatmap of normalised expression across all treatment conditions.</figcaption>
-      </figure>
-    </div>
-  </div>
+    
 
   <!-- 5G: Volcano -->
   <span class="anchor" id="step5g"></span>
@@ -1431,7 +1425,7 @@ keyvals &lt;- <span class="rf">ifelse</span>(
       <div class="gal-card-body"><h4>PCA — Treatment × Day</h4><p>Temporal dynamics of the transcriptome</p></div>
     </div>
     <div class="gal-card">
-      <img src="figures/qc-heatmap-samples.png" alt="QC heatmap" onclick="openLB(this.src,'QC Sample Distance Heatmap')">
+      <img src="figures/heatmap_plot.png" alt="QC heatmap" onclick="openLB(this.src,'QC Sample Distance Heatmap')">
       <div class="gal-card-body"><h4>QC Sample Distance Heatmap</h4><p>Sample-to-sample distances; replicate quality</p></div>
     </div>
     <div class="gal-card">
@@ -1443,14 +1437,10 @@ keyvals &lt;- <span class="rf">ifelse</span>(
       <div class="gal-card-body"><h4>Normalized Counts</h4><p>DESeq2-normalised counts for top DEG</p></div>
     </div>
     <div class="gal-card">
-      <img src="figures/heatmap_plot.png" alt="Heatmap" onclick="openLB(this.src,'Heatmap of top 50 DEGs')">
-      <div class="gal-card-body"><h4>Heatmap — Top DEGs</h4><p>Hierarchical clustering of top 50 DEGs</p></div>
+      <img src="figures/heatmap_top10_genes.png" alt="Heatmap" onclick="openLB(this.src,'Heatmap of top 10 DEGs')">
+      <div class="gal-card-body"><h4>Heatmap — Top DEGs</h4><p>Hierarchical clustering of top 10 DEGs</p></div>
     </div>
-    <div class="gal-card">
-      <img src="figures/simple_heatmap.png" alt="Simple Heatmap" onclick="openLB(this.src,'Simplified Heatmap')">
-      <div class="gal-card-body"><h4>Simple Heatmap</h4><p>Expression patterns across conditions</p></div>
-    </div>
-  </div>
+    
 
   <div class="btn-row">
     <a href="https://github.com/MariamAmouzoune/rice-rnaseq-magnaporthe" target="_blank" class="btn btn-primary">
