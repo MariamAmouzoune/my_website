@@ -439,20 +439,71 @@ footer { background: #0f1f16; color: #d5e8dc; border-top: 1px solid rgba(200,168
 <!-- ─── HEADER ─────────────────────────────── -->
 <header>
   <div class="hdr-inner">
-    <a href="../../index.html" class="logo">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M14 3C14 16C6 16C6 24 22 16C22 8 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.4"/>
-        <path d="M14 24V14M14 14C10 11 8 14 18 11" stroke="#c8a84b" stroke-width="1.1" stroke-linecap="round"/>
+    <a href="index.html" class="logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+        <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
       </svg>
       <span class="logo-name">Mariam Amouzoune</span>
     </a>
+
     <nav>
-      <a href="../../index.html">Home</a>
-      <a href="../../about.html">About</a>
-      <a href="../../research.html">Research</a>
-      <a href="../../publications.html">Publications</a>
-      <a href="../../projects.html" class="active">Portfolio</a>
-      <a href="../../contact.html">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+
+      <!-- Portfolio with dropdown -->
+      <span class="port-item">
+        <a href="portfolio.html" class="active">Portfolio</a>
+
+        <ul class="port-dropdown" role="menu">
+          <li class="port-dropdown-hdr" role="presentation">Projects</li>
+
+          <!-- Project 1 — Rice RNA-seq -->
+          <li role="menuitem">
+            <a href="portfolio/rice-rnaseq/rice-rnaseq-tutorial.html" class="proj-link">
+              <span class="proj-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </span>
+              <span>
+                <span class="proj-title-dd">Rice RNA-seq &amp; <em>M. oryzae</em></span>
+                <div class="proj-tag-dd">RNA-seq · DESeq2 · HISAT2</div>
+              </span>
+            </a>
+          </li>
+
+          <!--
+            Add future projects here — duplicate the <li> block above.
+            Example:
+          <li role="menuitem">
+            <a href="portfolio/gwas-barley/index.html" class="proj-link">
+              <span class="proj-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </span>
+              <span>
+                <span class="proj-title-dd">GWAS — Barley Drought Tolerance</span>
+                <div class="proj-tag-dd">GWAS · PLINK · R</div>
+              </span>
+            </a>
+          </li>
+          -->
+
+          <li class="view-all-row" role="menuitem">
+            <a href="portfolio.html">
+              View all projects
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </li>
+        </ul>
+      </span>
+      <!-- end Portfolio dropdown -->
+
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
