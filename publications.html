@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="main.css">
+    <title>Publications | Mariam Amouzoune</title>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="index.html" class="logo-link" aria-label="Mariam Amouzoune – Home">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+                <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text">Mariam Amouzoune</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="research.html" class="nav-link">Research</a>
+            <a href="publications.html" class="nav-link active" aria-current="page">Publications</a>
+            <span class="port-item">
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
+                <ul class="port-dropdown" role="menu">
+                    <li class="port-dropdown-hdr">Projects</li>
+                    <li>
+                        <a href="portfolio/rice-rnaseq/rice-rnaseq-tutorial.html" class="proj-link">
+                            <span class="proj-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                            <span>
+                                <span class="proj-title-dd">Rice RNA-seq &amp; <em>M. oryzae</em></span>
+                                <span class="proj-tag-dd">RNA-seq · DESeq2 · HISAT2</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="port-view-all">
+                        <a href="portfolio.html">View all projects
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="5" x2="20" y2="5"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="19" x2="20" y2="19"/>
+            </svg>
+        </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html" class="active" aria-current="page">Publications</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="page-hero">
+  <div class="page-badge">Publications</div>
+  <h1>Peer-Reviewed Research</h1>
+  <p>Published research on barley genomics, disease resistance, and bioinformatics in leading international journals.</p>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stats-inner">
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Published Papers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">In Preparation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Journals</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PUBLICATIONS ═══════════════════ -->
+<div class="pub-container">
+
+  <h2 class="section-title">Published</h2>
+
+  <!-- Paper 1 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Scientific Reports &nbsp;·&nbsp; 2024</div>
+      <h3 class="pub-title">Genome-wide association study for seedling and adult plant resistance to leaf rust in barley</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">GWAS</span>
+        <span class="tag">Barley</span>
+        <span class="tag">Leaf Rust</span>
+        <span class="tag">Adult Plant Resistance</span>
+        <span class="tag">Puccinia hordei</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1038/s41598-024-53149-2" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 2 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Agriculture, 12, 1829 &nbsp;·&nbsp; 2022</div>
+      <h3 class="pub-title">Genome-wide association study for leaf rust resistance in a global barley panel</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">GWAS</span>
+        <span class="tag">Barley</span>
+        <span class="tag">Global Panel</span>
+        <span class="tag">Genetic Diversity</span>
+        <span class="tag">Leaf Rust</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.3390/agriculture12111829" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 3 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Genetic Resources and Crop Evolution &nbsp;·&nbsp; 2022</div>
+      <h3 class="pub-title">Mining resistance to leaf rust (Puccinia hordei) in barley landraces and wild relatives</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">Landraces</span>
+        <span class="tag">Wild Relatives</span>
+        <span class="tag">Resistance Mining</span>
+        <span class="tag">Germplasm</span>
+        <span class="tag">Barley</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1007/s10722-021-01268-4" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- Paper 4 -->
+  <div class="pub-card">
+    <div class="pub-meta">
+      <div class="pub-journal">Crop Science, 61(1), 219–233 &nbsp;·&nbsp; 2021</div>
+      <h3 class="pub-title">Traits discovery in Hordeum vulgare using genome-wide association mapping</h3>
+      <p class="pub-authors">Rehman S., Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag">Hordeum vulgare</span>
+        <span class="tag">GWAS</span>
+        <span class="tag">Trait Discovery</span>
+        <span class="tag">Crop Science</span>
+        <span class="tag">Genomics</span>
+      </div>
+    </div>
+    <a href="https://doi.org/10.1002/csc2.20360" target="_blank" rel="noopener noreferrer" class="doi-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      </svg>
+      DOI
+    </a>
+  </div>
+
+  <!-- ── In Preparation ── -->
+  <h2 class="section-title" style="margin-top:2.5rem;">In Preparation</h2>
+
+  <!-- Prep 1 -->
+  <div class="pub-card in-prep">
+    <div class="pub-meta">
+      <div class="pub-journal in-prep-label">Target: Plants &nbsp;·&nbsp; In Preparation</div>
+      <h3 class="pub-title">Genomic diversity and population structure of wild barley germplasm from North Africa</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag in-prep">Wild Barley</span>
+        <span class="tag in-prep">Genetic Diversity</span>
+        <span class="tag in-prep">Population Structure</span>
+        <span class="tag in-prep">North Africa</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prep 2 -->
+  <div class="pub-card in-prep">
+    <div class="pub-meta">
+      <div class="pub-journal in-prep-label">Target: Crop Science &nbsp;·&nbsp; In Preparation</div>
+      <h3 class="pub-title">GWAS for disease resistance in Hordeum bulbosum: insights for barley improvement</h3>
+      <p class="pub-authors">Amouzoune M., et al.</p>
+      <div class="pub-tags">
+        <span class="tag in-prep">Hordeum bulbosum</span>
+        <span class="tag in-prep">GWAS</span>
+        <span class="tag in-prep">Disease Resistance</span>
+        <span class="tag in-prep">Pre-breeding</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pub-container -->
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-heading">Mariam Amouzoune</h3>
+                <p class="footer-text">
+                    PhD Plant Breeding &amp; Molecular Biology<br>
+                    Bioinformatician · GWAS · NGS<br>
+                    Ibn Tofail University × ICARDA
+                </p>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="index.html" class="footer-link">Home</a></li>
+                    <li><a href="about.html" class="footer-link">About</a></li>
+                    <li><a href="research.html" class="footer-link">Research</a></li>
+                    <li><a href="publications.html" class="footer-link">Publications</a></li>
+                    <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
+                    <li><a href="contact.html" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Connect</h4>
+                <ul class="footer-list">
+                    <li><a href="mailto:mariam.amouzoune@gmail.com" class="footer-link">Email</a></li>
+                    <li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener noreferrer" class="footer-link">ResearchGate</a></li>
+                    <li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            <span class="copyright-text">© 2026 Mariam Amouzoune. All rights reserved.</span>
+            <span class="copyright-accent">Plant Science &amp; Bioinformatics</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    var btn  = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(){
+        var open = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function(e){
+        if(!btn.contains(e.target) && !menu.contains(e.target)){
+            menu.classList.remove('show');
+            btn.setAttribute('aria-expanded','false');
+        }
+    });
+    // scroll effect
+    var hdr = document.getElementById('siteHeader');
+    if(hdr){
+        window.addEventListener('scroll', function(){
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+        }, {passive:true});
+    }
+})();
+</script>
+</body>
+</html>
