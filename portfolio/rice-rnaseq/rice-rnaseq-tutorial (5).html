@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rice RNA-seq Tutorial | Mariam Amouzoune</title>
+    <!-- Relative path to main CSS -->
+    <link rel="stylesheet" href="../../main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="../../index.html">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/></svg>
+            <span class="logo-text">Mariam Amouzoune</span>
+        </a>
+        <nav>
+            <a href="../../index.html" class="nav-link">Home</a>
+            <a href="../../about.html" class="nav-link">About</a>
+            <a href="../../portfolio.html" class="nav-link active">Portfolio</a>
+            <a href="../../contact.html" class="nav-link">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-inner">
+        <span style="text-transform: uppercase; color: var(--gold); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em;">Case Study 01</span>
+        <h1>Rice Transcriptome under <em>M. oryzae</em> Infection</h1>
+        <p>A full reproduction of Cui et al. (2021) using WSL2, HISAT2, and DESeq2.</p>
+    </div>
+</section>
+
+<main class="section">
+    <article class="prose">
+        <h2>01. Workflow Overview</h2>
+        <p>This project analyzes the transcriptomic reprogramming of rice in response to blast disease. We used 8 paired-end libraries (6 treated, 2 mock controls).</p>
+        
+        <div class="code-block">
+            <div class="code-header">Bash — Step 1: Mapping (HISAT2)</div>
+            <pre>for sample in control1 Treated1R1; do
+  hisat2 --dta-cufflinks -p 6 -x rice_index \
+         -1 ${sample}_1.fastq -2 ${sample}_2.fastq \
+         | samtools sort -o sorted_${sample}.bam
+done</pre>
+        </div>
+
+        <h2>02. Statistical Analysis in R</h2>
+        <div class="code-block">
+            <div class="code-header">R — Differential Expression</div>
+            <pre>library(DESeq2)
+dds <- DESeqDataSetFromMatrix(countData = dat, colData = coldata, design = ~ condition)
+dds <- DESeq(dds)
+res <- results(dds, contrast=c("condition", "T", "C"))</pre>
+        </div>
+
+        <div class="fig-card">
+            <div style="padding: 2rem; text-align: center; background: #f9f9f9;">
+                <!-- Placeholder for your image -->
+                <img src="diffexpr-volcanoplot.png" alt="Volcano Plot" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="fig-caption">
+                <strong>Figure 1:</strong> Volcano plot showing upregulated (red) and downregulated (blue) genes in infected vs control samples.
+            </div>
+        </div>
+
+    </article>
+</main>
+
+<footer>
+    <div class="footer-bottom">© 2026 Mariam Amouzoune. <a href="../../portfolio.html" style="color:var(--gold)">Return to Portfolio</a></div>
+</footer>
+
+</body>
+</html>
