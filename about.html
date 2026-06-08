@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="main.css">
+    <title>About | Mariam Amouzoune</title>
+</head>
+
+<body>
+
+<!-- ================================================
+     HEADER
+     ================================================ -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="index.html" class="logo-link" aria-label="Mariam Amouzoune – Home">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+                <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text">Mariam Amouzoune</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link active" aria-current="page">About</a>
+            <a href="research.html" class="nav-link">Research</a>
+            <a href="publications.html" class="nav-link">Publications</a>
+            <span class="port-item">
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
+                <ul class="port-dropdown" role="menu">
+                    <li class="port-dropdown-hdr">Projects</li>
+                    <li>
+                        <a href="portfolio/rice-rnaseq/rice-rnaseq-tutorial.html" class="proj-link">
+                            <span class="proj-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                            <span>
+                                <span class="proj-title-dd">Rice RNA-seq &amp; <em>M. oryzae</em></span>
+                                <span class="proj-tag-dd">RNA-seq · DESeq2 · HISAT2</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="port-view-all">
+                        <a href="portfolio.html">View all projects
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="5" x2="20" y2="5"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="19" x2="20" y2="19"/>
+            </svg>
+        </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active" aria-current="page">About</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<!-- ================================================
+     ABOUT HERO
+     ================================================ -->
+<div class="about-hero">
+    <div class="about-badge">About Me</div>
+    <h1>Plant Scientist<br>&amp;<br>Bioinformatician</h1>
+</div>
+
+<!-- ================================================
+     ABOUT CONTENT — about1.jpg to about4.jpg
+     ================================================ -->
+<main class="about-content">
+
+    <!-- SECTION 1 ── about1.jpg ── Introduction -->
+    <div class="about-section reveal">
+        <div class="about-img">
+            <img src="about1.jpg" alt="Dr. Mariam Amouzoune in the field" loading="lazy">
+        </div>
+        <div class="about-text">
+            <h2>Dr. Mariam <span class="gold">Amouzoune</span></h2>
+            <p>
+                I am a plant scientist and bioinformatician with a PhD in
+                Plant Breeding and Molecular Biology from Ibn Tofail
+                University (Kenitra, Morocco), conducted in partnership
+                with ICARDA (International Center for Agricultural
+                Research in the Dry Areas).
+            </p>
+            <p>
+                My doctoral research focused on unraveling the genetic
+                architecture of disease resistance in barley through
+                genome-wide association studies (GWAS), combining field
+                phenotyping with high-throughput genotyping data.
+            </p>
+            <div class="tag-row">
+                <span class="tag">GWAS</span>
+                <span class="tag">NGS</span>
+                <span class="tag">Plant Pathology</span>
+                <span class="tag">Bioinformatics</span>
+                <span class="tag">Cereal Diseases</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2 ── about2.jpg ── Research Focus -->
+    <div class="about-section reverse reveal">
+        <div class="about-img">
+            <img src="about2.jpg" alt="Laboratory genomic analysis" loading="lazy">
+        </div>
+        <div class="about-text">
+            <h2>Research <span class="gold">Focus</span></h2>
+            <p>
+                My research bridges the gap between classical plant
+                pathology and cutting-edge bioinformatics. I specialize in:
+            </p>
+            <ul class="detail-list">
+                <li>Genome-wide association studies (GWAS) for cereal disease resistance</li>
+                <li>Next-generation sequencing (NGS) data analysis</li>
+                <li>Quantitative trait loci (QTL) mapping</li>
+                <li>Marker-assisted selection for crop improvement</li>
+                <li>Statistical genomics using R, Python, PLINK, and TASSEL</li>
+            </ul>
+            <p>
+                I have published in high-impact journals including
+                <em>Scientific Reports</em>, <em>Agriculture</em>,
+                <em>Genetic Resources and Crop Evolution</em>, and
+                <em>Crop Science</em>.
+            </p>
+        </div>
+    </div>
+
+    <!-- SECTION 3 ── about3.jpg ── Education -->
+    <div class="about-section reveal">
+        <div class="about-img">
+            <img src="about3.jpg" alt="Academic training" loading="lazy">
+        </div>
+        <div class="about-text">
+            <h2>Education &amp; <span class="gold">Training</span></h2>
+            <p>
+                <strong>PhD in Plant Breeding &amp; Molecular Biology</strong><br>
+                Ibn Tofail University, Kenitra, Morocco<br>
+                <em>In partnership with ICARDA</em>
+            </p>
+            <p>
+                During my doctoral training I gained extensive experience
+                in both controlled-environment and field-based phenotyping
+                of cereal diseases, along with advanced computational
+                skills for processing and interpreting large-scale
+                genomic datasets.
+            </p>
+            <p>
+                I have received specialized training in bioinformatics
+                pipelines, statistical genetics, and high-performance
+                computing applied to plant breeding programs.
+            </p>
+        </div>
+    </div>
+
+    <!-- SECTION 4 ── about4.jpg ── Collaboration -->
+    <div class="about-section reverse reveal">
+        <div class="about-img">
+            <img src="about4.jpg" alt="International collaboration at ICARDA" loading="lazy">
+        </div>
+        <div class="about-text">
+            <h2>Collaboration &amp; <span class="gold">Vision</span></h2>
+            <p>
+                I am deeply committed to international scientific
+                collaboration. My partnership with ICARDA has allowed me
+                to work with diverse germplasm collections and contribute
+                to global food security initiatives targeting dryland
+                agriculture.
+            </p>
+            <p>
+                Looking ahead, I aim to continue integrating multi-omics
+                approaches — genomics, transcriptomics, and phenomics — to
+                accelerate the development of disease-resistant cereal
+                varieties adapted to the challenges of climate change.
+            </p>
+            <p>
+                I am always open to collaborative research opportunities
+                and eager to connect with fellow scientists working at the
+                intersection of plant science and data-driven biology.
+            </p>
+        </div>
+    </div>
+
+</main>
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-heading">Mariam Amouzoune</h3>
+                <p class="footer-text">
+                    PhD Plant Breeding &amp; Molecular Biology<br>
+                    Bioinformatician · GWAS · NGS<br>
+                    Ibn Tofail University × ICARDA
+                </p>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="index.html" class="footer-link">Home</a></li>
+                    <li><a href="about.html" class="footer-link">About</a></li>
+                    <li><a href="research.html" class="footer-link">Research</a></li>
+                    <li><a href="publications.html" class="footer-link">Publications</a></li>
+                    <li><a href="portfolio.html" class="footer-link">Portfolio</a></li>
+                    <li><a href="contact.html" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Connect</h4>
+                <ul class="footer-list">
+                    <li><a href="mailto:mariam.amouzoune@gmail.com" class="footer-link">Email</a></li>
+                    <li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener noreferrer" class="footer-link">ResearchGate</a></li>
+                    <li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            <span class="copyright-text">© 2026 Mariam Amouzoune. All rights reserved.</span>
+            <span class="copyright-accent">Plant Science &amp; Bioinformatics</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ================================================
+     JAVASCRIPT
+     ================================================ -->
+
+<script>
+(function(){
+    var btn  = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(){
+        var open = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function(e){
+        if(!btn.contains(e.target) && !menu.contains(e.target)){
+            menu.classList.remove('show');
+            btn.setAttribute('aria-expanded','false');
+        }
+    });
+    // scroll effect
+    var hdr = document.getElementById('siteHeader');
+    if(hdr){
+        window.addEventListener('scroll', function(){
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+        }, {passive:true});
+    }
+})();
+</script>
+</body>
+</html>
