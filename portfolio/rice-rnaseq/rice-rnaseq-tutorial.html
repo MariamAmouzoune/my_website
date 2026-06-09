@@ -5,1101 +5,1205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="main.css">
-    <title>Portfolio | Mariam Amouzoune</title>
+    <link rel="stylesheet" href="../../main.css">
+    <title>Rice RNA-seq Analysis | Mariam Amouzoune</title>
 </head>
 <body>
 
-<!-- ──────────── HEADER ──────────── -->
-<header>
-  <div class="hdr-inner">
-    <a class="logo" href="../../index.html" aria-label="Mariam Amouzoune — Home">
-      <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
-        <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      <span class="logo-name">Mariam Amouzoune</span>
-    </a>
-    <nav>
-      <a href="../../index.html">Home</a>
-      <a href="../../about.html">About</a>
-      <a href="../../research.html">Research</a>
-      <a href="../../publications.html">Publications</a>
-      <a href="../../portfolio.html" class="active">Portfolio</a>
-      <a href="../../contact.html">Contact</a>
+<!-- ─── HEADER ─────────────────────────────── -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="../../index.html" class="logo-link" aria-label="Mariam Amouzoune – Home">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+                <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text">Mariam Amouzoune</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+            <a href="../../index.html" class="nav-link">Home</a>
+            <a href="../../about.html" class="nav-link">About</a>
+            <a href="../../research.html" class="nav-link">Research</a>
+            <a href="../../publications.html" class="nav-link">Publications</a>
+            <span class="port-item">
+                <a href="../../portfolio.html" class="nav-link active">Portfolio</a>
+                <ul class="port-dropdown" role="menu">
+                    <li class="port-dropdown-hdr">Projects</li>
+                    <li>
+                        <a href="rice-rnaseq-tutorial.html" class="proj-link">
+                            <span class="proj-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                            <span>
+                                <span class="proj-title-dd">Rice RNA-seq &amp; <em>M. oryzae</em></span>
+                                <span class="proj-tag-dd">RNA-seq · DESeq2 · HISAT2</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="port-view-all">
+                        <a href="../../portfolio.html">View all projects
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+            <a href="../../contact.html" class="nav-link">Contact</a>
+        </nav>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="5" x2="20" y2="5"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="19" x2="20" y2="19"/>
+            </svg>
+        </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../about.html">About</a>
+        <a href="../../research.html">Research</a>
+        <a href="../../publications.html">Publications</a>
+        <a href="../../portfolio.html" class="active" aria-current="page">Portfolio</a>
+        <a href="../../contact.html">Contact</a>
     </nav>
-    <button class="menu-btn" aria-label="Open menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="5" x2="20" y2="5"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="19" x2="20" y2="19"/></svg>
-    </button>
-  </div>
 </header>
 
-<!-- ──────────── HERO ──────────── -->
-<section class="hero">
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- ─── HERO ───────────────────────────────── -->
+<div class="hero">
   <div class="hero-inner">
-
-    <div class="breadcrumb">
-      <a href="../../portfolio.html">Portfolio</a>
-      <span>›</span>
-      <a href="#" aria-current="page">Rice RNA-seq</a>
+    <div class="hero-breadcrumb">
+      <a href="../../portfolio.html">Portfolio</a> › <span>Rice RNA-seq Analysis</span>
     </div>
-
     <div class="hero-badge">
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Reproduction Study · 2026
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Bioinformatics Tutorial
     </div>
-
-    <h1>
-      Transcriptome of <em>Oryza sativa</em> in Response to<br>
-      <em>Magnaporthe oryzae</em> Infection
-    </h1>
-
+    <h1>RNA-seq Analysis of <em>Oryza sativa</em> in Response to <em>Magnaporthe oryzae</em> Infection</h1>
+    <p class="hero-desc">A complete, reproducible RNA-seq pipeline — from raw SRA data to differential gene expression results — reproducing Cui et al. (2021), <em>The Crop Journal</em>.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Cui et al. (2021) — ScienceDirect
-      </span>
-      <span class="hero-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Accession: SRP230704
-      </span>
-      <span class="hero-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Platform: WSL2 Ubuntu + R 4.x
-      </span>
+      <div class="hero-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg><strong>Data:</strong>&nbsp;NCBI SRA · SRP230674 &amp; SRP230704</div>
+      <div class="hero-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/><polyline points="14 2 14 8 20 8"/></svg><strong>Reference:</strong>&nbsp;Cui et al., Crop J 9:843–853 (2021)</div>
+      <div class="hero-meta-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><strong>Organism:</strong>&nbsp;<em>Oryza sativa</em> (rice)</div>
     </div>
-
-    <div class="tool-chips">
-      <span class="chip chip-bio">RNA-seq</span>
-      <span class="chip chip-bio">Plant pathology</span>
-      <span class="chip chip-tool">FastQC</span>
-      <span class="chip chip-tool">fastp</span>
-      <span class="chip chip-tool">HISAT2</span>
-      <span class="chip chip-tool">Cufflinks</span>
-      <span class="chip chip-stat">DESeq2</span>
-      <span class="chip chip-stat">EnhancedVolcano</span>
-      <span class="chip chip-stat">pheatmap</span>
+    <div class="hero-tags">
+      <span class="hero-tag">RNA-seq</span><span class="hero-tag">DESeq2</span>
+      <span class="hero-tag">HISAT2</span><span class="hero-tag">featureCounts</span>
+      <span class="hero-tag">FastQC · MultiQC</span><span class="hero-tag">R · ggplot2</span>
+      <span class="hero-tag">Rice Blast Disease</span><span class="hero-tag">NCBI SRA</span>
     </div>
+  </div>
+</div>
 
+<!-- ─── PAGE LAYOUT ────────────────────────── -->
+<div class="page-layout">
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR — TABLE OF CONTENTS
+     ══════════════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="toc-card">
+    <div class="toc-header">Table of Contents</div>
+    <div class="toc-body" id="toc">
+      <a href="#overview">Overview</a>
+      <a href="#design">Experimental Design</a>
+      <a href="#step1">1. Download Data from SRA</a>
+      <a href="#step1a" class="sub">A) Download via ENA (wget)</a>
+      <a href="#step1b" class="sub">B) Download via NCBI (aspera)</a>
+      <a href="#step1c" class="sub">C) SRA → FASTQ conversion</a>
+      <a href="#step1d" class="sub">D) Download genome &amp; GFF</a>
+      <div class="toc-sep"></div>
+      <a href="#step2">2. Quality Check</a>
+      <a href="#step2a" class="sub">A) Run FastQC</a>
+      <a href="#step2b" class="sub">B) Aggregate with MultiQC</a>
+      <div class="toc-sep"></div>
+      <a href="#step3">3. Mapping Reads to Genome</a>
+      <a href="#step3a" class="sub">A) HISAT2 — Index genome</a>
+      <a href="#step3b" class="sub">B) HISAT2 — Map reads</a>
+      <div class="toc-sep"></div>
+      <a href="#step4">4. Abundance Estimation</a>
+      <a href="#step4a" class="sub">A) Run featureCounts</a>
+      <a href="#step4b" class="sub">B) Merge count tables</a>
+      <div class="toc-sep"></div>
+      <a href="#step5">5. Differential Expression</a>
+      <a href="#step5a" class="sub">A) Load data &amp; DESeq2 setup</a>
+      <a href="#step5b" class="sub">B) QC — dispersion &amp; PCA</a>
+      <a href="#step5c" class="sub">C) Sample distance heatmap</a>
+      <a href="#step5d" class="sub">D) Extract DEG results</a>
+      <a href="#step5e" class="sub">E) MA Plot</a>
+      <a href="#step5f" class="sub">F) Heatmap of top DEGs</a>
+      <a href="#step5g" class="sub">G) Volcano Plot</a>
+      <div class="toc-sep"></div>
+      <a href="#results">Results Gallery</a>
+      <a href="#citation">Reference &amp; Data</a>
+    </div>
+    <div class="toc-links">
+      <a href="https://github.com/MariamAmouzoune/rice-rnaseq-magnaporthe" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        View on GitHub
+      </a>
+      <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230674" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        SRA SRP230674
+      </a>
+      <a href="https://doi.org/10.1016/j.cj.2020.10.008" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16h16V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Original Paper
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════ -->
+<main class="content">
+
+<!-- ── OVERVIEW ─────────────────────────────── -->
+<span class="anchor" id="overview"></span>
+<section>
+  <div class="prose">
+    <p>RNA-seq experiments are performed to comprehend transcriptomic changes in organisms in response to a treatment or mutation. This project reproduces the full analysis pipeline from <strong>Cui et al. (2021)</strong>, who characterised how <em>Oryza sativa</em> reprograms its transcriptome upon infection by <em>Magnaporthe oryzae</em> — the fungal pathogen responsible for rice blast disease, which causes major crop losses worldwide.</p>
+    <p>Raw data were downloaded from NCBI SRA (<a href="https://www.ncbi.nlm.nih.gov/sra/SRP230674" target="_blank">SRP230674</a> and <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230704" target="_blank">SRP230704</a>). The pipeline covers all steps from quality checking of reads through alignment, quantification, and identification of differentially expressed genes (DEGs). The overview is illustrated in the workflow below.</p>
+  </div>
+
+  <!-- Pipeline workflow strip -->
+  <div class="workflow">
+    <div class="wf-step"><div class="wf-box">SRA<br>Download</div><span>Step 1</span></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">FastQC<br>MultiQC</div><span>Step 2</span></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">HISAT2<br>Alignment</div><span>Step 3</span></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">feature<br>Counts</div><span>Step 4</span></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">DESeq2<br>DEGs</div><span>Step 5</span></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">Plots &<br>Results</div><span>Output</span></div>
   </div>
 </section>
 
-<!-- ──────────── MAIN CONTENT ──────────── -->
-<div class="page-wrap">
-
-  <!-- 1. Background -->
-  <div class="sec-divider">
-    <span class="sec-num">01</span>
-    <h2 class="sec-title">Background &amp; Objective</h2>
-    <div class="sec-line"></div>
+<!-- ── EXPERIMENTAL DESIGN ───────────────────── -->
+<span class="anchor" id="design"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num badge-style" style="background:var(--gold);color:var(--dg);">DESIGN</div>
+    <div class="sec-title"><h2>Experimental Design</h2><p>Sample structure, conditions, and sequencing strategy</p></div>
   </div>
-
-  <p class="prose">
-    Rice blast, caused by the ascomycete fungus <em>Magnaporthe oryzae</em>, is the most
-    devastating disease of rice worldwide, threatening food security across Asia, Africa,
-    and South America. Understanding the transcriptomic reprogramming that occurs during
-    infection is critical for designing durable resistance strategies.
-  </p>
-  <p class="prose" style="margin-top:.75rem">
-    This project is a <strong>full reproduction</strong> of the RNA-seq analysis published by
-    Cui et al. (2021) in <em>ScienceDirect</em> — <em>"Changes in the epigenome and
-    transcriptome of rice in response to Magnaporthe oryzae infection"</em>. Using the
-    publicly deposited raw sequencing data (NCBI SRA accession <strong>SRP230704</strong>),
-    I reproduced the complete bioinformatics pipeline from raw FASTQ files to a final list of
-    differentially expressed genes (DEGs), then generated publication-quality visualizations.
-  </p>
-
-  <div class="info-box">
-    <strong>Dataset:</strong> 8 paired-end RNA-seq libraries —
-    6 infected (<em>M. oryzae</em>-treated, three time points × two replicates) and
-    2 mock-inoculated controls. SRR IDs: SRR10498876–SRR10498883.
-    Reference genome: <em>Oryza sativa</em> IRGSP-1.0 (Ensembl Plants release 59).
+  <div class="prose">
+    <p>The experiment compares <strong>Treated (T)</strong> rice samples — inoculated with <em>M. oryzae</em> — against <strong>Control (C)</strong> mock-inoculated samples, sampled at multiple time points post-inoculation. RNA was extracted from leaf tissue; libraries were sequenced on Illumina. We have three biological replicates per condition.</p>
   </div>
-
-  <!-- 2. Pipeline -->
-  <div class="sec-divider">
-    <span class="sec-num">02</span>
-    <h2 class="sec-title">Analysis Pipeline</h2>
-    <div class="sec-line"></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Condition</th><th>Description</th><th>Replicate 1</th><th>Replicate 2</th><th>Replicate 3</th></tr></thead>
+      <tbody>
+        <tr><td><strong>T (Treated)</strong></td><td><em>M. oryzae</em>-infected</td><td><code>SRR…_T_1.fastq.gz</code></td><td><code>SRR…_T_2.fastq.gz</code></td><td><code>SRR…_T_3.fastq.gz</code></td></tr>
+        <tr><td><strong>C (Control)</strong></td><td>Mock inoculation</td><td><code>SRR…_C_1.fastq.gz</code></td><td><code>SRR…_C_2.fastq.gz</code></td><td><code>SRR…_C_3.fastq.gz</code></td></tr>
+      </tbody>
+    </table>
   </div>
-
-  <p class="prose">
-    The pipeline was executed entirely on <strong>WSL2 (Ubuntu 22.04)</strong> for all
-    pre-processing, alignment, and quantification steps, then switched to <strong>R</strong>
-    for statistical modelling and visualisation. Each step below shows the exact commands used.
-  </p>
-
-  <!-- Pipeline overview diagram -->
-  <div class="pipeline">
-    <div class="pipe-step">
-      <div class="pipe-dot">01</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Data download</div>
-        <div class="pipe-tools">16 paired-end FASTQ files retrieved from EBI FTP using <code>wget</code></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">02</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Quality control</div>
-        <div class="pipe-tools"><code>FastQC</code> — per-base quality, adapter content, overrepresented sequences</div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">03</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Adapter trimming</div>
-        <div class="pipe-tools"><code>fastp</code> — paired-end mode, quality threshold Q ≥ 30</div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">04</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Splice-aware alignment</div>
-        <div class="pipe-tools"><code>HISAT2</code> — aligned to IRGSP-1.0 index; <code>samtools sort</code> + <code>index</code></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">05</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Transcript quantification</div>
-        <div class="pipe-tools"><code>Cufflinks</code> per sample → <code>cuffmerge</code> → <code>cuffdiff</code></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">06</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Differential expression (R)</div>
-        <div class="pipe-tools"><code>DESeq2</code> — filter (rowSums ≥ 5), size-factor normalisation, Wald test; LFC shrinkage via <code>apeglm</code></div>
-      </div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-dot">07</div>
-      <div class="pipe-content">
-        <div class="pipe-title">Visualisation (R)</div>
-        <div class="pipe-tools"><code>EnhancedVolcano</code> · <code>pheatmap</code> · <code>ggplot2</code> PCA · MA plot · Dispersion estimates</div>
-      </div>
+  <div class="callout note">
+    <div class="callout-ico">ℹ️</div>
+    <div class="callout-body">
+      <div class="callout-label">Data accession</div>
+      <p>Check the <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230674" target="_blank">SRA BioProject page</a> for the exact SRR accession numbers, sample metadata, and replicate structure before downloading.</p>
     </div>
   </div>
+</section>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 01 — DATA DOWNLOAD
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 01</span>
-    <h2 class="sec-title">Data Download</h2>
-    <div class="sec-line"></div>
+<!-- ══════════════════════════════════════════
+     STEP 1 — DOWNLOAD DATA
+     ══════════════════════════════════════════ -->
+<span class="anchor" id="step1"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num">1</div>
+    <div class="sec-title"><h2>Download the Data from Public Repositories</h2><p>Retrieve raw FASTQ files from NCBI SRA or EMBL-EBI ENA</p></div>
+  </div>
+  <div class="prose">
+    <p>Raw sequencing data for this project are hosted in public repositories. The two main options are: download FASTQ directly from EMBL-EBI's European Nucleotide Archive (ENA), or download SRA archives from NCBI and convert them to FASTQ. Both routes are shown below.</p>
   </div>
 
-  <p class="prose">
-    Raw paired-end FASTQ files were downloaded directly from the EBI FTP mirror using
-    <code>wget -c</code> (the <code>-c</code> flag resumes interrupted downloads).
-    The dataset comprises 8 samples — 6 infected and 2 mock controls —
-    each with two read files (_1 and _2), giving 16 files total.
-    After download, all <code>.gz</code> archives are decompressed.
-  </p>
-
+  <!-- 1A: ENA -->
+  <span class="anchor" id="step1a"></span>
+  <h3 class="sh3">A) Download FASTQ directly from ENA (recommended)</h3>
+  <div class="prose">
+    <p>The fastest route is to use <code>wget</code> to pull pre-built FASTQ files from EBI's FTP server. Replace the SRR numbers below with the actual accessions from the BioProject page.</p>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 01: Download</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 01: Data Downloading — SRP230704
-## Samples: SRR10498876 – SRR10498883
-## Paired-end: _1 (forward) and _2 (reverse) per sample
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="cm"># Download paired-end FASTQ files directly from ENA FTP</span>
+<span class="cm"># Samples: SRR10498876 – SRR10498883 (Treatment + Control)</span>
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/076/SRR10498876/SRR10498876_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/076/SRR10498876/SRR10498876_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/077/SRR10498877/SRR10498877_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/077/SRR10498877/SRR10498877_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/078/SRR10498878/SRR10498878_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/078/SRR10498878/SRR10498878_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/079/SRR10498879/SRR10498879_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/079/SRR10498879/SRR10498879_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/080/SRR10498880/SRR10498880_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/080/SRR10498880/SRR10498880_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/081/SRR10498881/SRR10498881_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/081/SRR10498881/SRR10498881_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/082/SRR10498882/SRR10498882_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/082/SRR10498882/SRR10498882_2.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/083/SRR10498883/SRR10498883_1.fastq.gz
+<span class="fn">wget</span> <span class="fl">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/083/SRR10498883/SRR10498883_2.fastq.gz
 
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/076/SRR10498876/SRR10498876_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/076/SRR10498876/SRR10498876_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/077/SRR10498877/SRR10498877_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/077/SRR10498877/SRR10498877_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/078/SRR10498878/SRR10498878_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/078/SRR10498878/SRR10498878_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/079/SRR10498879/SRR10498879_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/079/SRR10498879/SRR10498879_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/080/SRR10498880/SRR10498880_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/080/SRR10498880/SRR10498880_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/081/SRR10498881/SRR10498881_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/081/SRR10498881/SRR10498881_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/082/SRR10498882/SRR10498882_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/082/SRR10498882/SRR10498882_2.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/083/SRR10498883/SRR10498883_1.fastq.gz
-<span class="fn">wget</span> <span class="kw">-c</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR104/083/SRR10498883/SRR10498883_2.fastq.gz
-
-<span class="cm"># Decompress all files</span>
-<span class="fn">gunzip</span> *.gz</pre>
+<span class="cm"># Decompress all downloaded files</span>
+<span class="fn">gunzip</span> *.gz</code></pre>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 02 — QUALITY CONTROL
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 02</span>
-    <h2 class="sec-title">Quality Control — FastQC</h2>
-    <div class="sec-line"></div>
+  <!-- 1B: NCBI aspera -->
+  <span class="anchor" id="step1b"></span>
+  <h3 class="sh3">B) Download from NCBI using SRA Toolkit + aspera</h3>
+  <div class="prose">
+    <p>Alternatively, use NCBI's SRA Toolkit with <strong>aspera</strong> high-speed transfer. This requires <code>sra-toolkit</code>, <code>edirect</code>, and <code>parallel</code> to be installed on your cluster.</p>
   </div>
-
-  <p class="prose">
-    FastQC generates per-sample HTML reports covering all key quality metrics.
-    Three parameters were checked to decide on data quality before proceeding to trimming:
-    <strong>(1)</strong> Per-base sequence quality,
-    <strong>(2)</strong> Overrepresented sequences, and
-    <strong>(3)</strong> Adapter content.
-  </p>
-
+  <div class="callout warn">
+    <div class="callout-ico">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-label">Warning: perl HTTPS issue</div>
+      <p>Sometimes users encounter <strong>perl</strong> issues when using <code>edirect</code>. The installed version of perl must support the HTTPS protocol. If you hit errors, check with <code>perl -MHTTP::Tiny -e 'print "OK\n"'</code>.</p>
+    </div>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 02: Quality Control</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 02: Quality Control using FastQC
-## Install: sudo apt-get install fastqc
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="kw">module load</span> sra-toolkit
+<span class="kw">module load</span> edirect
+<span class="kw">module load</span> parallel
 
-<span class="cm"># Run FastQC on all FASTQ files at once</span>
-<span class="fn">fastqc</span> *.fastq
+<span class="cm"># Step 1 — Fetch all SRR accession numbers for the project</span>
+<span class="fn">esearch</span> <span class="fl">-db</span> sra <span class="fl">-query</span> SRP230674 <span class="op">|</span> \
+  <span class="fn">efetch</span> <span class="fl">--format</span> runinfo <span class="op">|</span> \
+  <span class="fn">cut</span> <span class="fl">-d</span> <span class="st">","</span> <span class="fl">-f</span> 1 <span class="op">|</span> \
+  <span class="fn">awk</span> <span class="st">'NF&gt;0'</span> <span class="op">|</span> \
+  <span class="fn">grep</span> <span class="fl">-v</span> <span class="st">"Run"</span> <span class="op">&gt;</span> srr_numbers.txt
 
-<span class="cm"># Three parameters to check before deciding on trimming:
-# 1. Per base sequence quality  → should be green (Phred ≥ 28)
-# 2. Overrepresented sequences  → flag if any sequence > 0.1%
-# 3. Adapter content            → trim if adapters detected</span></pre>
+<span class="cm"># Step 2 — Build prefetch commands</span>
+<span class="kw">while</span> <span class="fn">read</span> <span class="va">line</span>; <span class="kw">do</span>
+  <span class="fn">echo</span> <span class="st">"prefetch --max-size 100G --transport ascp \
+    --ascp-path \"/path/to/aspera/ascp|/path/to/asperaweb_id_dsa.openssh\" \
+    <span class="op">${</span><span class="va">line</span><span class="op">}</span>"</span>
+<span class="kw">done</span> &lt; srr_numbers.txt <span class="op">&gt;</span> prefetch.cmds
+
+<span class="cm"># Step 3 — Run all downloads in parallel</span>
+<span class="fn">parallel</span> <span class="op">&lt;</span> prefetch.cmds</code></pre>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 03 — TRIMMING
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 03</span>
-    <h2 class="sec-title">Adapter Trimming — fastp</h2>
-    <div class="sec-line"></div>
+  <!-- 1C: SRA to FASTQ -->
+  <span class="anchor" id="step1c"></span>
+  <h3 class="sh3">C) Convert SRA archives to FASTQ format</h3>
+  <div class="callout warn">
+    <div class="callout-ico">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-label">Warning: fastq-dump is slow</div>
+      <p><code>fastq-dump</code> runs very slowly on large SRA files. Use <code>GNU parallel</code> to process multiple files simultaneously, or consider using <code>fasterq-dump</code> (newer, faster alternative).</p>
+    </div>
   </div>
-
-  <p class="prose">
-    If FastQC flags adapter contamination or low-quality bases, reads are trimmed with
-    <code>fastp</code> in paired-end mode. After trimming, FastQC is run again on the
-    trimmed files to confirm quality improvement before alignment.
-  </p>
-
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 03: Trimming</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 03: Trimming using fastp
-## Install: sudo apt-get install fastp
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="kw">module load</span> parallel
 
-<span class="cm"># Paired-end trimming — one sample example</span>
-<span class="fn">fastp</span> <span class="kw">-i</span> <span class="str">SRR10498876_1.fastq</span> <span class="kw">-o</span> <span class="str">trim_SRR10498876_1.fastq</span>       <span class="kw">-I</span> <span class="str">SRR10498876_2.fastq</span> <span class="kw">-O</span> <span class="str">trim_SRR10498876_2.fastq</span>       <span class="kw">--adapter_fasta</span> adapter.fasta
+<span class="va">INDIR</span>=<span class="st">"/path/to/sra/files"</span>   <span class="cm"># folder containing downloaded .sra files</span>
 
-<span class="cm"># Loop over all samples</span>
-<span class="kw">for</span> sample <span class="kw">in</span> control1 control2 Treated1R1 Treated1R2                      Treated2R1 Treated2R2 Treated3R1 Treated3R2; <span class="kw">do</span>
-    <span class="fn">fastp</span> <span class="kw">-i</span>  <span class="str">${sample}_1.fastq</span> <span class="kw">-o</span>  <span class="str">trim_${sample}_1.fastq</span>           <span class="kw">-I</span>  <span class="str">${sample}_2.fastq</span> <span class="kw">-O</span>  <span class="str">trim_${sample}_2.fastq</span>           <span class="kw">--adapter_fasta</span> adapter.fasta
-    echo <span class="str">"✅  Trimmed: ${sample}"</span>
-<span class="kw">done</span>
+<span class="cm"># Convert all .sra files to FASTQ in parallel</span>
+<span class="fn">parallel</span> <span class="st">"fastq-dump --split-files --origfmt --gzip {}"</span> \
+  ::: <span class="op">${</span><span class="va">INDIR</span><span class="op">}</span>/*.sra
 
-<span class="cm"># Re-check quality after trimming</span>
-<span class="fn">fastqc</span> trim_*.fastq</pre>
+<span class="cm"># --split-files : creates _1.fastq.gz and _2.fastq.gz for paired-end</span>
+<span class="cm"># --gzip        : compress output to save disk space</span></code></pre>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 04 — ALIGNMENT
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 04</span>
-    <h2 class="sec-title">Splice-Aware Alignment — HISAT2</h2>
-    <div class="sec-line"></div>
+  <!-- 1D: Genome -->
+  <span class="anchor" id="step1d"></span>
+  <h3 class="sh3">D) Download the rice reference genome and annotation</h3>
+  <div class="prose">
+    <p>We need the <em>Oryza sativa</em> genome (FASTA) and the gene annotation (GFF3/GTF). These are available from <a href="https://plants.ensembl.org" target="_blank">Ensembl Plants</a> or NCBI. Always use matching versions for both files.</p>
   </div>
-
-  <p class="prose">
-    Trimmed reads are aligned to the <em>Oryza sativa</em> IRGSP-1.0 reference genome using
-    HISAT2 with the <code>--dta-cufflinks</code> flag (required for downstream Cufflinks
-    quantification). The output is piped directly into <code>samtools sort</code> to produce
-    sorted BAM files in one pass, then indexed for fast random access.
-  </p>
-
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 04A: Download reference genome &amp; build index</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 04A: Reference genome and HISAT2 index
-## Install: sudo apt-get install hisat2 samtools
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="cm"># Download genome FASTA and GTF from Ensembl Plants (release 57)</span>
+<span class="fn">wget</span> <span class="st">"https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-57/\
+fasta/oryza_sativa/dna/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa.gz"</span>
 
-<span class="cm"># Download Oryza sativa IRGSP-1.0 reference genome (Ensembl Plants release 59)</span>
-<span class="fn">wget</span> ftp://ftp.ensemblgenomes.org/pub/plants/release-59/fasta/oryza_sativa/dna/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa.gz
-<span class="fn">wget</span> ftp://ftp.ensemblgenomes.org/pub/plants/release-59/gtf/oryza_sativa/Oryza_sativa.IRGSP-1.0.59.gtf.gz
+<span class="fn">wget</span> <span class="st">"https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-57/\
+gtf/oryza_sativa/Oryza_sativa.IRGSP-1.0.57.gtf.gz"</span>
 
-<span class="cm"># Decompress</span>
-<span class="fn">gunzip</span> Oryza_sativa.IRGSP-1.0.dna.toplevel.fa.gz
-<span class="fn">gunzip</span> Oryza_sativa.IRGSP-1.0.59.gtf.gz
+<span class="cm"># Decompress both files before use</span>
+<span class="fn">gzip</span> <span class="fl">-d</span> Oryza_sativa.IRGSP-1.0.dna.toplevel.fa.gz
+<span class="fn">gzip</span> <span class="fl">-d</span> Oryza_sativa.IRGSP-1.0.57.gtf.gz</code></pre>
+  </div>
+  <div class="callout tip">
+    <div class="callout-ico">💡</div>
+    <div class="callout-body">
+      <div class="callout-label">Pro tip</div>
+      <p>Always use the <strong>same Ensembl Plants release</strong> for both the genome FASTA and the GTF file. Mixing versions causes gene ID mismatches in featureCounts and DESeq2.</p>
+    </div>
+  </div>
+</section>
 
-<span class="cm"># Build HISAT2 genome index (required once; speeds up all alignments)</span>
-<span class="fn">hisat2-build</span> Oryza_sativa.IRGSP-1.0.dna.toplevel.fa rice_index</pre>
+<!-- ══════════════════════════════════════════
+     STEP 2 — QUALITY CHECK
+     ══════════════════════════════════════════ -->
+<span class="anchor" id="step2"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num">2</div>
+    <div class="sec-title"><h2>Quality Check</h2><p>Assess read quality with FastQC and MultiQC before alignment</p></div>
+  </div>
+  <div class="prose">
+    <p>We use <code>FastQC</code> to perform quality control checks on raw sequencing reads. It generates reports covering per-base quality scores, GC content, adapter contamination, sequence duplication, and more. A high-quality Illumina RNA-seq file should show per-base quality scores above Q30 across almost all positions.</p>
   </div>
 
+  <!-- 2A: FastQC -->
+  <span class="anchor" id="step2a"></span>
+  <h3 class="sh3">A) Run FastQC on all FASTQ files</h3>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 04B: Align all samples (loop)</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 04B: Map all 8 samples — sorted BAM files in one pass
-## --dta-cufflinks: required for Cufflinks downstream
-## -p 6           : use 6 CPU threads
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="kw">module load</span> fastqc
+<span class="kw">module load</span> parallel
 
-<span class="kw">for</span> sample <span class="kw">in</span> control1 control2 Treated1R1 Treated1R2                      Treated2R1 Treated2R2 Treated3R1 Treated3R2; <span class="kw">do</span>
+<span class="cm"># Create output directory</span>
+<span class="fn">mkdir</span> <span class="fl">-p</span> fq_out_directory
+<span class="va">OUTDIR</span>=fq_out_directory
 
-    <span class="fn">hisat2</span> <span class="kw">--dta-cufflinks</span> <span class="kw">-p</span> <span class="num">6</span> <span class="kw">-x</span> rice_index            <span class="kw">-1</span> <span class="str">${sample}_1.fastq</span> <span class="kw">-2</span> <span class="str">${sample}_2.fastq</span>     | <span class="fn">samtools</span> sort <span class="kw">-o</span> <span class="str">sorted_${sample}.bam</span>
-
-    <span class="fn">samtools</span> index <span class="str">sorted_${sample}.bam</span>
-    echo <span class="str">"✅  Mapped and sorted: ${sample}"</span>
-
-<span class="kw">done</span>
-
-<span class="cm"># Optional: convert BAM to SAM to inspect alignment headers</span>
-<span class="fn">samtools</span> view sorted_control1.bam &gt; sorted_control1.sam
-<span class="fn">head</span> <span class="kw">-50</span> sorted_control1.sam</pre>
+<span class="cm"># Run FastQC on all FASTQ files in parallel</span>
+<span class="cm"># {} is replaced by each filename; -o sets output folder</span>
+<span class="fn">parallel</span> <span class="st">"fastqc {} -o <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span>"</span> ::: *.fastq.gz</code></pre>
+  </div>
+  <div class="prose">
+    <p>For 6 samples this produces 6 HTML reports and 6 ZIP files in <code>fq_out_directory/</code>. Open any <code>.html</code> file in a browser to inspect quality metrics for that sample.</p>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 05 — QUANTIFICATION
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 05</span>
-    <h2 class="sec-title">Transcript Quantification — Cufflinks Suite</h2>
-    <div class="sec-line"></div>
+  <!-- 2B: MultiQC -->
+  <span class="anchor" id="step2b"></span>
+  <h3 class="sh3">B) Aggregate all reports with MultiQC</h3>
+  <div class="prose">
+    <p><code>MultiQC</code> scans the FastQC output folder and produces a single interactive HTML summary across all samples — essential for quickly spotting batch effects or outlier samples.</p>
   </div>
-
-  <p class="prose">
-    Each sorted BAM file is processed individually with <code>cufflinks</code> to estimate
-    transcript abundances. The per-sample GTF files are then merged with <code>cuffmerge</code>
-    into a single consensus annotation, and <code>cuffdiff</code> performs the pairwise
-    differential expression test between treated and control groups.
-  </p>
-
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 05A: Cufflinks — per-sample quantification</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 05A: Run Cufflinks on each sorted BAM
-## -G : use reference annotation (guided assembly)
-## -p : threads
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="fn">cd</span> fq_out_directory
 
-<span class="kw">for</span> sample <span class="kw">in</span> control1 control2 Treated1R1 Treated1R2                      Treated2R1 Treated2R2 Treated3R1 Treated3R2; <span class="kw">do</span>
-    <span class="fn">cufflinks</span> <span class="kw">-o</span> <span class="str">cufflinks_${sample}</span> <span class="kw">-p</span> <span class="num">2</span>               <span class="kw">-G</span> Oryza_sativa.IRGSP-1.0.59.gtf               <span class="str">sorted_${sample}.bam</span>
-    echo <span class="str">"✅  Cufflinks done: ${sample}"</span>
-<span class="kw">done</span></pre>
+<span class="kw">module load</span> python/3
+<span class="kw">module load</span> py-multiqc   <span class="cm"># or: pip install multiqc</span>
+
+<span class="fn">multiqc</span> .
+
+<span class="cm"># MultiQC output:</span>
+<span class="cm">#   multiqc_report.html       ← open this in a browser</span>
+<span class="cm">#   multiqc_data/             ← raw stats in text files</span>
+<span class="cm">#     multiqc_fastqc.txt</span>
+<span class="cm">#     multiqc_general_stats.txt</span>
+<span class="cm">#     multiqc_sources.txt</span></code></pre>
   </div>
 
+  <div class="fig-wrap">
+    <figure>
+      <img src="figures/qc-heatmap-samples.png" alt="QC Sample Distance Heatmap" onclick="openLB(this.src,'Fig. 1 — QC: Sample distance heatmap. Replicates cluster together, confirming technical reproducibility.')">
+      <figcaption><strong>Fig. 1</strong> — QC sample-to-sample distance heatmap. Darker = more similar. Replicates within each condition cluster tightly, confirming batch reproducibility.</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-ico">💡</div>
+    <div class="callout-body">
+      <div class="callout-label">What to look for</div>
+      <p>If per-base quality drops below Q20 at the 3′ end, trim reads with <code>fastp</code> before alignment (see trimming note below). If adapter content is high, add <code>ILLUMINACLIP</code> parameters. If a sample looks very different from others, consider excluding it from downstream analysis.</p>
+    </div>
+  
+  <h3 class="sh3">C) Trim reads with fastp (if needed)</h3>
+  <div class="prose">
+    <p>If FastQC shows adapter contamination or quality drops, trim with <code>fastp</code> before mapping. This step is optional if the raw reads pass QC.</p>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 05B: Cuffmerge — merge transcripts</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 05B: Create assembly.txt and run cuffmerge
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="cm"># Install fastp</span>
+<span class="fn">sudo</span> apt-get install fastp
 
-<span class="cm"># Create the list of per-sample transcript GTF paths</span>
-<span class="kw">for</span> sample <span class="kw">in</span> control1 control2 Treated1R1 Treated1R2                      Treated2R1 Treated2R2 Treated3R1 Treated3R2; <span class="kw">do</span>
-    echo <span class="str">"cufflinks_${sample}/transcripts.gtf"</span> &gt;&gt; assembly.txt
-<span class="kw">done</span>
+<span class="cm"># Trim a paired-end sample</span>
+<span class="fn">fastp</span> <span class="fl">-i</span> sample_1.fastq <span class="fl">-o</span> trim_sample_1.fastq       <span class="fl">-I</span> sample_2.fastq <span class="fl">-O</span> trim_sample_2.fastq       <span class="fl">--adapter_fasta</span> adapter.fasta
 
-<span class="cm"># Verify the file</span>
-<span class="fn">cat</span> assembly.txt
+<span class="cm"># Re-run FastQC on trimmed files to confirm quality</span>
+<span class="fn">fastqc</span> trim_sample_1.fastq trim_sample_2.fastq</code></pre>
+  </div>
+</div>
+</section>
 
-<span class="cm"># Merge all transcripts into a single consensus annotation</span>
-<span class="fn">cuffmerge</span> <span class="kw">-o</span> cuffmerge_output <span class="kw">-p</span> <span class="num">2</span>           <span class="kw">-g</span> Oryza_sativa.IRGSP-1.0.59.gtf           <span class="kw">-s</span> Oryza_sativa.IRGSP-1.0.dna.toplevel.fa           assembly.txt</pre>
+<!-- ══════════════════════════════════════════
+     STEP 3 — MAPPING
+     ══════════════════════════════════════════ -->
+<span class="anchor" id="step3"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num">3</div>
+    <div class="sec-title"><h2>Mapping Reads to the Genome</h2><p>Splice-aware alignment with HISAT2</p></div>
+  </div>
+  <div class="prose">
+    <p>Generic DNA aligners such as <code>BWA</code>, <code>Bowtie2</code>, or <code>BBMap</code> are <strong>not suitable</strong> for RNA-seq. Because mRNA reads span exon–intron junctions, they require a <strong>splice-aware mapper</strong> that can split a single read across an intron. We use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml" target="_blank">HISAT2</a>, the successor to TopHat2.</p>
+  </div>
+  <div class="callout warn">
+    <div class="callout-ico">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-label">Do not use BWA or Bowtie2 for RNA-seq</div>
+      <p>These aligners cannot handle reads that span splice junctions. Using them for RNA-seq leads to many unmapped reads and severely distorted count data.</p>
+    </div>
   </div>
 
+  <!-- 3A: Index -->
+  <span class="anchor" id="step3a"></span>
+  <h3 class="sh3">A) Build the HISAT2 genome index</h3>
+  <div class="prose">
+    <p>The genome must be indexed once before mapping. Save the following as <code>indexing_hisat2.sh</code> and submit with <code>sbatch</code>.</p>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">Bash — WSL2 · Step 05C: Cuffdiff — differential expression</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — indexing_hisat2.sh</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 05C: Cuffdiff — Treated vs Control
-## -L : group labels
-## -u : multi-read correction
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="sh">#!/bin/bash</span>
 
-<span class="fn">cuffdiff</span> <span class="kw">-o</span> cuffdiff_output <span class="kw">-p</span> <span class="num">2</span>          <span class="kw">-L</span> Control,Treatment          <span class="kw">-u</span> cuffmerge_output/merged.gtf          sorted_control1.bam,sorted_control2.bam          sorted_Treated1R1.bam,sorted_Treated1R2.bam,sorted_Treated2R1.bam,sorted_Treated2R2.bam,sorted_Treated3R1.bam,sorted_Treated3R2.bam</pre>
+<span class="cm">#SBATCH -N 1</span>
+<span class="cm">#SBATCH --ntasks-per-node=16</span>
+<span class="cm">#SBATCH --time=1:00:00</span>
+<span class="cm">#SBATCH --job-name=HI_build</span>
+<span class="cm">#SBATCH --output=HI_build.%j.out</span>
+<span class="cm">#SBATCH --error=HI_build.%j.err</span>
+<span class="cm">#SBATCH --mail-user=your@email.com</span>
+<span class="cm">#SBATCH --mail-type=end</span>
+
+set -o xtrace
+<span class="fn">cd</span> <span class="op">${</span>SLURM_SUBMIT_DIR<span class="op">}</span>
+ulimit -s unlimited
+
+<span class="kw">module load</span> hisat2
+
+<span class="va">GENOME_FNA</span>=<span class="st">"/path/to/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa"</span>
+<span class="va">GENOME</span>=<span class="op">${</span><span class="va">GENOME_FNA</span>%.*<span class="op">}</span>   <span class="cm"># drops the .fa extension → used as index prefix</span>
+
+<span class="fn">hisat2-build</span> <span class="op">${</span><span class="va">GENOME_FNA</span><span class="op">}</span> <span class="op">${</span><span class="va">GENOME</span><span class="op">}</span></code></pre>
   </div>
-
-  <!-- ════════════════════════════════════════════════════════
-       STEP 06 — DESeq2
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 06</span>
-    <h2 class="sec-title">Differential Expression — DESeq2 (R)</h2>
-    <div class="sec-line"></div>
-  </div>
-
-  <p class="prose">
-    The count table (<code>count_table.csv</code>) is loaded into R and analysed with
-    <strong>DESeq2</strong>. Genes with a total count below 5 are filtered out before
-    statistical testing. Significant DEGs are defined as adjusted p-value &lt; 0.05
-    and |log₂FC| ≥ 1. LFC shrinkage via <code>apeglm</code> reduces noise from
-    lowly expressed genes before visualisation.
-  </p>
-
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 06A: Load data, build DESeq2 object, run pipeline</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — submit</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 06A: DESeq2 pipeline
-##──────────────────────────────────────────────────────────</span>
-<span class="fn">library</span>(DESeq2)
-<span class="fn">library</span>(ggplot2)
+<pre><code><span class="fn">sbatch</span> indexing_hisat2.sh</code></pre>
+  </div>
+  <div class="prose">
+    <p>Once complete you will see 8 index files with the <code>.ht2</code> extension:</p>
+  </div>
+  <div class="file-output">
+    <div class="file-output-bar">📁 output files</div>
+    <div class="file-output-body">Oryza_sativa.IRGSP-1.0.1.ht2
+Oryza_sativa.IRGSP-1.0.2.ht2
+Oryza_sativa.IRGSP-1.0.3.ht2
+Oryza_sativa.IRGSP-1.0.4.ht2
+Oryza_sativa.IRGSP-1.0.5.ht2
+Oryza_sativa.IRGSP-1.0.6.ht2
+Oryza_sativa.IRGSP-1.0.7.ht2
+Oryza_sativa.IRGSP-1.0.8.ht2</div>
+  </div>
+  <div class="callout warn">
+    <div class="callout-ico">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-label">Important</div>
+      <p>Update the <code>GENOME_FNA</code> variable with the actual path to your genome FASTA file. If the file is still gzip-compressed, decompress it first: <code>gzip -d filename.fa.gz</code></p>
+    </div>
+  </div>
+  <div class="callout tip">
+    <div class="callout-ico">💡</div>
+    <div class="callout-body">
+      <div class="callout-label">Pro tip: SLURM time allocation</div>
+      <p>The <code>#SBATCH --time</code> value is in <em>hours:minutes:seconds</em>. For indexing the rice genome, <code>1:00:00</code> is sufficient. If outputs were not generated, check <code>HI_build.{jobID}.err</code> for error messages.</p>
+    </div>
+  </div>
 
-<span class="fn">setwd</span>(<span class="str">"C:/Users/DELL/Desktop/RNA-seq_Analysis"</span>)
+  <!-- 3B: Map reads -->
+  <span class="anchor" id="step3b"></span>
+  <h3 class="sh3">B) Map reads with HISAT2</h3>
+  <div class="prose">
+    <p>Create two scripts: <code>run_hisat2.sh</code> (maps one sample) and <code>loop_hisat2.sh</code> (submits all samples via SLURM).</p>
+  </div>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — run_hisat2.sh</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="sh">#!/bin/bash</span>
+set -o xtrace
 
-<span class="cm"># Read count table (semicolon-separated)</span>
-Counts &lt;- <span class="fn">read.delim</span>(<span class="str">"count_table.csv"</span>, row.names = <span class="num">1</span>,
-                      header = <span class="kw">TRUE</span>, sep = <span class="str">";"</span>)
+<span class="va">GENOME</span>=<span class="st">"/path/to/index/Oryza_sativa.IRGSP-1.0"</span>   <span class="cm"># index prefix (no .ht2)</span>
+<span class="va">OUTDIR</span>=<span class="st">"/path/to/bam_files"</span>
+<span class="op">[[</span> -d <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span> <span class="op">]]</span> <span class="op">||</span> <span class="fn">mkdir</span> <span class="fl">-p</span> <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span>
 
-<span class="cm"># Filter: keep genes with total count >= 5 across all samples</span>
-dat &lt;- Counts[<span class="fn">which</span>(<span class="fn">rowSums</span>(Counts) &gt;= <span class="num">5</span>), ]
-dat &lt;- <span class="fn">as.matrix</span>(dat)
+<span class="va">p</span>=8          <span class="cm"># threads</span>
+<span class="va">R1_FQ</span>=<span class="st">"$1"</span>  <span class="cm"># first argument: forward reads</span>
+<span class="va">R2_FQ</span>=<span class="st">"$2"</span>  <span class="cm"># second argument: reverse reads</span>
 
-<span class="cm"># Define condition factor: 6 Treated, 2 Control; Control = reference</span>
-condition &lt;- <span class="fn">factor</span>(<span class="fn">c</span>(<span class="fn">rep</span>(<span class="str">"T"</span>, <span class="num">6</span>), <span class="fn">rep</span>(<span class="str">"C"</span>, <span class="num">2</span>)))
-condition  &lt;- <span class="fn">relevel</span>(condition, ref = <span class="str">"C"</span>)
+<span class="kw">module</span> purge
+<span class="kw">module load</span> hisat2
+<span class="kw">module load</span> samtools
 
-<span class="cm"># Build coldata metadata frame</span>
-coldata &lt;- <span class="fn">data.frame</span>(row.names = <span class="fn">colnames</span>(dat), condition)
+<span class="va">OUTFILE</span>=<span class="op">$(</span><span class="fn">basename</span> <span class="op">${</span><span class="va">R1_FQ</span><span class="op">}</span> <span class="op">|</span> <span class="fn">cut</span> <span class="fl">-f 1</span> <span class="fl">-d</span> <span class="st">"_"</span><span class="op">)</span>
 
-<span class="cm"># Create DESeqDataSet and run full pipeline</span>
-dds &lt;- <span class="fn">DESeqDataSetFromMatrix</span>(countData = dat,
+<span class="cm"># Map a single paired-end sample (example: Treated2R2)</span>
+<span class="fn">hisat2</span> <span class="fl">--dta-cufflinks</span> <span class="fl">-p</span> <span class="nu">6</span> <span class="fl">-x</span> rice_index        <span class="fl">-1</span> Treated2R2_1.fastq <span class="fl">-2</span> Treated2R2_2.fastq        <span class="op">&gt;</span> Treated2R2.bam
+
+<span class="cm"># Sort and index the BAM file</span>
+<span class="fn">samtools</span> sort Treated2R2.bam <span class="op">&gt;</span> sorted_Treated2R2.bam
+<span class="fn">samtools</span> index sorted_Treated2R2.bam
+
+<span class="cm"># Optional: convert BAM to SAM for inspection</span>
+<span class="fn">samtools</span> view sorted_Treated2R2.bam <span class="op">&gt;</span> sorted_Treated2R2.sam
+<span class="fn">head</span> <span class="fl">-50</span> sorted_Treated2R2.sam</code></pre>
+  </div>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — loop_hisat2.sh (SLURM wrapper)</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="cm">#!/bin/bash</span>
+<span class="cm"># Map all samples and get sorted BAM files directly</span>
+<span class="kw">for</span> <span class="va">sample</span> <span class="kw">in</span> control1 control2 Treated3R2 Treated3R1 Treated2R2 Treated2R1 Treated1R2 Treated1R1; <span class="kw">do</span>
+
+    <span class="fn">hisat2</span> <span class="fl">--dta-cufflinks</span> <span class="fl">-p</span> <span class="nu">6</span> <span class="fl">-x</span> rice_index            <span class="fl">-1</span> <span class="op">${</span><span class="va">sample</span><span class="op">}</span>_1.fastq <span class="fl">-2</span> <span class="op">${</span><span class="va">sample</span><span class="op">}</span>_2.fastq     <span class="op">|</span> <span class="fn">samtools</span> sort <span class="fl">-o</span> sorted_<span class="op">${</span><span class="va">sample</span><span class="op">}</span>.bam
+
+    <span class="fn">samtools</span> index sorted_<span class="op">${</span><span class="va">sample</span><span class="op">}</span>.bam
+
+    <span class="fn">echo</span> <span class="st">"✅ Mapped and sorted: <span class="op">${</span><span class="va">sample</span><span class="op">}</span>"</span>
+<span class="kw">done</span></code></pre>
+  </div>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — submit</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="fn">sbatch</span> loop_hisat2.sh</code></pre>
+  </div>
+  <div class="prose"><p>Expected output — one BAM file per sample:</p></div>
+  <div class="file-output">
+    <div class="file-output-bar">📁 bam_files/</div>
+    <div class="file-output-body">SRR_T_rep1.bam
+SRR_T_rep2.bam
+SRR_T_rep3.bam
+SRR_C_rep1.bam
+SRR_C_rep2.bam
+SRR_C_rep3.bam</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STEP 4 — ABUNDANCE ESTIMATION
+     ══════════════════════════════════════════ -->
+<span class="anchor" id="step4"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num">4</div>
+    <div class="sec-title"><h2>Abundance Estimation</h2><p>Count reads per gene using featureCounts</p></div>
+  </div>
+  <div class="prose">
+    <p>To quantify gene expression we count how many aligned reads overlap each annotated gene. <code>featureCounts</code> (from the <a href="http://subread.sourceforge.net/" target="_blank">Subread</a> package) is highly efficient and outputs a count matrix directly usable by DESeq2. It also produces summary statistics on mapping rates and ambiguous reads.</p>
+  </div>
+
+  <!-- 4A: featureCounts -->
+  <span class="anchor" id="step4a"></span>
+  <h3 class="sh3">A) Run featureCounts on all BAM files</h3>
+  <div class="callout warn">
+    <div class="callout-ico">⚠️</div>
+    <div class="callout-body">
+      <div class="callout-label">Check strandedness first</div>
+      <p>Use <code>RSeQC infer_experiment.py</code> to determine library strandedness before running featureCounts. The <code>-s</code> flag must match: <code>0</code> = unstranded, <code>1</code> = stranded (forward), <code>2</code> = stranded (reverse). Wrong setting causes severe undercounting.</p>
+    </div>
+  </div>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash — run_featureCounts.sh</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="sh">#!/bin/bash</span>
+<span class="cm">#SBATCH -N 1</span>
+<span class="cm">#SBATCH --ntasks-per-node=16</span>
+<span class="cm">#SBATCH --time=6:00:00</span>
+<span class="cm">#SBATCH --job-name=featureCounts</span>
+
+set -o xtrace
+<span class="fn">cd</span> <span class="op">${</span>SLURM_SUBMIT_DIR<span class="op">}</span>
+ulimit -s unlimited
+
+<span class="va">ANNOT_GFF</span>=<span class="st">"/path/to/Oryza_sativa.IRGSP-1.0.57.gtf"</span>   <span class="cm"># must be decompressed</span>
+<span class="va">INDIR</span>=<span class="st">"/path/to/bam_files"</span>
+<span class="va">OUTDIR</span>=counts
+<span class="op">[[</span> -d <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span> <span class="op">]]</span> <span class="op">||</span> <span class="fn">mkdir</span> <span class="fl">-p</span> <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span>
+
+<span class="kw">module</span> purge
+<span class="kw">module load</span> subread
+<span class="kw">module load</span> parallel
+
+<span class="fn">parallel</span> <span class="fl">-j 4</span> \
+  <span class="st">"featureCounts -T 4 -s 2 -p -t gene -g ID \
+    -a <span class="op">${</span><span class="va">ANNOT_GFF</span><span class="op">}</span> \
+    -o <span class="op">${</span><span class="va">OUTDIR</span><span class="op">}</span>/{/.}.gene.txt {}"</span> \
+  ::: <span class="op">${</span><span class="va">INDIR</span><span class="op">}</span>/*.bam
+
+scontrol show job <span class="op">${</span>SLURM_JOB_ID<span class="op">}</span></code></pre>
+  </div>
+  <div class="prose"><p>Each output file has a header comment line and seven columns. Example:</p></div>
+  <div class="file-output">
+    <div class="file-output-bar">📄 head SRR_T_rep1.gene.txt</div>
+    <div class="file-output-body"># Program:featureCounts v2.0.3; Command:"featureCounts" "-T" "4" "-s" "2" ...
+Geneid  Chr    Start   End     Strand  Length  SRR_T_rep1.bam
+Os01g0100100  1  2983  10815  +  7833  1502
+Os01g0100200  1  11218  12435  -  1218  890
+Os01g0100300  1  14523  17621  +  3099  2211</div>
+  </div>
+
+  <!-- 4B: Merge counts -->
+  <span class="anchor" id="step4b"></span>
+  <h3 class="sh3">B) Merge all count files into one table</h3>
+  <div class="prose">
+    <p>Combine the individual per-sample count files using <code>paste</code> and <code>awk</code> to create a single count matrix for import into R.</p>
+  </div>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">bash</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="fn">cd</span> counts/
+
+<span class="cm"># Merge: keep GeneID (col 1) + count (col 7) from each file</span>
+<span class="fn">paste</span> \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $1,$7}'</span> SRR_T_rep1.gene.txt) \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $7}'</span>    SRR_T_rep2.gene.txt) \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $7}'</span>    SRR_T_rep3.gene.txt) \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $7}'</span>    SRR_C_rep1.gene.txt) \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $7}'</span>    SRR_C_rep2.gene.txt) \
+  &lt;(<span class="fn">awk</span> <span class="st">'BEGIN{OFS="\t"} NR&gt;1 {print $7}'</span>    SRR_C_rep3.gene.txt) \
+  <span class="op">|</span> <span class="fn">grep</span> <span class="fl">-v</span> <span class="st">'^\#'</span> \
+  <span class="op">&gt;</span> rice_count_matrix.txt
+
+<span class="cm"># Add header manually</span>
+<span class="fn">sed</span> <span class="fl">-i</span> <span class="st">'1s/^/GeneID\tT_rep1\tT_rep2\tT_rep3\tC_rep1\tC_rep2\tC_rep3\n/'</span> \
+  rice_count_matrix.txt</code></pre>
+  </div>
+  <div class="prose"><p>The resulting file looks like this:</p></div>
+  <div class="file-output">
+    <div class="file-output-bar">📄 head rice_count_matrix.txt</div>
+    <div class="file-output-body">GeneID            T_rep1  T_rep2  T_rep3  C_rep1  C_rep2  C_rep3
+Os01g0100100      1502    1498    1511    890     901     878
+Os01g0100200      341     328     355     412     398     420
+Os01g0100300      2211    2198    2240    1054    1068    1042
+Os01g0100400      0       0       0       0       0       0</div>
+  </div>
+  <div class="prose"><p>This count matrix is the direct input for DESeq2 in Step 5.</p></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STEP 5 — DIFFERENTIAL EXPRESSION
+     ══════════════════════════════════════════ -->
+<span class="anchor" id="step5"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num">5</div>
+    <div class="sec-title"><h2>Differential Gene Expression with DESeq2</h2><p>Identify DEGs between Treated and Control in R / RStudio</p></div>
+  </div>
+  <div class="prose">
+    <p>DESeq2 is a Bioconductor R package specifically designed for differential expression analysis of count data from RNA-seq. It applies a negative binomial distribution model, shrinkage estimation of fold changes, and Benjamini-Hochberg correction for multiple testing. All steps below are run in <strong>RStudio</strong> or an R terminal.</p>
+  </div>
+
+  <!-- 5A: Setup -->
+  <span class="anchor" id="step5a"></span>
+  <h3 class="sh3">A) Install packages, load data, and build DESeqDataSet</h3>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="cm">## ── Load libraries ─────────────────────────────────────</span>
+<span class="rf">library</span>(DESeq2)
+<span class="rf">library</span>(ggplot2)
+
+<span class="rf">setwd</span>(<span class="rs">"C:/Users/DELL/Desktop/RNA-seq_Analysis"</span>)
+
+<span class="cm">## ── Read count data ────────────────────────────────────</span>
+Counts &lt;- <span class="rf">read.delim</span>(<span class="rs">"count_table.csv"</span>, row.names = <span class="nu">1</span>,
+                      header = <span class="rv">TRUE</span>, sep = <span class="rs">";"</span>)
+
+<span class="cm">## ── Filter low-count genes (rowSum >= 5) ──────────────</span>
+dat &lt;- Counts[<span class="rv">which</span>(<span class="rf">rowSums</span>(Counts) &gt;= <span class="nu">5</span>), ]
+
+<span class="cm">## ── Convert to matrix ─────────────────────────────────</span>
+dat &lt;- <span class="rf">as.matrix</span>(dat)
+<span class="rf">head</span>(dat)
+
+<span class="cm">## ── Set factor levels (6 Treated, 2 Control) ──────────</span>
+condition &lt;- <span class="rf">factor</span>(<span class="rf">c</span>(<span class="rf">rep</span>(<span class="rs">"T"</span>, <span class="nu">6</span>), <span class="rf">rep</span>(<span class="rs">"C"</span>, <span class="nu">2</span>)))
+condition  &lt;- <span class="rf">relevel</span>(condition, ref = <span class="rs">"C"</span>)  <span class="cm"># Control = reference</span>
+
+<span class="cm">## ── Build coldata (metadata) frame ────────────────────</span>
+coldata &lt;- <span class="rf">data.frame</span>(row.names = <span class="rf">colnames</span>(dat),
+                       condition = condition)
+
+<span class="cm">## ── Create DESeqDataSet and run full pipeline ──────────</span>
+dds &lt;- <span class="rf">DESeqDataSetFromMatrix</span>(countData = dat,
                                colData   = coldata,
-                               design    = ~ condition)
-dds &lt;- <span class="fn">DESeq</span>(dds)</pre>
+                               design    = <span class="op">~</span> condition)
+dds &lt;- <span class="rf">DESeq</span>(dds)
+
+<span class="cm">## ── Extract results (Treated vs Control) ──────────────</span>
+deseq_results &lt;- <span class="rf">results</span>(dds, contrast = <span class="rf">c</span>(<span class="rs">"condition"</span>, <span class="rs">"T"</span>, <span class="rs">"C"</span>))
+deseq_results &lt;- <span class="rf">as.data.frame</span>(deseq_results)
+deseq_results<span class="op">$</span>GeneName &lt;- <span class="rf">row.names</span>(deseq_results)
+
+<span class="cm">## ── Reorder columns ───────────────────────────────────</span>
+deseq_results &lt;- <span class="rf">subset</span>(deseq_results,
+  select = <span class="rf">c</span>(<span class="rs">"GeneName"</span>, <span class="rs">"padj"</span>, <span class="rs">"pvalue"</span>, <span class="rs">"lfcSE"</span>,
+             <span class="rs">"stat"</span>, <span class="rs">"log2FoldChange"</span>, <span class="rs">"baseMean"</span>))
+
+<span class="cm">## ── Write all results ─────────────────────────────────</span>
+<span class="rf">write.table</span>(deseq_results, file = <span class="rs">"deseq_results.tsv"</span>,
+            row.names = <span class="rv">FALSE</span>, sep = <span class="rs">"	"</span>)
+
+<span class="cm">## ── Extract significant DEGs (padj < 0.05, |LFC| >= 1) </span>
+DEG &lt;- <span class="rf">subset</span>(deseq_results, padj &lt; <span class="nu">0.05</span> &amp; <span class="rf">abs</span>(log2FoldChange) &gt;= <span class="nu">1</span>)
+DEG &lt;- DEG[<span class="rf">order</span>(DEG<span class="op">$</span>padj), ]
+<span class="rf">write.table</span>(DEG, file = <span class="rs">"deseq_DEG.tsv"</span>,
+            row.names = <span class="rv">FALSE</span>, sep = <span class="rs">"	"</span>)</code></pre>
   </div>
 
+  <!-- 5B: Dispersions + PCA -->
+  <span class="anchor" id="step5b"></span>
+  <h3 class="sh3">B) Run DESeq2 and plot dispersion + PCA</h3>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 06B: Extract results and significant DEGs</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm">##──────────────────────────────────────────────────────────
-## STEP 06B: Extract results — Treated vs Control
-##──────────────────────────────────────────────────────────</span>
+<pre><code><span class="cm">## ── Dispersion estimates plot ──────────────────────────</span>
+<span class="rf">png</span>(<span class="rs">"qc-dispersions.png"</span>, <span class="nu">1000</span>, <span class="nu">1000</span>, pointsize = <span class="nu">20</span>)
+<span class="rf">plotDispEsts</span>(dds, main = <span class="rs">"Dispersion Estimates"</span>)
+<span class="rf">dev.off</span>()
 
-<span class="cm"># Extract results (T vs C; C is reference)</span>
-deseq_results &lt;- <span class="fn">results</span>(dds, contrast = <span class="fn">c</span>(<span class="str">"condition"</span>, <span class="str">"T"</span>, <span class="str">"C"</span>))
-deseq_results &lt;- <span class="fn">as.data.frame</span>(deseq_results)
-deseq_results$GeneName &lt;- <span class="fn">row.names</span>(deseq_results)
+<span class="cm">## ── Variance stabilising transformation ───────────────</span>
+vsd &lt;- <span class="rf">vst</span>(dds, blind = <span class="rv">FALSE</span>)
 
-<span class="cm"># Reorder columns for clarity</span>
-deseq_results &lt;- <span class="fn">subset</span>(deseq_results,
-  select = <span class="fn">c</span>(<span class="str">"GeneName"</span>, <span class="str">"padj"</span>, <span class="str">"pvalue"</span>, <span class="str">"lfcSE"</span>,
-             <span class="str">"stat"</span>, <span class="str">"log2FoldChange"</span>, <span class="str">"baseMean"</span>))
-
-<span class="cm"># Write full results table</span>
-<span class="fn">write.table</span>(deseq_results, file = <span class="str">"deseq_results.tsv"</span>,
-            row.names = <span class="kw">FALSE</span>, sep = <span class="str">"	"</span>)
-
-<span class="cm"># Extract significant DEGs: padj < 0.05 and |log2FC| >= 1</span>
-DEG &lt;- <span class="fn">subset</span>(deseq_results, padj &lt; <span class="num">0.05</span> &amp; <span class="fn">abs</span>(log2FoldChange) &gt;= <span class="num">1</span>)
-DEG &lt;- DEG[<span class="fn">order</span>(DEG$padj), ]
-<span class="fn">dim</span>(DEG)   <span class="cm"># number of significant DEGs</span>
-
-<span class="fn">write.table</span>(DEG, file = <span class="str">"deseq_DEG.tsv"</span>,
-            row.names = <span class="kw">FALSE</span>, sep = <span class="str">"	"</span>)</pre>
+<span class="cm">## ── PCA: Treatment vs Control ─────────────────────────</span>
+<span class="rf">plotPCA</span>(vsd, intgroup = <span class="rs">"condition"</span>)
+<span class="cm"># Save to file:</span>
+pca_plot &lt;- <span class="rf">plotPCA</span>(vsd, intgroup = <span class="rs">"condition"</span>)
+<span class="rf">ggsave</span>(<span class="rs">"PCA_T_vs_C.png"</span>, pca_plot, width = <span class="nu">7</span>, height = <span class="nu">5</span>)</code></pre>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════
-       STEP 07 — VISUALISATION
-  ════════════════════════════════════════════════════════ -->
-  <div class="sec-divider" style="margin-top:2.5rem">
-    <span class="sec-num">Step 07</span>
-    <h2 class="sec-title">Visualisation (R)</h2>
-    <div class="sec-line"></div>
+  <div class="fig-2col">
+    <div class="fig-wrap">
+      <figure>
+        <img src="figures/PCA_T_vs_C.png" alt="PCA Treated vs Control" onclick="openLB(this.src,'Fig. 2 — PCA: Treated vs Control. PC1 captures the variance driven by M. oryzae infection.')">
+        <figcaption><strong>Fig. 2</strong> — PCA: Treated vs Control. PC1 separates infected from uninfected samples.</figcaption>
+      </figure>
+    </div>
+    <div class="fig-wrap">
+      <figure>
+        <img src="figures/PCA_TreatmentDay.png" alt="PCA by Treatment and Day" onclick="openLB(this.src,'Fig. 3 — PCA by Treatment × Time point, revealing temporal dynamics.')">
+        <figcaption><strong>Fig. 3</strong> — PCA by Treatment × Day, showing temporal transcriptomic dynamics.</figcaption>
+      </figure>
+    </div>
   </div>
 
-  <p class="prose">
-    All publication-quality figures were generated in R. The code below produces each
-    figure shown in the Results section.
-  </p>
-
-  <!-- 07A: Dispersion -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07A — Dispersion Estimates
-  </h3>
+  <!-- 5C: Sample heatmap -->
+  <span class="anchor" id="step5c"></span>
+  <h3 class="sh3">C) Sample distance heatmap</h3>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07A: Dispersion plot</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm"># Plot and save dispersion estimates</span>
-<span class="fn">png</span>(<span class="str">"qc-dispersions.png"</span>, <span class="num">1000</span>, <span class="num">1000</span>, pointsize = <span class="num">20</span>)
-<span class="fn">plotDispEsts</span>(dds, main = <span class="str">"Dispersion Estimates"</span>)
-<span class="fn">dev.off</span>()</pre>
-  </div>
+<pre><code><span class="rf">library</span>(pheatmap)
+<span class="rf">library</span>(RColorBrewer)
 
-  <!-- 07B: VST + PCA -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07B — Variance Stabilisation &amp; PCA
-  </h3>
-  <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07B: VST transformation and PCA plots</span>
-    </div>
-    <pre><span class="cm"># Variance stabilising transformation (VST)</span>
-vsd &lt;- <span class="fn">vst</span>(dds, blind = <span class="kw">FALSE</span>)
+<span class="cm">## ── Compute sample-to-sample distances (VST) ──────────</span>
+sampleDists &lt;- <span class="rf">dist</span>(<span class="rf">t</span>(<span class="rf">assay</span>(vsd)))
+sampleDistMatrix &lt;- <span class="rf">as.matrix</span>(sampleDists)
+rownames(sampleDistMatrix) &lt;- colnames(vsd)
+colnames(sampleDistMatrix) &lt;- <span class="rv">NULL</span>
+colors &lt;- <span class="rf">colorRampPalette</span>(<span class="rf">rev</span>(<span class="rf">brewer.pal</span>(<span class="nu">9</span>, <span class="rs">"Blues"</span>)))(<span class="nu">255</span>)
 
-<span class="cm"># PCA: Treatment vs Control (PC1 vs PC2)</span>
-pca_plot &lt;- <span class="fn">plotPCA</span>(vsd, intgroup = <span class="str">"condition"</span>)
-<span class="fn">ggsave</span>(<span class="str">"PCA_T_vs_C.png"</span>, pca_plot, width = <span class="num">7</span>, height = <span class="num">5</span>, dpi = <span class="num">150</span>)
-
-<span class="cm"># PCA coloured by Treatment × Day (if day metadata is in coldata)</span>
-pca_day &lt;- <span class="fn">plotPCA</span>(vsd, intgroup = <span class="fn">c</span>(<span class="str">"condition"</span>))
-<span class="fn">ggsave</span>(<span class="str">"PCA_TreatmentDay.png"</span>, pca_day, width = <span class="num">7</span>, height = <span class="num">5</span>, dpi = <span class="num">150</span>)</pre>
-  </div>
-
-  <!-- 07C: Sample distance heatmap -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07C — Sample-to-Sample Distance Heatmap
-  </h3>
-  <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07C: QC heatmap of sample distances</span>
-    </div>
-    <pre><span class="fn">library</span>(pheatmap)
-<span class="fn">library</span>(RColorBrewer)
-
-<span class="cm"># Compute Euclidean distances between samples using VST counts</span>
-sampleDists       &lt;- <span class="fn">dist</span>(<span class="fn">t</span>(<span class="fn">assay</span>(vsd)))
-sampleDistMatrix  &lt;- <span class="fn">as.matrix</span>(sampleDists)
-rownames(sampleDistMatrix) &lt;- <span class="fn">colnames</span>(vsd)
-colnames(sampleDistMatrix) &lt;- <span class="kw">NULL</span>
-colors &lt;- <span class="fn">colorRampPalette</span>(<span class="fn">rev</span>(<span class="fn">brewer.pal</span>(<span class="num">9</span>, <span class="str">"Blues"</span>)))(<span class="num">255</span>)
-
-<span class="cm"># Save heatmap</span>
-<span class="fn">png</span>(<span class="str">"qc-heatmap-samples.png"</span>, width = <span class="num">1000</span>, height = <span class="num">1000</span>, pointsize = <span class="num">20</span>)
-<span class="fn">pheatmap</span>(sampleDistMatrix,
+<span class="cm">## ── Plot and save sample distance heatmap ─────────────</span>
+<span class="rf">png</span>(<span class="rs">"qc-heatmap-samples.png"</span>, width = <span class="nu">1000</span>, height = <span class="nu">1000</span>, pointsize = <span class="nu">20</span>)
+<span class="rf">pheatmap</span>(sampleDistMatrix,
          clustering_distance_rows = sampleDists,
          clustering_distance_cols = sampleDists,
-         col  = colors,
-         main = <span class="str">"Sample Distance Matrix"</span>)
-<span class="fn">dev.off</span>()</pre>
+         col = colors,
+         main = <span class="rs">"Sample Distance Matrix"</span>)
+<span class="rf">dev.off</span>()</code></pre>
   </div>
 
-  <!-- 07D: MA plot -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07D — MA Plot (with LFC Shrinkage)
-  </h3>
+  <!-- 5D: Results -->
+  <span class="anchor" id="step5d"></span>
+  <h3 class="sh3">D) Extract differential expression results</h3>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07D: MA plot before and after apeglm shrinkage</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm"># MA plot — raw results (before shrinkage)</span>
-<span class="fn">plotMA</span>(dds, ylim = <span class="fn">c</span>(<span class="num">-9</span>, <span class="num">9</span>))
+<pre><code><span class="cm">## ── Results already extracted in Step 5A ─────────────</span>
+<span class="cm"># deseq_results contains all genes; DEG contains significant ones</span>
+<span class="rf">dim</span>(deseq_results)   <span class="cm"># total tested genes</span>
+<span class="rf">dim</span>(DEG)             <span class="cm"># significant DEGs</span>
 
-<span class="cm"># LFC shrinkage with apeglm (reduces noise at low counts)</span>
-<span class="fn">if</span> (!<span class="fn">requireNamespace</span>(<span class="str">"BiocManager"</span>, quietly = <span class="kw">TRUE</span>))
-  <span class="fn">install.packages</span>(<span class="str">"BiocManager"</span>)
-BiocManager::<span class="fn">install</span>(<span class="str">"apeglm"</span>)
-<span class="fn">library</span>(apeglm)
+<span class="cm">## ── Quick visualisation: top gene by log2FC ───────────</span>
+topGene &lt;- <span class="rf">rownames</span>(deseq_results)[<span class="rf">which.max</span>(deseq_results<span class="op">$</span>log2FoldChange)]
+<span class="rf">plotCounts</span>(dds, gene = topGene, intgroup = <span class="rs">"condition"</span>)
 
-resLFC &lt;- <span class="fn">lfcShrink</span>(dds, coef = <span class="str">"condition_T_vs_C"</span>, type = <span class="str">"apeglm"</span>)
+<span class="cm">## ── Normalised count table for all samples ────────────</span>
+normalized_counts &lt;- <span class="rf">counts</span>(dds, normalized = <span class="rv">TRUE</span>)
+<span class="rf">head</span>(normalized_counts)
 
-<span class="cm"># MA plot after shrinkage — save to file</span>
-<span class="fn">png</span>(<span class="str">"maplott.png"</span>, width = <span class="num">1000</span>, height = <span class="num">800</span>, pointsize = <span class="num">18</span>)
-<span class="fn">plotMA</span>(resLFC, ylim = <span class="fn">c</span>(<span class="num">-5</span>, <span class="num">5</span>))
-<span class="fn">dev.off</span>()</pre>
+<span class="cm">## ── Histogram of p-values ─────────────────────────────</span>
+<span class="rf">png</span>(<span class="rs">"hist-pvalue.png"</span>, <span class="nu">1000</span>, <span class="nu">1000</span>, pointsize = <span class="nu">20</span>)
+<span class="rf">hist</span>(deseq_results<span class="op">$</span>pvalue,
+     breaks = <span class="rf">seq</span>(<span class="nu">0</span>, <span class="nu">1</span>, length = <span class="nu">21</span>),
+     col    = <span class="rs">"grey"</span>, border = <span class="rs">"white"</span>,
+     xlab   = <span class="rs">"p-value"</span>, ylab = <span class="rs">"Frequency"</span>,
+     main   = <span class="rs">"Frequencies of p-value"</span>)
+<span class="rf">dev.off</span>()</code></pre>
   </div>
 
-  <!-- 07E: Heatmaps -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07E — Heatmaps: Top DEGs &amp; Z-score Profiles
-  </h3>
+  <!-- 5E: MA plot -->
+  <span class="anchor" id="step5e"></span>
+  <h3 class="sh3">E) MA Plot</h3>
+  <div class="prose">
+    <p>An MA plot shows the log2 fold-change (M) on the y-axis against the mean expression level (A) on the x-axis. Significant DEGs (padj &lt; 0.05) are highlighted in red.</p>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07E: Normalised count heatmaps and Z-score heatmap</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="cm"># Normalised counts (DESeq2 size-factor corrected)</span>
-normalized_counts  &lt;- <span class="fn">counts</span>(dds, normalized = <span class="kw">TRUE</span>)
-transformed_counts &lt;- <span class="fn">log2</span>(normalized_counts + <span class="num">1</span>)
+<pre><code><span class="cm">## ── MA plot — raw (before LFC shrinkage) ──────────────</span>
+<span class="rf">plotMA</span>(dds, ylim = <span class="rf">c</span>(<span class="fl">-9</span>, <span class="nu">9</span>))
 
-<span class="cm"># Select top 10 DEG names</span>
-top_hits &lt;- <span class="fn">row.names</span>(DEG[<span class="num">1</span>:<span class="num">10</span>, ])
+<span class="cm">## ── LFC shrinkage with apeglm ──────────────────────────</span>
+<span class="rv">if</span> (!<span class="rf">requireNamespace</span>(<span class="rs">"BiocManager"</span>, quietly = <span class="rv">TRUE</span>))
+  <span class="rf">install.packages</span>(<span class="rs">"BiocManager"</span>)
+BiocManager<span class="op">::</span><span class="rf">install</span>(<span class="rs">"apeglm"</span>)
+<span class="rf">library</span>(apeglm)
+
+resLFC &lt;- <span class="rf">lfcShrink</span>(dds, coef = <span class="rs">"condition_T_vs_C"</span>, type = <span class="rs">"apeglm"</span>)
+
+<span class="cm">## ── MA plot after shrinkage ───────────────────────────</span>
+<span class="rf">plotMA</span>(resLFC, ylim = <span class="rf">c</span>(<span class="fl">-5</span>, <span class="nu">5</span>))</code></pre>
+  </div>
+  <div class="fig-wrap">
+    <figure>
+      <img src="figures/MAplot.png" alt="MA Plot" onclick="openLB(this.src,'Fig. 4 — MA Plot. Red dots = significant DEGs (padj < 0.05).')">
+      <figcaption><strong>Fig. 4</strong> — MA Plot. Each dot is a gene. Red = significant (padj &lt; 0.05). Upward shift = genes overexpressed in Treated.</figcaption>
+    </figure>
+  </div>
+
+  <!-- 5F: Heatmap -->
+  <span class="anchor" id="step5f"></span>
+  <h3 class="sh3">F) Heatmap of top differentially expressed genes</h3>
+  <div class="code-block">
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
+    </div>
+<pre><code><span class="cm">## ── Get normalized counts ─────────────────────────────</span>
+normalized_counts &lt;- <span class="rf">counts</span>(dds, normalized = <span class="rv">TRUE</span>)
+transformed_counts &lt;- <span class="rf">log2</span>(normalized_counts + <span class="nu">1</span>)
+
+<span class="cm">## ── Select top 10 DEG gene names ──────────────────────</span>
+top_hits &lt;- <span class="rf">row.names</span>(DEG[<span class="nu">1</span>:<span class="nu">10</span>, ])
 top_hits  &lt;- transformed_counts[top_hits, ]
 
-<span class="fn">library</span>(pheatmap)
+<span class="rf">library</span>(pheatmap)
 
-<span class="cm"># Heatmap without clustering (simple)</span>
-<span class="fn">png</span>(<span class="str">"nomalized_counts.png"</span>, width = <span class="num">1000</span>, height = <span class="num">800</span>, pointsize = <span class="num">18</span>)
-<span class="fn">pheatmap</span>(top_hits, cluster_rows = <span class="kw">FALSE</span>,
-          cluster_cols = <span class="kw">FALSE</span>, show_rownames = <span class="kw">TRUE</span>)
-<span class="fn">dev.off</span>()
+<span class="cm">## ── Simple heatmap (no clustering) ───────────────────</span>
+<span class="rf">pheatmap</span>(top_hits, cluster_rows = <span class="rv">FALSE</span>,
+          cluster_cols = <span class="rv">FALSE</span>, show_rownames = <span class="rv">TRUE</span>)
 
-<span class="cm"># Heatmap with hierarchical clustering</span>
-<span class="fn">png</span>(<span class="str">"heatmap_top10_genes.png"</span>, width = <span class="num">1000</span>, height = <span class="num">900</span>, pointsize = <span class="num">18</span>)
-<span class="fn">pheatmap</span>(top_hits)
-<span class="fn">dev.off</span>()
+<span class="cm">## ── Heatmap with hierarchical clustering ─────────────</span>
+<span class="rf">pheatmap</span>(top_hits)
 
-<span class="cm"># Z-score heatmap — all significant DEGs</span>
-cal_z_score   &lt;- <span class="kw">function</span>(x) (x - <span class="fn">mean</span>(x)) / <span class="fn">sd</span>(x)
-zscore_all    &lt;- <span class="fn">t</span>(<span class="fn">apply</span>(normalized_counts, <span class="num">1</span>, cal_z_score))
-zscore_subset &lt;- zscore_all[<span class="fn">row.names</span>(DEG[<span class="num">1</span>:<span class="num">10</span>, ]), ]
-
-<span class="fn">png</span>(<span class="str">"heatmap_plot.png"</span>, width = <span class="num">1000</span>, height = <span class="num">900</span>, pointsize = <span class="num">18</span>)
-<span class="fn">pheatmap</span>(zscore_subset)
-<span class="fn">dev.off</span>()</pre>
+<span class="cm">## ── Z-score heatmap (all significant DEGs) ───────────</span>
+cal_z_score &lt;- <span class="rv">function</span>(x) (x - <span class="rf">mean</span>(x)) / <span class="rf">sd</span>(x)
+zscore_all    &lt;- <span class="rf">t</span>(<span class="rf">apply</span>(normalized_counts, <span class="nu">1</span>, cal_z_score))
+zscore_subset &lt;- zscore_all[<span class="rf">row.names</span>(DEG[<span class="nu">1</span>:<span class="nu">10</span>, ]), ]
+<span class="rf">pheatmap</span>(zscore_subset)</code></pre>
+  </div>
+  <div class="fig-2col">
+    <div class="fig-wrap">
+      <figure>
+        <img src="figures/heatmap_plot.png" alt="Heatmap of top DEGs" onclick="openLB(this.src,'Fig. 5 — Heatmap of top 50 DEGs, hierarchically clustered.')">
+        <figcaption><strong>Fig. 5</strong> — Heatmap of top 50 DEGs. Row-centred rlog expression. Hierarchical clustering groups co-regulated genes.</figcaption>
+      </figure>
+    </div>
+    <div class="fig-wrap">
+      <figure>
+        <img src="figures/simple_heatmap.png" alt="Simple Heatmap" onclick="openLB(this.src,'Fig. 6 — Simplified expression heatmap across all conditions.')">
+        <figcaption><strong>Fig. 6</strong> — Simplified heatmap of normalised expression across all treatment conditions.</figcaption>
+      </figure>
+    </div>
   </div>
 
-  <!-- 07F: Volcano -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07F — Volcano Plot (EnhancedVolcano)
-  </h3>
+  <!-- 5G: Volcano -->
+  <span class="anchor" id="step5g"></span>
+  <h3 class="sh3">G) Volcano Plot</h3>
+  <div class="prose">
+    <p>A volcano plot visualises the relationship between statistical significance (–log10 adjusted p-value) and fold change. Colour-coded points show: genes significant by p-value only (red), genes with large fold change only (orange), and genes meeting both criteria (green).</p>
+  </div>
   <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07F: Publication-grade volcano plot</span>
+    <div class="code-bar">
+      <div class="code-bar-left"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><span class="code-lang">R</span></div>
+      <button class="code-copy" onclick="copyCode(this)">Copy</button>
     </div>
-    <pre><span class="fn">if</span> (!<span class="fn">requireNamespace</span>(<span class="str">"BiocManager"</span>, quietly = <span class="kw">TRUE</span>))
-  <span class="fn">install.packages</span>(<span class="str">"BiocManager"</span>)
-BiocManager::<span class="fn">install</span>(<span class="str">"EnhancedVolcano"</span>)
-<span class="fn">library</span>(EnhancedVolcano)
+<pre><code><span class="cm">## ── Install and load EnhancedVolcano ──────────────────</span>
+<span class="rv">if</span> (!<span class="rf">requireNamespace</span>(<span class="rs">"BiocManager"</span>, quietly = <span class="rv">TRUE</span>))
+  <span class="rf">install.packages</span>(<span class="rs">"BiocManager"</span>)
+BiocManager<span class="op">::</span><span class="rf">install</span>(<span class="rs">"EnhancedVolcano"</span>)
+<span class="rf">library</span>(EnhancedVolcano)
 
-<span class="cm"># Define custom colours based on direction and significance</span>
-keyvals &lt;- <span class="fn">ifelse</span>(
-  deseq_results$log2FoldChange &gt;=  <span class="num">1.0</span> &amp; deseq_results$pvalue &lt; <span class="num">0.05</span>, <span class="str">"red"</span>,
-  <span class="fn">ifelse</span>(deseq_results$log2FoldChange &lt;= <span class="num">-1.0</span> &amp; deseq_results$pvalue &lt; <span class="num">0.05</span>,
-         <span class="str">"royalblue"</span>, <span class="str">"grey"</span>))
-<span class="fn">names</span>(keyvals)[keyvals == <span class="str">"red"</span>]       &lt;- <span class="str">"UP Regulated"</span>
-<span class="fn">names</span>(keyvals)[keyvals == <span class="str">"royalblue"</span>] &lt;- <span class="str">"DOWN Regulated"</span>
-<span class="fn">names</span>(keyvals)[keyvals == <span class="str">"grey"</span>]      &lt;- <span class="str">"NS"</span>
+<span class="cm">## ── Define custom colours ─────────────────────────────</span>
+keyvals &lt;- <span class="rf">ifelse</span>(
+  deseq_results<span class="op">$</span>log2FoldChange &gt;= <span class="nu">1.0</span> &amp; deseq_results<span class="op">$</span>pvalue &lt; <span class="nu">0.05</span>, <span class="rs">"red"</span>,
+  <span class="rf">ifelse</span>(deseq_results<span class="op">$</span>log2FoldChange &lt;= <span class="fl">-1.0</span> &amp; deseq_results<span class="op">$</span>pvalue &lt; <span class="nu">0.05</span>,
+         <span class="rs">"royalblue"</span>, <span class="rs">"grey"</span>))
+<span class="rf">names</span>(keyvals)[keyvals == <span class="rs">"red"</span>]       &lt;- <span class="rs">"UP Regulated"</span>
+<span class="rf">names</span>(keyvals)[keyvals == <span class="rs">"royalblue"</span>] &lt;- <span class="rs">"DOWN Regulated"</span>
+<span class="rf">names</span>(keyvals)[keyvals == <span class="rs">"grey"</span>]      &lt;- <span class="rs">"NS"</span>
 
-<span class="cm"># Publication-grade volcano plot</span>
-<span class="fn">png</span>(<span class="str">"diffexpr-volcanoplot.png"</span>, width = <span class="num">2000</span>, height = <span class="num">1200</span>, res = <span class="num">150</span>)
-<span class="fn">EnhancedVolcano</span>(deseq_results,
-  lab             = <span class="fn">rownames</span>(deseq_results),
-  x               = <span class="str">"log2FoldChange"</span>,
-  y               = <span class="str">"pvalue"</span>,
-  pCutoff         = <span class="num">0.1</span>,
-  FCcutoff        = <span class="num">1.0</span>,
+<span class="cm">## ── Publication-grade Volcano plot ───────────────────</span>
+<span class="rf">png</span>(<span class="rs">"VolcanoPlot_Rice.png"</span>, width = <span class="nu">2000</span>, height = <span class="nu">1200</span>, res = <span class="nu">150</span>)
+<span class="rf">EnhancedVolcano</span>(deseq_results,
+  lab             = <span class="rf">rownames</span>(deseq_results),
+  x               = <span class="rs">"log2FoldChange"</span>,
+  y               = <span class="rs">"pvalue"</span>,
+  pCutoff         = <span class="nu">0.1</span>,
+  FCcutoff        = <span class="nu">1.0</span>,
   colCustom       = keyvals,
-  title           = <span class="str">"Infected vs Control"</span>,
-  subtitle        = <span class="str">"Up and Down Regulated Genes"</span>,
-  pointSize       = <span class="num">1.5</span>,
-  labSize         = <span class="num">3.0</span>,
-  legendPosition  = <span class="str">"right"</span>,
-  legendLabSize   = <span class="num">12</span>,
-  legendIconSize  = <span class="num">4.0</span>,
-  drawConnectors  = <span class="kw">TRUE</span>,
-  widthConnectors = <span class="num">0.5</span>)
-<span class="fn">dev.off</span>()</pre>
+  title           = <span class="rs">"Infected vs Control"</span>,
+  subtitle        = <span class="rs">"Up and Down Regulated Genes"</span>,
+  pointSize       = <span class="nu">1.5</span>,
+  labSize         = <span class="nu">3.0</span>,
+  legendPosition  = <span class="rs">"right"</span>,
+  legendLabSize   = <span class="nu">12</span>,
+  legendIconSize  = <span class="nu">4.0</span>,
+  drawConnectors  = <span class="rv">TRUE</span>,
+  widthConnectors = <span class="nu">0.5</span>)
+<span class="rf">dev.off</span>()</code></pre>
   </div>
 
-  <!-- 07G: Top gene count plot -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--dg);margin:1.5rem 0 .4rem">
-    07G — Top Gene Normalized Count Plot
-  </h3>
-  <div class="code-block">
-    <div class="code-header">
-      <div class="code-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
-      <span class="code-lang">R · Step 07G: Normalized counts for the top DEG</span>
+  <div class="fig-wrap">
+    <figure>
+      <img src="figures/normalized_counts.png" alt="Normalized counts" onclick="openLB(this.src,'Fig. 7 — Normalized counts for a top DEG across all samples.')">
+      <figcaption><strong>Fig. 7</strong> — DESeq2 size-factor normalised counts for a top DEG. Consistent expression levels across biological replicates confirm reliable detection.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ── RESULTS GALLERY ───────────────────────── -->
+<span class="anchor" id="results"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num badge-style" style="background:var(--gold);color:var(--dg);">GALLERY</div>
+    <div class="sec-title"><h2>All Results Figures</h2><p>Click any figure to enlarge</p></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gal-card">
+      <img src="figures/PCA_T_vs_C.png" alt="PCA T vs C" onclick="openLB(this.src,'PCA — Treated vs Control')">
+      <div class="gal-card-body"><h4>PCA — Treated vs Control</h4><p>PC1 captures infection-driven variance</p></div>
     </div>
-    <pre><span class="cm"># Identify the gene with the highest log2FoldChange</span>
-topGene &lt;- <span class="fn">rownames</span>(deseq_results)[<span class="fn">which.max</span>(deseq_results$log2FoldChange)]
-topGene   <span class="cm"># print gene ID</span>
-
-<span class="cm"># Plot normalized counts per sample for the top gene</span>
-<span class="fn">png</span>(<span class="str">"the_top_gene_count.png"</span>, width = <span class="num">800</span>, height = <span class="num">600</span>, pointsize = <span class="num">16</span>)
-<span class="fn">plotCounts</span>(dds, gene = topGene, intgroup = <span class="str">"condition"</span>)
-<span class="fn">dev.off</span>()
-
-<span class="cm"># p-value distribution histogram</span>
-<span class="fn">png</span>(<span class="str">"hist-pvalue.png"</span>, <span class="num">1000</span>, <span class="num">1000</span>, pointsize = <span class="num">20</span>)
-<span class="fn">hist</span>(deseq_results$pvalue,
-     breaks = <span class="fn">seq</span>(<span class="num">0</span>, <span class="num">1</span>, length = <span class="num">21</span>),
-     col    = <span class="str">"grey"</span>, border = <span class="str">"white"</span>,
-     xlab   = <span class="str">"p-value"</span>, ylab = <span class="str">"Frequency"</span>,
-     main   = <span class="str">"Frequencies of p-value"</span>)
-<span class="fn">dev.off</span>()</pre>
-  </div>
-
-  <!-- 3. Results -->
-  <div class="sec-divider">
-    <span class="sec-num">03</span>
-    <h2 class="sec-title">Results &amp; Figures</h2>
-    <div class="sec-line"></div>
-  </div>
-
-  <p class="prose">
-    Out of 26,167 expressed genes tested, the analysis identified a large number of
-    differentially expressed genes between infected and control rice leaves, consistent with
-    the scale of transcriptomic reprogramming reported in the original publication.
-    Each figure below is a direct output of the reproduced analysis.
-  </p>
-
-  <!-- DEG summary table -->
-  <table class="results-table">
-    <thead>
-      <tr>
-        <th>Metric</th>
-        <th>Threshold</th>
-        <th>Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Total genes tested</td>
-        <td>—</td>
-        <td><span class="badge-all">26,167</span></td>
-      </tr>
-      <tr>
-        <td>Upregulated (infected)</td>
-        <td>padj &lt; 0.05 &amp; log₂FC ≥ 1</td>
-        <td><span class="badge-up">UP ↑</span></td>
-      </tr>
-      <tr>
-        <td>Downregulated (infected)</td>
-        <td>padj &lt; 0.05 &amp; log₂FC ≤ −1</td>
-        <td><span class="badge-down">DOWN ↓</span></td>
-      </tr>
-      <tr>
-        <td>LFC shrinkage method</td>
-        <td>—</td>
-        <td>apeglm</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Figure 1: Dispersion estimates -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dg);margin-bottom:.5rem;margin-top:2rem">
-    Quality Control: Dispersion Estimates
-  </h3>
-  <p class="prose">
-    Before interpreting differential expression results, DESeq2's dispersion modelling must be
-    evaluated. The plot below confirms a well-fitted negative binomial model: gene-wise estimates
-    (black) shrink toward the fitted curve (red), and final shrunken estimates (blue) follow the
-    expected mean-dispersion trend.
-  </p>
-
-  <div class="fig-card">
-    <div class="fig-img-wrap" onclick="openLightbox('qc-dispersions.png','Dispersion estimates — gene-wise (black), fitted (red), final (blue)')">
-      <img src="qc-dispersions.png" alt="DESeq2 dispersion estimates plot showing mean-dispersion relationship">
+    <div class="gal-card">
+      <img src="figures/PCA_TreatmentDay.png" alt="PCA TreatmentDay" onclick="openLB(this.src,'PCA — Treatment × Time point')">
+      <div class="gal-card-body"><h4>PCA — Treatment × Day</h4><p>Temporal dynamics of the transcriptome</p></div>
     </div>
-    <div class="fig-caption">
-      <div class="fig-label">Figure 1 — Dispersion estimates</div>
-      <div class="fig-text">
-        DESeq2 dispersion plot. <strong>Black dots:</strong> per-gene maximum-likelihood estimates.
-        <strong>Red curve:</strong> fitted dispersion trend. <strong>Blue circles:</strong> final
-        MAP-shrunken estimates used for testing. The expected decreasing trend with mean expression
-        confirms robust model fitting with these 8 samples.
-      </div>
+    <div class="gal-card">
+      <img src="figures/qc-heatmap-samples.png" alt="QC heatmap" onclick="openLB(this.src,'QC Sample Distance Heatmap')">
+      <div class="gal-card-body"><h4>QC Sample Distance Heatmap</h4><p>Sample-to-sample distances; replicate quality</p></div>
+    </div>
+    <div class="gal-card">
+      <img src="figures/MAplot.png" alt="MA Plot" onclick="openLB(this.src,'MA Plot')">
+      <div class="gal-card-body"><h4>MA Plot</h4><p>Log2 FC vs mean expression; red = DEGs</p></div>
+    </div>
+    <div class="gal-card">
+      <img src="figures/normalized_counts.png" alt="Normalized counts" onclick="openLB(this.src,'Normalized Counts')">
+      <div class="gal-card-body"><h4>Normalized Counts</h4><p>DESeq2-normalised counts for top DEG</p></div>
+    </div>
+    <div class="gal-card">
+      <img src="figures/heatmap_plot.png" alt="Heatmap" onclick="openLB(this.src,'Heatmap of top 50 DEGs')">
+      <div class="gal-card-body"><h4>Heatmap — Top DEGs</h4><p>Hierarchical clustering of top 50 DEGs</p></div>
+    </div>
+    <div class="gal-card">
+      <img src="figures/simple_heatmap.png" alt="Simple Heatmap" onclick="openLB(this.src,'Simplified Heatmap')">
+      <div class="gal-card-body"><h4>Simple Heatmap</h4><p>Expression patterns across conditions</p></div>
     </div>
   </div>
 
-  <div class="callout">
-    <div class="callout-icon">🔬</div>
-    <div class="callout-body">
-      <div class="callout-title">Interpretation</div>
-      <div class="callout-text">
-        The dispersion estimates behave as expected for bulk RNA-seq data: high dispersion at
-        low counts, converging to lower values at high expression. No unusual outlier clusters
-        are visible, indicating good library quality and consistent sample preparation.
-      </div>
-    </div>
-  </div>
-
-  <!-- Figure 2: PCA -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dg);margin-bottom:.5rem;margin-top:2rem">
-    Sample Clustering: PCA
-  </h3>
-  <p class="prose">
-    Principal component analysis (PCA) on VST-transformed counts reveals the global
-    structure of the experiment and confirms that treatment explains the dominant source
-    of variation.
-  </p>
-
-  <div class="fig-card">
-    <div class="fig-img-wrap" onclick="openLightbox('PCA_TreatmentDay.png','PCA plot — PC1 (90% variance) separates infected from control samples')">
-      <img src="PCA_TreatmentDay.png" alt="PCA plot showing separation of infected and control rice samples">
-    </div>
-    <div class="fig-caption">
-      <div class="fig-label">Figure 2 — PCA of VST-transformed counts</div>
-      <div class="fig-text">
-        PC1 explains <strong>90% of total variance</strong> and cleanly separates infected (Treated)
-        from control (C1, C2) samples along the x-axis. PC2 (5%) captures within-treatment
-        variation, likely reflecting the three infection time points. The two control replicates
-        cluster tightly, confirming low technical noise.
-      </div>
-    </div>
-  </div>
-
-  <div class="callout">
-    <div class="callout-icon">📊</div>
-    <div class="callout-body">
-      <div class="callout-title">Interpretation</div>
-      <div class="callout-text">
-        The strong separation on PC1 validates the experimental design: the transcriptomic
-        response to <em>M. oryzae</em> infection dominates the signal. Time-point variation
-        within treated samples (visible along PC2) suggests a dynamic, time-dependent
-        transcriptional response, consistent with staged infection biology.
-      </div>
-    </div>
-  </div>
-
-  <!-- Figure 3 & 4: Volcano + MA side-by-side -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dg);margin-bottom:.5rem;margin-top:2rem">
-    Differential Expression: Volcano &amp; MA Plots
-  </h3>
-  <p class="prose">
-    Two complementary views of the differential expression results. The volcano plot combines
-    statistical significance with fold change; the MA plot shows LFC versus mean expression
-    to assess whether the LFC shrinkage was effective.
-  </p>
-
-  <div class="fig-card">
-    <div class="fig-img-wrap" onclick="openLightbox('diffexpr-volcanoplot.png','Volcano plot — Infected vs Control, 26,167 genes')">
-      <img src="diffexpr-volcanoplot.png" alt="Volcano plot of differentially expressed genes in rice infected with M. oryzae">
-    </div>
-    <div class="fig-caption">
-      <div class="fig-label">Figure 3 — Volcano plot (EnhancedVolcano)</div>
-      <div class="fig-text">
-        Infected vs Control. <span style="color:#c05050;font-weight:600">Red:</span> upregulated
-        (log₂FC ≥ 1, p &lt; 0.05). <span style="color:#4a82c8;font-weight:600">Blue:</span>
-        downregulated (log₂FC ≤ −1, p &lt; 0.05). <strong>Grey:</strong> not significant.
-        Total = 26,167 variables. Notable top genes labelled with connectors:
-        <em>Os01g0389200</em>, <em>Os01g0940700</em>, and <em>Os01g0198300</em> show the
-        strongest upregulation.
-      </div>
-    </div>
-  </div>
-
-  <div class="fig-grid" style="margin-top:1rem">
-    <div class="fig-card" style="margin:0">
-      <div class="fig-img-wrap" onclick="openLightbox('maplott.png','MA plot after apeglm LFC shrinkage')">
-        <img src="maplott.png" alt="MA plot showing log fold change vs mean normalized counts">
-      </div>
-      <div class="fig-caption">
-        <div class="fig-label">Figure 4a — MA plot (shrunken LFC)</div>
-        <div class="fig-text">
-          <strong>Blue dots:</strong> significant DEGs (padj &lt; 0.05).
-          Shrinkage via <code>apeglm</code> pulls extreme LFC estimates at low counts
-          toward zero, reducing noise from lowly expressed genes.
-        </div>
-      </div>
-    </div>
-    <div class="fig-card" style="margin:0">
-      <div class="fig-img-wrap" onclick="openLightbox('the_top_gene_count.png','Top gene Os07g0518100 — normalized count plot')">
-        <img src="the_top_gene_count.png" alt="Normalized count plot for the top differentially expressed gene">
-      </div>
-      <div class="fig-caption">
-        <div class="fig-label">Figure 4b — Top gene: Os07g0518100</div>
-        <div class="fig-text">
-          Normalized counts for the gene with the highest log₂FC.
-          Expression is near-zero in controls (C) but strongly induced across
-          treated replicates (T), validating the DESeq2 call.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Figure 5: Heatmaps -->
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dg);margin-bottom:.5rem;margin-top:2rem">
-    Heatmaps: Top DEGs &amp; Z-score Profiles
-  </h3>
-  <p class="prose">
-    Two heatmaps explore DEG expression patterns across all 8 samples: one using
-    log₂-transformed normalised counts (top 10 DEGs) and one using a broader Z-score
-    scaled view of defence-related genes.
-  </p>
-
-  <div class="fig-grid">
-    <div class="fig-card" style="margin:0">
-      <div class="fig-img-wrap" onclick="openLightbox('heatmap_top10_genes.png','Heatmap of top 10 DEGs — log2 normalised counts')">
-        <img src="heatmap_top10_genes.png" alt="Heatmap showing top 10 differentially expressed genes">
-      </div>
-      <div class="fig-caption">
-        <div class="fig-label">Figure 5a — Top 10 DEGs (log₂ counts)</div>
-        <div class="fig-text">
-          Hierarchical clustering of the 10 most significant DEGs. Treated samples
-          (left cluster) show consistently higher expression for most top genes,
-          particularly <em>Os06g0633100</em> and <em>Os01g0940700</em>.
-        </div>
-      </div>
-    </div>
-    <div class="fig-card" style="margin:0">
-      <div class="fig-img-wrap" onclick="openLightbox('nomalized_counts.png','Heatmap of normalised counts')">
-        <img src="nomalized_counts.png" alt="Heatmap of normalized counts across all samples">
-      </div>
-      <div class="fig-caption">
-        <div class="fig-label">Figure 5b — Normalised counts overview</div>
-        <div class="fig-text">
-          Broader view across a larger set of DEGs. The clear separation between
-          treated and control columns confirms robust differential expression
-          without requiring Z-score transformation.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="fig-card">
-    <div class="fig-img-wrap" onclick="openLightbox('heatmap_plot.png','Z-score heatmap of defence and stress response genes')">
-      <img src="heatmap_plot.png" alt="Z-score heatmap of rice defence genes in response to blast infection">
-    </div>
-    <div class="fig-caption">
-      <div class="fig-label">Figure 6 — Z-score heatmap (defence &amp; stress genes)</div>
-      <div class="fig-text">
-        Z-score normalised expression across selected defence- and stress-related genes,
-        annotated with gene names (e.g. <em>OsCCT36</em>, <em>OsPR1b</em>, <em>OsDREB1C</em>,
-        <em>PR1A</em>). Red = high relative expression; blue = low.
-        Treated replicates (Treated2R1–Treated1R2) form a clear high-expression cluster,
-        while both controls and <em>Treated1R1</em> show predominantly suppressed profiles,
-        suggesting heterogeneity in early infection response.
-      </div>
-    </div>
-  </div>
-
-  <div class="callout">
-    <div class="callout-icon">🌾</div>
-    <div class="callout-body">
-      <div class="callout-title">Biological interpretation</div>
-      <div class="callout-text">
-        The heatmap reveals induction of canonical defence genes including
-        <em>PR1A</em>, <em>OsPR1b</em>, and <em>OsPR10a</em> (pathogenesis-related proteins),
-        as well as transcription factors (<em>OsDREB1C</em>) and secondary metabolite
-        biosynthesis genes. This pattern is consistent with the salicylic acid and
-        jasmonate signalling cascades activated during incompatible rice–blast interactions
-        described in the original publication.
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. Conclusions -->
-  <div class="sec-divider">
-    <span class="sec-num">04</span>
-    <h2 class="sec-title">Conclusions &amp; Skills Demonstrated</h2>
-    <div class="sec-line"></div>
-  </div>
-
-  <p class="prose">
-    This reproduction study successfully recapitulated the main findings of Cui et al. (2021):
-    a large-scale transcriptomic reprogramming in rice upon <em>M. oryzae</em> infection,
-    characterised by strong induction of pathogenesis-related genes and suppression of
-    growth-related processes. The PCA, volcano plot, and heatmap patterns are qualitatively
-    consistent with the published results.
-  </p>
-
-  <div class="info-box" style="margin-top:1rem">
-    <strong>Skills demonstrated in this project:</strong><br>
-    Linux/WSL2 command-line pipelines &nbsp;·&nbsp;
-    NGS quality control (<code>FastQC</code>, <code>fastp</code>) &nbsp;·&nbsp;
-    Splice-aware alignment (<code>HISAT2</code>) &nbsp;·&nbsp;
-    Transcript quantification (<code>Cufflinks</code> suite) &nbsp;·&nbsp;
-    Statistical modelling in R (<code>DESeq2</code>, <code>apeglm</code>) &nbsp;·&nbsp;
-    Scientific visualisation (<code>EnhancedVolcano</code>, <code>pheatmap</code>, <code>ggplot2</code>) &nbsp;·&nbsp;
-    Reproducible research practices
-  </div>
-
-  <p class="prose" style="margin-top:1rem">
-    All scripts and the count table are available on GitHub.
-    Raw FASTQ files can be retrieved using the download script (NCBI SRA accession SRP230704).
-  </p>
-
-  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
-    <a href="https://github.com/YOUR_USERNAME/rice-blast-rnaseq"
-       target="_blank" rel="noopener noreferrer"
-       style="display:inline-flex;align-items:center;gap:.5rem;background:var(--dg);color:#f3ede2;
-              padding:.65rem 1.25rem;border-radius:6px;font-size:.85rem;font-weight:600;
-              text-decoration:none;font-family:'Source Serif 4',serif;transition:opacity .2s;"
-       onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      View on GitHub
+  <div class="btn-row">
+    <a href="https://github.com/MariamAmouzoune/rice-rnaseq-magnaporthe" target="_blank" class="btn btn-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      View Full Code on GitHub
     </a>
-    <a href="../../portfolio.html"
-       style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;
-              color:var(--mg);border:1px solid rgba(46,96,72,.35);
-              padding:.65rem 1.25rem;border-radius:6px;font-size:.85rem;font-weight:600;
-              text-decoration:none;font-family:'Source Serif 4',serif;transition:all .2s;"
-       onmouseover="this.style.background='rgba(26,58,42,.06)'" onmouseout="this.style.background='transparent'">
-      ← Back to Portfolio
-    </a>
+    <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230674" target="_blank" class="btn btn-outline">SRA SRP230674</a>
+    <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230704" target="_blank" class="btn btn-outline">SRA SRP230704</a>
+    <a href="https://doi.org/10.1016/j.cj.2020.10.008" target="_blank" class="btn btn-soft">Original Paper (DOI)</a>
+    <a href="../../portfolio.html" class="btn btn-soft">← Back to Portfolio</a>
   </div>
+</section>
 
-</div><!-- /page-wrap -->
+<!-- ── CITATION ──────────────────────────────── -->
+<span class="anchor" id="citation"></span>
+<section>
+  <div class="sec-header">
+    <div class="sec-num badge-style" style="background:rgba(26,58,42,.1);color:var(--dg);">REF</div>
+    <div class="sec-title"><h2>Reference &amp; Data Availability</h2></div>
+  </div>
+  <div class="citation">
+    Cui N, Chen X, Shi Y, Chi M, Hu J, Lai K, Wang Z, Wang H. (2021). Changes in the epigenome and transcriptome of rice in response to <em>Magnaporthe oryzae</em> infection. <em>The Crop Journal</em>, 9(4), 843–853. <a href="https://doi.org/10.1016/j.cj.2020.10.008" target="_blank">https://doi.org/10.1016/j.cj.2020.10.008</a>
+  </div>
+  <div class="callout note">
+    <div class="callout-ico">ℹ️</div>
+    <div class="callout-body">
+      <div class="callout-label">Data availability</div>
+      <p>All raw sequencing data are publicly available at NCBI SRA under accessions <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230674" target="_blank">SRP230674</a> and <a href="https://www.ncbi.nlm.nih.gov/sra/SRP230704" target="_blank">SRP230704</a> as deposited by the original authors. Analysis scripts are available at <a href="https://github.com/MariamAmouzoune/rice-rnaseq-magnaporthe" target="_blank">github.com/MariamAmouzoune/rice-rnaseq-magnaporthe</a>.</p>
+    </div>
+  </div>
+</section>
 
-<!-- ──────────── LIGHTBOX ──────────── -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Figure lightbox"
-     onclick="closeLightbox(event)">
+</main>
+</div><!-- end page-layout -->
+
+<!-- ─── LIGHTBOX ───────────────────────────── -->
+<div id="lb" onclick="closeLB()">
+  <button id="lb-close" onclick="closeLB()">✕</button>
   <img id="lb-img" src="" alt="">
-  <div class="lb-caption" id="lb-caption"></div>
-  <button class="lb-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+  <div id="lb-cap"></div>
 </div>
 
-<!-- ──────────── FOOTER ──────────── -->
-<footer>
-  <div class="foot-inner">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <h3>Mariam Amouzoune</h3>
-        <p>PhD Plant Breeding &amp; Molecular Biology<br>Bioinformatician · GWAS · NGS<br>Ibn Tofail University × ICARDA</p>
-      </div>
-      <div class="foot-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="../../index.html">Home</a></li>
-          <li><a href="../../about.html">About</a></li>
-          <li><a href="../../research.html">Research</a></li>
-          <li><a href="../../publications.html">Publications</a></li>
-          <li><a href="../../portfolio.html">Portfolio</a></li>
-          <li><a href="../../contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener">ResearchGate</a></li>
-          <li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
-      </div>
+<!-- ─── FOOTER ─────────────────────────────── -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-heading">Mariam Amouzoune</h3>
+                <p class="footer-text">
+                    PhD Plant Breeding &amp; Molecular Biology<br>
+                    Bioinformatician · GWAS · NGS<br>
+                    Ibn Tofail University × ICARDA
+                </p>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Quick Links</h4>
+                <ul class="footer-list">
+                    <li><a href="../../index.html" class="footer-link">Home</a></li>
+                    <li><a href="../../about.html" class="footer-link">About</a></li>
+                    <li><a href="../../research.html" class="footer-link">Research</a></li>
+                    <li><a href="../../publications.html" class="footer-link">Publications</a></li>
+                    <li><a href="../../portfolio.html" class="footer-link">Portfolio</a></li>
+                    <li><a href="../../contact.html" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-subheading">Connect</h4>
+                <ul class="footer-list">
+                    <li><a href="mailto:mariam.amouzoune@gmail.com" class="footer-link">Email</a></li>
+                    <li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener noreferrer" class="footer-link">ResearchGate</a></li>
+                    <li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            <span class="copyright-text">© 2026 Mariam Amouzoune. All rights reserved.</span>
+            <span class="copyright-accent">Plant Science &amp; Bioinformatics</span>
+        </div>
     </div>
-    <div class="foot-bottom">
-      <span style="color:#6a9a7a">© 2026 Mariam Amouzoune. All rights reserved.</span>
-      <span>Plant Science &amp; Bioinformatics</span>
-    </div>
-  </div>
 </footer>
 
 <script>
-/* Lightbox */
-function openLightbox(src, caption) {
-  document.getElementById('lb-img').src = src;
-  document.getElementById('lb-caption').textContent = caption;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox(e) {
-  if (!e || e.target !== document.getElementById('lb-img')) {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLightbox();
+// ── Reading progress bar ──────────────────────────
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  const p = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+  document.getElementById('progress-fill').style.width = p + '%';
 });
+
+// ── Lightbox ──────────────────────────────────────
+function openLB(src, cap) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-cap').textContent = cap || '';
+  document.getElementById('lb').classList.add('open');
+}
+function closeLB() { document.getElementById('lb').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+
+// ── Copy-code buttons ─────────────────────────────
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+// ── Active TOC on scroll ──────────────────────────
+const anchors = document.querySelectorAll('.anchor');
+const tocLinks = document.querySelectorAll('#toc a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      tocLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-60px 0px -70% 0px' });
+anchors.forEach(a => io.observe(a));
+</script>
+<script>
+(function(){
+    var btn  = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(){
+        var open = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function(e){
+        if(!btn.contains(e.target) && !menu.contains(e.target)){
+            menu.classList.remove('show');
+            btn.setAttribute('aria-expanded','false');
+        }
+    });
+    // scroll effect
+    var hdr = document.getElementById('siteHeader');
+    if(hdr){
+        window.addEventListener('scroll', function(){
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+        }, {passive:true});
+    }
+})();
 </script>
 </body>
 </html>
