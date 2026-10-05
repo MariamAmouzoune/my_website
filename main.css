@@ -1187,3 +1187,20 @@ td code { font-family: monospace; font-size: .82em; background: rgba(26,58,42,.0
   cursor: pointer; transition: background var(--transition);
 }
 #lb-close:hover { background: rgba(255,255,255,.25); }
+
+
+/* Code block readability override */
+.code-block pre,
+.code-block pre code {
+  color: #ffffff;
+}
+.code-block .kw,
+.code-block .fn,
+.code-block .rf,
+.code-block .rs,
+.code-block .rv,
+.code-block .nu,
+.code-block .op,
+.code-block .cm {
+  color: #ffffff;
+}
