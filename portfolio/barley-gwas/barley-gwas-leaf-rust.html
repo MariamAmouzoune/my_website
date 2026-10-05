@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../../main.css">
+<title>Barley GWAS: Leaf Rust Resistance | Mariam Amouzoune</title>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="../../index.html" class="logo-link" aria-label="Mariam Amouzoune – Home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 3C14 3 6 8 6 16C6 20.4 9.6 24 14 24C18.4 24 22 20.4 22 16C22 8 14 3 14 3Z" fill="#2d5c42" stroke="#c8a84b" stroke-width="1.5"/>
+        <path d="M14 24V14M14 14C14 14 10 11 8 8M14 14C14 14 18 11 20 8" stroke="#c8a84b" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Mariam Amouzoune</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../about.html" class="nav-link">About</a>
+      <a href="../../research.html" class="nav-link">Research</a>
+      <span class="port-item">
+        <a href="../../portfolio.html" class="nav-link active">Portfolio</a>
+        <ul class="port-dropdown" role="menu">
+          <li class="port-dropdown-hdr">Projects</li>
+          <li><a href="../rice-rnaseq/rice-rnaseq-tutorial.html" class="proj-link"><span class="proj-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span><span class="proj-title-dd">Rice RNA-seq &amp; <em>M. oryzae</em></span><span class="proj-tag-dd">RNA-seq · DESeq2 · HISAT2</span></span></a></li>
+          <li><a href="barley-gwas-leaf-rust.html" class="proj-link"><span class="proj-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg></span><span><span class="proj-title-dd">Barley GWAS &amp; <em>P. hordei</em></span><span class="proj-tag-dd">GWAS · MLM · TASSEL</span></span></a></li>
+          <li class="port-view-all"><a href="../../portfolio.html">View all projects <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+        </ul>
+      </span>
+      <a href="../../contact.html" class="nav-link">Contact</a>
+    </nav>
+    <button class="hamburger-btn" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="5" x2="20" y2="5"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="19" x2="20" y2="19"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="../../index.html">Home</a><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../portfolio.html" class="active">Portfolio</a><a href="../../contact.html">Contact</a>
+  </nav>
+</header>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb"><a href="../../portfolio.html">Portfolio</a> › <span>Barley GWAS &amp; Leaf Rust Resistance</span></div>
+    <div class="hero-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg>GWAS Tutorial &amp; Reproducible Analysis</div>
+    <h1>Genome-Wide Association Study of Leaf Rust Resistance in Barley (<em>Hordeum vulgare</em>)</h1>
+    <p class="hero-desc">A reproducible computational walkthrough of the published AM2017 barley study: phenotype integration, 50K SNP quality control, population structure, TASSEL mixed-model GWAS, GAPIT3 validation, multiple-testing correction, and visualization in R.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>Panel:</strong>&nbsp; AM2017 · 316 spring barley genotypes</div>
+      <div class="hero-meta-item"><strong>Genotypes:</strong>&nbsp; 50K iSelect array · 36,793 SNPs after QC</div>
+      <div class="hero-meta-item"><strong>Traits:</strong>&nbsp; SRT-MRC · SRT-SAT · APR-SAT17 · APR-SAT19</div>
+      <div class="hero-meta-item"><strong>Publication:</strong>&nbsp; Agriculture 2022, 12, 1829</div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">GWAS</span><span class="hero-tag">TASSEL 5.2.53</span><span class="hero-tag">GAPIT3</span>
+      <span class="hero-tag">MLM</span><span class="hero-tag">PCA + K</span><span class="hero-tag">50K SNP</span>
+      <span class="hero-tag">PLINK</span><span class="hero-tag">STRUCTURE</span><span class="hero-tag">R · ggplot2</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="toc-card">
+    <div class="toc-header">Table of Contents</div>
+    <div class="toc-body" id="toc">
+      <a href="#overview">Overview</a>
+      <a href="#design">Study Design</a>
+      <a href="#data">Data Preparation</a>
+      <a href="#phenotypes">1. Phenotypes</a>
+      <a href="#qc">2. SNP Quality Control</a>
+      <a href="#structure">3. Population Structure</a>
+      <a href="#tassel">4. TASSEL Tutorial</a>
+      <a href="#tassel-input" class="sub">A) Prepare HapMap + traits</a>
+      <a href="#tassel-filter" class="sub">B) Filter markers</a>
+      <a href="#tassel-pca" class="sub">C) PCA + kinship</a>
+      <a href="#tassel-gwas" class="sub">D) GLM/MLM comparison</a>
+      <a href="#tassel-mlm" class="sub">E) Final MLM (K + PCA)</a>
+      <a href="#gapit">5. GAPIT3 Validation</a>
+      <a href="#results">6. Results &amp; R Codes</a>
+      <a href="#results-pca" class="sub">PCA plot</a>
+      <a href="#results-qq" class="sub">QQ plot</a>
+      <a href="#results-manhattan" class="sub">Manhattan plot</a>
+      <a href="#results-fdr" class="sub">FDR + significant MTA</a>
+      <a href="#results-mta" class="sub">MTA summary</a>
+      <a href="#map">7. Genetic Map &amp; Candidates</a>
+      <a href="#breeding">8. Breeding Interpretation</a>
+      <a href="#repro">Reproducibility Notes</a>
+      <a href="#citation">Publication &amp; Data</a>
+    </div>
+    <div class="toc-links">
+      <a href="https://www.mdpi.com/2077-0472/12/11/1829" target="_blank" rel="noopener noreferrer">Published article</a>
+      <a href="https://github.com/MariamAmouzoune/my_website" target="_blank" rel="noopener noreferrer">Website repository</a>
+      <a href="../../portfolio.html">← Back to Portfolio</a>
+    </div>
+  </div>
+</aside>
+
+<main class="content">
+
+<span class="anchor" id="overview"></span>
+<section>
+  <div class="prose">
+    <p>This project converts the published study <strong>“Genome-Wide Association Study of Leaf Rust Resistance at Seedling and Adult Plant Stages in a Global Barley Panel”</strong> into a reproducible learning and portfolio workflow. The analysis combines disease phenotypes with dense SNP genotypes to identify marker–trait associations (MTAs) for <em>Puccinia hordei</em> resistance.</p>
+    <p>The published study used 316 spring barley genotypes from the AM2017 association panel. After retaining mapped polymorphic SNPs and applying <strong>MAF ≥ 5%</strong> and <strong>missingness ≤ 10%</strong>, 36,793 SNPs were used for genetic analyses. Population structure was assessed with 2,065 highly informative SNPs in STRUCTURE; PCA was calculated with PLINK 1.9; kinship was calculated from the filtered marker set; and GWAS was conducted with TASSEL 5.2.53 and six GAPIT3 models. citeturn2search0</p>
+  </div>
+  <div class="workflow">
+    <div class="wf-step"><div class="wf-box">Phenotypes</div><span>4 traits</span></div><div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">50K SNP</div><span>QC</span></div><div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">PCA + K</div><span>Structure</span></div><div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">TASSEL<br>MLM</div><span>Primary GWAS</span></div><div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">GAPIT3</div><span>Validation</span></div><div class="wf-arrow">→</div>
+    <div class="wf-step"><div class="wf-box">58 MTA</div><span>Results</span></div>
+  </div>
+  <div class="callout note"><div class="callout-ico">ℹ️</div><div class="callout-body"><div class="callout-label">Important distinction</div><p>The page gives executable analysis templates that follow the published Materials and Methods. Exact numerical reproduction requires the original genotype, phenotype, structure and marker-position files. Where the paper used PLINK, STRUCTURE or MapChart, the corresponding R code below reproduces the visualization or downstream result rather than pretending that R was the software used in the paper.</p></div></div>
+</section>
+
+<span class="anchor" id="design"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">DESIGN</div><div class="sec-title"><h2>Study Design</h2><p>What was measured and how the GWAS was structured</p></div></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Component</th><th>Published study</th><th>Analysis role</th></tr></thead>
+    <tbody>
+      <tr><td>Plant material</td><td>316 spring barley genotypes; 173 two-row and 143 six-row</td><td>Association panel</td></tr>
+      <tr><td>Seedling resistance</td><td>SRT-MRC and SRT-SAT</td><td>Two <em>P. hordei</em> isolates</td></tr>
+      <tr><td>Adult-plant resistance</td><td>APR-SAT17 and APR-SAT19</td><td>Sidi Allal Tazi, 2017 and 2019</td></tr>
+      <tr><td>Genotyping</td><td>50K iSelect barley SNP array</td><td>Genome-wide marker matrix</td></tr>
+      <tr><td>GWAS markers</td><td>36,793 SNPs after filtering</td><td>MAF ≥ 0.05; missingness ≤ 0.10</td></tr>
+      <tr><td>Structure markers</td><td>2,065 highly informative SNPs</td><td>STRUCTURE / ΔK</td></tr>
+      <tr><td>Primary model</td><td>TASSEL MLM (K + PCA)</td><td>Population structure + relatedness</td></tr>
+      <tr><td>Validation</td><td>GAPIT3: GLM, MLM, SUPER, MLMM, FarmCPU, BLINK</td><td>Cross-model support</td></tr>
+      <tr><td>Significance</td><td>pFDR, q &lt; 0.05</td><td>Multiple-testing control</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<span class="anchor" id="data"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">DATA</div><div class="sec-title"><h2>Data Preparation</h2><p>Recommended project layout before starting the analysis</p></div></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">text</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>barley-gwas/
+├── data/
+│   ├── genotype.hmp.txt
+│   ├── phenotype.csv
+│   ├── marker_map.csv
+│   └── structure_q.csv
+├── tassel/
+│   ├── kinship.txt
+│   ├── pca.txt
+│   └── gwas_results/
+├── gapit/
+├── figures/
+└── R/
+    ├── 01_phenotypes.R
+    ├── 02_pca.R
+    ├── 03_gwas_plots.R
+    └── 04_mta_summary.R</code></pre></div>
+  <div class="prose"><p>For the phenotype table, use one row per genotype and one column for each trait. Keep genotype names identical to the taxon names in the genotype file; this is essential when intersecting phenotype, PCA, Q and K data in TASSEL.</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Basic phenotype import and identifier check</span>
+<span class="rf">library</span>(tidyverse)
+
+pheno &lt;- <span class="rf">read_csv</span>(<span class="rs">"data/phenotype.csv"</span>)
+
+<span class="rf">glimpse</span>(pheno)
+<span class="rf">stopifnot</span>(<span class="rf">!anyDuplicated</span>(pheno$Genotype))
+
+<span class="cm"># Expected columns:</span>
+<span class="cm"># Genotype, SRT_MRC, SRT_SAT, APR_SAT17, APR_SAT19</span></code></pre></div>
+</section>
+
+<span class="anchor" id="phenotypes"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">1</div><div class="sec-title"><h2>Phenotype Exploration</h2><p>Inspect the four leaf-rust resistance traits before GWAS</p></div></div>
+  <div class="prose"><p>The GWAS combined disease severity scores from two seedling tests and two adult-plant environments. Before association testing, inspect missing values, distributions and trait relationships. This does not replace the experimental phenotyping described in the paper; it is the computational QC layer before GWAS.</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">library</span>(tidyverse)
+
+traits &lt;- <span class="rf">c</span>(<span class="rs">"SRT_MRC"</span>, <span class="rs">"SRT_SAT"</span>, <span class="rs">"APR_SAT17"</span>, <span class="rs">"APR_SAT19"</span>)
+
+<span class="cm"># Missingness and descriptive statistics</span>
+pheno |&gt;
+  <span class="rf">summarise</span>(<span class="rf">across</span>(<span class="rf">all_of</span>(traits),
+                   <span class="rf">list</span>(n = ~<span class="rf">sum</span>(!<span class="rf">is.na</span>(.x)),
+                        mean = ~<span class="rf">mean</span>(.x, na.rm = <span class="rv">TRUE</span>),
+                        sd = ~<span class="rf">sd</span>(.x, na.rm = <span class="rv">TRUE</span>),
+                        min = ~<span class="rf">min</span>(.x, na.rm = <span class="rv">TRUE</span>),
+                        max = ~<span class="rf">max</span>(.x, na.rm = <span class="rv">TRUE</span>))))
+
+<span class="cm"># Long format for trait distributions</span>
+long_pheno &lt;- pheno |&gt;
+  <span class="rf">pivot_longer</span>(<span class="rf">all_of</span>(traits), names_to = <span class="rs">"Trait"</span>, values_to = <span class="rs">"Score"</span>)
+
+<span class="rf">ggplot</span>(long_pheno, <span class="rf">aes</span>(Score)) +
+  <span class="rf">geom_histogram</span>(bins = <span class="nu">20</span>) +
+  <span class="rf">facet_wrap</span>(~Trait, scales = <span class="rs">"free"</span>) +
+  <span class="rf">theme_classic</span>()</code></pre></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R · trait correlation</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Pearson correlation among traits; use pairwise observations</span>
+cor_mat &lt;- <span class="rf">cor</span>(pheno[, traits], use = <span class="rs">"pairwise.complete.obs"</span>, method = <span class="rs">"pearson"</span>)
+<span class="rf">round</span>(cor_mat, <span class="nu">2</span>)
+
+<span class="cm"># Quick correlation heatmap</span>
+<span class="rf">library</span>(pheatmap)
+<span class="rf">pheatmap</span>(cor_mat, display_numbers = <span class="rv">TRUE</span>)</code></pre></div>
+</section>
+
+<span class="anchor" id="qc"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">2</div><div class="sec-title"><h2>SNP Quality Control</h2><p>Apply the published MAF and missingness thresholds</p></div></div>
+  <div class="prose"><p>The published analysis retained SNPs with known genetic/physical positions, removed monomorphic markers, removed markers with MAF &lt; 5%, and removed markers with &gt;10% missing data, resulting in 36,793 SNPs. The same MAF and missingness criteria were used for the GWAS. citeturn2search0</p></div>
+  <h3 class="sh3">PLINK command-line QC</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">bash · PLINK 1.9</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Starting from a PLINK binary dataset: barley50k</span>
+<span class="fn">plink</span> --bfile barley50k \
+  --maf <span class="nu">0.05</span> \
+  --geno <span class="nu">0.10</span> \
+  --make-bed \
+  --out barley50k_QC
+
+<span class="cm"># Confirm retained markers</span>
+<span class="fn">wc</span> -l barley50k_QC.bim</code></pre></div>
+  <div class="prose"><p>If your starting file is HapMap, VCF or another array-specific format, convert it to a PLINK-compatible representation first. Do not silently change the thresholds if the goal is to reproduce the paper.</p></div>
+  <h3 class="sh3">R QC summary from a numeric genotype matrix</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># G is a numeric SNP matrix: rows = genotypes, columns = SNPs.</span>
+<span class="cm"># Missing genotypes must be coded NA.</span>
+G &lt;- <span class="rf">as.matrix</span>(G)
+
+maf &lt;- <span class="rf">apply</span>(G, <span class="nu">2</span>, <span class="kw">function</span>(x) {
+  p &lt;- <span class="rf">mean</span>(x, na.rm = <span class="rv">TRUE</span>) / <span class="nu">2</span>
+  <span class="rf">min</span>(p, <span class="nu">1</span> - p)
+})
+
+missing_rate &lt;- <span class="rf">colMeans</span>(<span class="rf">is.na</span>(G))
+
+keep &lt;- maf &gt;= <span class="nu">0.05</span> &amp; missing_rate &lt;= <span class="nu">0.10</span>
+G_qc &lt;- G[, keep, drop = <span class="rv">FALSE</span>]
+
+<span class="rf">c</span>(markers_before = <span class="rf">ncol</span>(G),
+  markers_after = <span class="rf">ncol</span>(G_qc))</code></pre></div>
+  <div class="callout note"><div class="callout-ico">✓</div><div class="callout-body"><div class="callout-label">Expected published endpoint</div><p>The article reports 36,793 high-quality SNPs across the seven barley chromosomes after filtering. Your count will only match exactly if you start from the same underlying marker dataset and position-filtering rules.</p></div></div>
+</section>
+
+<span class="anchor" id="structure"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">3</div><div class="sec-title"><h2>Population Structure, PCA and Kinship</h2><p>Model the genetic relationships that can create false associations</p></div></div>
+  <div class="prose"><p>The published study selected 2,065 highly informative SNPs for STRUCTURE, used 100,000 burn-in iterations followed by 100,000 MCMC iterations, and identified K = 2 using ΔK. PCA was calculated with PLINK 1.9 using the 36,793 filtered SNPs. PC1 and PC2 explained 21.10% and 9.29% of the variation, respectively. Kinship was calculated from the filtered SNP set. citeturn2search0</p></div>
+
+  <h3 class="sh3">A) STRUCTURE 2.3.4 — tutorial settings</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">STRUCTURE settings</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>Model:             Admixture
+Burn-in length:    100000
+MCMC repetitions:  100000
+K:                 test a range of K values
+Markers:           2065 highly informative SNPs
+Decision rule:     STRUCTURE HARVESTER / ΔK
+Published result:  K = 2
+
+Membership rule used for subgroup assignment:
+  ≥ 80% membership → assigned to a subgroup
+  otherwise        → admixed</code></pre></div>
+
+  <h3 class="sh3">B) PCA with PLINK 1.9</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">bash · PLINK 1.9</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="fn">plink</span> --bfile barley50k_QC \
+  --pca <span class="nu">10</span> \
+  --out barley_PCA
+
+<span class="cm"># The first two eigenvectors are then plotted in R.</span></code></pre></div>
+
+  <h3 class="sh3">C) R code for the published PCA-style scatter plot</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R · ggplot2</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">library</span>(tidyverse)
+
+pca &lt;- <span class="rf">read_table</span>(<span class="rs">"barley_PCA.eigenvec"</span>, col_names = <span class="rv">FALSE</span>)
+eig &lt;- <span class="rf">read_table</span>(<span class="rs">"barley_PCA.eigenval"</span>, col_names = <span class="rv">FALSE</span>)
+
+<span class="rf">colnames</span>(pca)[<span class="nu">1</span>:<span class="nu">4</span>] &lt;- <span class="rf">c</span>(<span class="rs">"FID"</span>, <span class="rs">"Genotype"</span>, <span class="rs">"PC1"</span>, <span class="rs">"PC2"</span>)
+pc_var &lt;- eig[[<span class="nu">1</span>]] / <span class="rf">sum</span>(eig[[<span class="nu">1</span>]])
+
+<span class="rf">ggplot</span>(pca, <span class="rf">aes</span>(PC1, PC2)) +
+  <span class="rf">geom_point</span>(size = <span class="nu">2.4</span>) +
+  <span class="rf">labs</span>(
+    x = <span class="rf">sprintf</span>(<span class="rs">"PC1 (%.2f%%)"</span>, <span class="nu">100</span> * pc_var[<span class="nu">1</span>]),
+    y = <span class="rf">sprintf</span>(<span class="rs">"PC2 (%.2f%%)"</span>, <span class="nu">100</span> * pc_var[<span class="nu">2</span>])
+  ) +
+  <span class="rf">theme_classic</span>()</code></pre></div>
+
+  <h3 class="sh3">D) Optional R-only PCA for a numeric SNP matrix</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># This is an educational reproduction; the paper used PLINK.</span>
+G_imp &lt;- <span class="rf">apply</span>(G_qc, <span class="nu">2</span>, <span class="kw">function</span>(x) {
+  x[<span class="rf">is.na</span>(x)] &lt;- <span class="rf">mean</span>(x, na.rm = <span class="rv">TRUE</span>)
+  x
+})
+
+pca_r &lt;- <span class="rf">prcomp</span>(G_imp, center = <span class="rv">TRUE</span>, scale. = <span class="rv">FALSE</span>)
+pca_df &lt;- <span class="rf">as.data.frame</span>(pca_r$x[, <span class="nu">1</span>:<span class="nu">2</span>])
+<span class="rf">colnames</span>(pca_df) &lt;- <span class="rf">c</span>(<span class="rs">"PC1"</span>, <span class="rs">"PC2"</span>)
+
+<span class="rf">ggplot</span>(pca_df, <span class="rf">aes</span>(PC1, PC2)) +
+  <span class="rf">geom_point</span>() + <span class="rf">theme_classic</span>()</code></pre></div>
+</section>
+
+<span class="anchor" id="tassel"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">4</div><div class="sec-title"><h2>TASSEL 5.2.53 — Complete GWAS Tutorial</h2><p>Rebuild the primary association analysis used in the publication</p></div></div>
+  <div class="prose"><p>TASSEL was the primary GWAS platform. The paper compared GLM (Q), GLM (PCA), MLM (Q + K), and MLM (K + PCA), found the MLM approaches better controlled false positives, and implemented <strong>MLM (K + PCA)</strong> for the final GWAS. TASSEL's MLM requires a kinship matrix and population-structure covariates; its official tutorial describes the same genotype + phenotype + structure + kinship workflow. citeturn2search0turn0search0</p></div>
+
+  <span class="anchor" id="tassel-input"></span>
+  <h3 class="sh3">A) Prepare the TASSEL inputs</h3>
+  <div class="prose"><p>Use a HapMap genotype file with the filtered SNPs, a trait file whose taxon names match the genotype taxa, a PCA covariate file, and a kinship matrix. TASSEL supports HapMap and numerical trait/covariate formats and can calculate PCA and kinship from marker data. citeturn0search1turn0search7</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">TASSEL file logic</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>genotype:       barley_QC.hmp.txt
+phenotype:      barley_traits.txt
+population Q:   structure_Q.txt          # for GLM/MLM Q models
+PCA:            barley_PCA.txt           # for GLM/MLM PCA models
+kinship K:      barley_kinship.txt       # for MLM models
+
+Traits to analyze:
+  SRT-MRC
+  SRT-SAT
+  APR-SAT17
+  APR-SAT19</code></pre></div>
+
+  <span class="anchor" id="tassel-filter"></span>
+  <h3 class="sh3">B) Filter sites in TASSEL</h3>
+  <ol class="step-list">
+    <li>Import the filtered HapMap genotype file.</li>
+    <li>Open <strong>Filter → Sites</strong>.</li>
+    <li>Apply the same biological thresholds used in the paper: MAF ≥ 0.05 and missingness ≤ 0.10.</li>
+    <li>Export the resulting genotype table for reproducibility.</li>
+    <li>Keep marker names, chromosome and genetic/physical positions intact because these are needed for the MTA tables and Manhattan plots.</li>
+  </ol>
+  <div class="callout warn"><div class="callout-ico">⚠️</div><div class="callout-body"><div class="callout-label">Do not double-filter blindly</div><p>If your HapMap file has already been filtered to the 36,793-marker dataset, applying another filter is fine as a verification step but should not be described as producing the published number unless the starting dataset is the same.</p></div></div>
+
+  <span class="anchor" id="tassel-pca"></span>
+  <h3 class="sh3">C) Generate PCA and kinship in TASSEL</h3>
+  <div class="prose"><p>In the TASSEL GUI, select the filtered genotype data and run <strong>Analysis → PCA</strong> for principal components and <strong>Analysis → Kinship</strong> for the relationship matrix. TASSEL's PCA implementation numerically represents marker states and its kinship tools can derive relationships from genome-wide SNPs. citeturn0search7turn0search1</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">bash · TASSEL pipeline example</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Example TASSEL pipeline for an MLM analysis.</span>
+<span class="cm"># Adapt file paths and population-structure columns to your files.</span>
+
+./run_pipeline.pl \
+  -fork1 -importGuess barley_QC.hmp.txt \
+  -fork2 -importGuess barley_traits.txt \
+  -fork3 -importGuess barley_PCA.txt -excludeLastTrait \
+  -fork4 -importGuess barley_kinship.txt \
+  -combine5 -input1 -input2 -input3 -intersect \
+  -mlm -mlmVarCompEst P3D -mlmCompressionLevel Optimum \
+  -input4 -export barley_MLM_PCAK \
+  -exportType Text</code></pre></div>
+  <div class="prose"><p>The command above follows the official TASSEL MLM pipeline pattern: intersect genotype/trait/structure data by taxa, then pass the kinship matrix to MLM. The exact CLI flags can vary with TASSEL releases, so the installed version's help output should be checked before execution. citeturn0search0</p></div>
+
+  <span class="anchor" id="tassel-gwas"></span>
+  <h3 class="sh3">D) Compare the four TASSEL models</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Model</th><th>Population structure</th><th>Kinship</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>GLM (Q)</td><td>Q matrix</td><td>—</td><td>Fixed-effect structure correction</td></tr>
+      <tr><td>GLM (PCA)</td><td>Principal components</td><td>—</td><td>Alternative structure correction</td></tr>
+      <tr><td>MLM (Q + K)</td><td>Q matrix</td><td>K</td><td>Structure + relatedness</td></tr>
+      <tr><td><strong>MLM (K + PCA)</strong></td><td>PCA</td><td>K</td><td><strong>Final model used for GWAS</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <span class="anchor" id="tassel-mlm"></span>
+  <h3 class="sh3">E) Run the final MLM (K + PCA)</h3>
+  <div class="prose"><p>Run the four traits separately. Record the model, marker, chromosome, genetic position, p-value, FDR/q-value, R² and allele effect. In the paper, a negative allele effect means the allele decreases disease severity (resistance), whereas a positive effect increases disease severity (susceptibility). citeturn2search0</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">TASSEL GUI checklist</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>For each trait:
+  1. Load genotype + trait + PCA + K.
+  2. Select the MLM analysis.
+  3. Use PCA as the fixed population-structure covariate.
+  4. Use K as the random relationship matrix.
+  5. Run MLM.
+  6. Export the association table.
+  7. Save the model output with the trait name.
+
+Outputs:
+  SRT-MRC_MLM_PCAK.txt
+  SRT-SAT_MLM_PCAK.txt
+  APR-SAT17_MLM_PCAK.txt
+  APR-SAT19_MLM_PCAK.txt</code></pre></div>
+</section>
+
+<span class="anchor" id="gapit"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">5</div><div class="sec-title"><h2>GAPIT3 Validation</h2><p>Validate TASSEL signals with six complementary GWAS models</p></div></div>
+  <div class="prose"><p>The article used GAPIT3 to validate loci with GLM, MLM, SUPER, MLMM, FarmCPU and BLINK. The purpose here is not to replace the primary TASSEL analysis, but to identify marker–trait associations supported across independent model assumptions. citeturn2search0</p></div>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R · GAPIT3 template</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">library</span>(GAPIT)
+
+<span class="cm"># Y must contain taxa IDs plus one phenotype column.</span>
+<span class="cm"># GD = genotype data; GM = marker map.</span>
+Y &lt;- pheno[, <span class="rf">c</span>(<span class="rs">"Genotype"</span>, <span class="rs">"SRT_MRC"</span>)]
+GD &lt;- <span class="rf">read.table</span>(<span class="rs">"data/GD.txt"</span>, header = <span class="rv">TRUE</span>, check.names = <span class="rv">FALSE</span>)
+GM &lt;- <span class="rf">read.table</span>(<span class="rs">"data/GM.txt"</span>, header = <span class="rv">TRUE</span>)
+
+<span class="cm"># Run the model(s) supported by your installed GAPIT3 version.</span>
+gwas_mlm &lt;- <span class="rf">GAPIT</span>(
+  Y = Y,
+  GD = GD,
+  GM = GM,
+  model = <span class="rs">"MLM"</span>,
+  PCA.total = <span class="nu">3</span>,
+  file.output = <span class="rv">TRUE</span>
+)</code></pre></div>
+  <div class="callout warn"><div class="callout-ico">⚠️</div><div class="callout-body"><div class="callout-label">Version check</div><p>GAPIT3 function arguments and supported model names have changed across releases. Keep the exact GAPIT version in your analysis log and use <code>?GAPIT</code> to confirm the argument names before running the template. The publication itself reports six GAPIT3 models; the code here is an analysis template, not a claim that a single call reproduces every model in every GAPIT release.</p></div></div>
+</section>
+
+<span class="anchor" id="results"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">6</div><div class="sec-title"><h2>Results: R Codes for the GWAS Outputs</h2><p>Turn TASSEL/GAPIT association tables into publication-style figures</p></div></div>
+  <div class="prose"><p>The paper reports 58 significant MTAs: 34 at the seedling stage and 24 at the adult-plant stage. It identifies shared resistance regions on 2H at 106.53 and 107.37 cM and on 7H at 126.7 cM, with 26 previously reported loci and 32 considered novel. citeturn2search1</p></div>
+
+  <span class="anchor" id="results-pca"></span>
+  <h3 class="sh3">A) PCA figure</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># If Q membership is available, merge it for a K=2 structure plot.</span>
+Q &lt;- <span class="rf">read_table</span>(<span class="rs">"data/structure_Q.csv"</span>)
+pca_plot &lt;- pca |&gt;
+  <span class="rf">left_join</span>(Q, by = <span class="rs">"Genotype"</span>)
+
+<span class="rf">ggplot</span>(pca_plot, <span class="rf">aes</span>(PC1, PC2)) +
+  <span class="rf">geom_point</span>(size = <span class="nu">2.5</span>) +
+  <span class="rf">theme_classic</span>() +
+  <span class="rf">labs</span>(title = <span class="rs">"AM2017 barley population structure"</span>)</code></pre></div>
+
+  <span class="anchor" id="results-qq"></span>
+  <h3 class="sh3">B) QQ plot</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">qq_plot</span> &lt;- <span class="kw">function</span>(p, title) {
+  p &lt;- p[<span class="rf">is.finite</span>(p) &amp; p &gt; <span class="nu">0</span> &amp; p &lt;= <span class="nu">1</span>]
+  expected &lt;- <span class="op">-</span><span class="rf">log10</span>(<span class="rf">ppoints</span>(<span class="rf">length</span>(p)))
+  observed &lt;- <span class="op">-</span><span class="rf">log10</span>(<span class="rf">sort</span>(p))
+  d &lt;- <span class="rf">tibble</span>(expected, observed)
+
+  <span class="rf">ggplot</span>(d, <span class="rf">aes</span>(expected, observed)) +
+    <span class="rf">geom_point</span>(size = <span class="nu">1.2</span>) +
+    <span class="rf">geom_abline</span>(slope = <span class="nu">1</span>, intercept = <span class="nu">0</span>, linetype = <span class="rs">"dashed"</span>) +
+    <span class="rf">labs</span>(x = <span class="rs">"Expected -log10(p)"</span>, y = <span class="rs">"Observed -log10(p)"</span>, title = title) +
+    <span class="rf">theme_classic</span>()
+}
+
+<span class="rf">qq_plot</span>(gwas$P, <span class="rs">"SRT-MRC — TASSEL MLM (PCA + K)"</span>)</code></pre></div>
+
+  <span class="anchor" id="results-manhattan"></span>
+  <h3 class="sh3">C) Manhattan plot for each trait</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R · ggplot2</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">library</span>(tidyverse)
+
+gwas &lt;- <span class="rf">read_tsv</span>(<span class="rs">"tassel/SRT_MRC_MLM_PCAK.txt"</span>)
+
+<span class="cm"># Rename these columns to match your exported TASSEL table.</span>
+gwas &lt;- gwas |&gt;
+  <span class="rf">rename</span>(
+    SNP = Marker,
+    Chr = Chromosome,
+    cM = Position,
+    P = P_Value
+  ) |&gt;
+  <span class="rf">filter</span>(!<span class="rf">is.na</span>(P), P &gt; <span class="nu">0</span>, P &lt;= <span class="nu">1</span>) |&gt;
+  <span class="rf">mutate</span>(Chr = <span class="rf">factor</span>(Chr, levels = <span class="rf">sort</span>(<span class="rf">unique</span>(Chr))),
+         logP = <span class="op">-</span><span class="rf">log10</span>(P))
+
+<span class="rf">ggplot</span>(gwas, <span class="rf">aes</span>(cM, logP)) +
+  <span class="rf">geom_point</span>(size = <span class="nu">0.8</span>) +
+  <span class="rf">facet_wrap</span>(~Chr, scales = <span class="rs">"free_x"</span>, nrow = <span class="nu">2</span>) +
+  <span class="rf">geom_hline</span>(yintercept = <span class="nu">3</span>, linetype = <span class="rs">"dashed"</span>) +
+  <span class="rf">labs</span>(x = <span class="rs">"Genetic position (cM)"</span>, y = <span class="rs">"-log10(p)"</span>) +
+  <span class="rf">theme_classic</span>()</code></pre></div>
+  <div class="callout note"><div class="callout-ico">ℹ️</div><div class="callout-body"><div class="callout-label">Published figure threshold</div><p>Figure 4 in the article displays a horizontal threshold at p &lt; 0.001, corresponding to −log10(p) = 3. The reported significance decision for multiple testing, however, was based on pFDR/q &lt; 0.05. Keep those two concepts separate.</p></div></div>
+
+  <span class="anchor" id="results-fdr"></span>
+  <h3 class="sh3">D) FDR correction and significant MTAs</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Storey q-values: install qvalue if it is not already available.</span>
+<span class="rf">library</span>(qvalue)
+
+gwas &lt;- gwas |&gt;
+  <span class="rf">mutate</span>(qvalue = <span class="rf">qvalue</span>(P)$qvalues,
+         significant = qvalue &lt; <span class="nu">0.05</span>)
+
+sig &lt;- gwas |&gt; <span class="rf">filter</span>(significant)
+
+<span class="rf">nrow</span>(sig)
+<span class="rf">write_csv</span>(sig, <span class="rs">"results/SRT_MRC_significant_MTA.csv"</span>)</code></pre></div>
+  <div class="prose"><p>If the TASSEL export already contains the paper's FDR/q-value column, use that published-model output directly rather than recalculating it unnecessarily. The code is provided to show how the multiple-testing step can be reproduced from raw p-values.</p></div>
+
+  <span class="anchor" id="results-mta"></span>
+  <h3 class="sh3">E) Summarise MTA across the four traits</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="rf">library</span>(tidyverse)
+
+files &lt;- <span class="rf">c</span>(
+  SRT_MRC = <span class="rs">"tassel/SRT_MRC_MLM_PCAK.txt"</span>,
+  SRT_SAT = <span class="rs">"tassel/SRT_SAT_MLM_PCAK.txt"</span>,
+  APR_SAT17 = <span class="rs">"tassel/APR_SAT17_MLM_PCAK.txt"</span>,
+  APR_SAT19 = <span class="rs">"tassel/APR_SAT19_MLM_PCAK.txt"</span>
+)
+
+all_mta &lt;- <span class="rf">imap_dfr</span>(files, ~<span class="rf">read_tsv</span>(.x) |&gt;
+  <span class="rf">mutate</span>(Trait = .y))
+
+<span class="cm"># After standardising column names:</span>
+all_mta &lt;- all_mta |&gt;
+  <span class="rf">filter</span>(qvalue &lt; <span class="nu">0.05</span>)
+
+summary &lt;- all_mta |&gt;
+  <span class="rf">count</span>(Trait, name = <span class="rs">"Significant_MTA"</span>)
+
+summary</code></pre></div>
+</section>
+
+<span class="anchor" id="map"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">7</div><div class="sec-title"><h2>Genetic Map and Candidate-Gene Follow-up</h2><p>From significant SNPs to biologically interpretable loci</p></div></div>
+  <div class="prose"><p>The study mapped significant SNPs with MapChart 2.32 and investigated genes adjacent to significant markers. Candidate genes were identified around 36 SNPs, with functions related to disease resistance. The paper also compared detected loci with previously reported leaf-rust resistance regions. citeturn2search0</p></div>
+  <h3 class="sh3">R: prepare significant markers for a genetic map</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Standardise significant-marker coordinates for export to MapChart.</span>
+map_input &lt;- all_mta |&gt;
+  <span class="rf">select</span>(SNP, Chr, cM, Trait, qvalue, R2, AlleleEffect) |&gt;
+  <span class="rf">arrange</span>(Chr, cM)
+
+<span class="rf">write_tsv</span>(map_input, <span class="rs">"results/significant_markers_for_MapChart.tsv"</span>)</code></pre></div>
+  <h3 class="sh3">R: identify shared loci between seedling and adult stages</h3>
+  <div class="code-block"><div class="code-bar"><span class="code-lang">R</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code><span class="cm"># Exact shared-marker analysis</span>
+seedling &lt;- all_mta |&gt; <span class="rf">filter</span>(Trait %in% <span class="rf">c</span>(<span class="rs">"SRT_MRC"</span>, <span class="rs">"SRT_SAT"</span>))
+adult &lt;- all_mta |&gt; <span class="rf">filter</span>(Trait %in% <span class="rf">c</span>(<span class="rs">"APR_SAT17"</span>, <span class="rs">"APR_SAT19"</span>))
+
+shared_snps &lt;- <span class="rf">intersect</span>(seedling$SNP, adult$SNP)
+shared_snps
+
+<span class="cm"># For regional rather than exact-marker overlap, compare chromosome + cM windows.</span>
+<span class="cm"># Example window: ±1 cM; choose the window a priori and report it.</span></code></pre></div>
+  <div class="callout note"><div class="callout-ico">ℹ️</div><div class="callout-body"><div class="callout-label">Candidate-gene caution</div><p>Candidate genes should be reported from the article's marker-to-gene annotation or from a clearly documented reference genome and physical interval. Do not infer a candidate gene from a marker name alone.</p></div></div>
+</section>
+
+<span class="anchor" id="breeding"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">8</div><div class="sec-title"><h2>Breeding Interpretation</h2><p>Translate statistical associations into breeding hypotheses</p></div></div>
+  <div class="prose">
+    <p>The biological interpretation is straightforward: an allele effect below zero indicates that the allele is associated with lower disease severity and therefore resistance on the study's scoring scale; a positive effect indicates higher severity and susceptibility. The study identified resistance at both seedling and adult stages, including common genomic regions, making the signals relevant to resistance breeding rather than only early-stage screening. citeturn2search0</p>
+    <p>The paper reports 14 genotypes resistant at seedling stage to both isolates, 12 genotypes resistant or moderately resistant at adult stage, and one genotype resistant at seedling stage and moderately resistant at adult stage. These accessions can be treated as germplasm candidates for validation and crossing, while significant SNPs provide starting points for marker-assisted follow-up rather than automatic diagnostic markers. citeturn2search1</p>
+  </div>
+</section>
+
+<span class="anchor" id="repro"></span>
+<section>
+  <div class="sec-header"><div class="sec-num">R</div><div class="sec-title"><h2>Reproducibility Notes</h2><p>What this tutorial reproduces exactly — and what still needs the original files</p></div></div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Analysis</th><th>Published software</th><th>Portfolio implementation</th></tr></thead>
+    <tbody>
+      <tr><td>SNP QC</td><td>Marker filtering / source genotype dataset</td><td>PLINK + R verification</td></tr>
+      <tr><td>STRUCTURE</td><td>STRUCTURE 2.3.4 + STRUCTURE HARVESTER</td><td>Settings documented; R visualisation</td></tr>
+      <tr><td>PCA</td><td>PLINK 1.9</td><td>PLINK command + ggplot2</td></tr>
+      <tr><td>Kinship</td><td>GAPIT / TASSEL</td><td>TASSEL GUI/CLI workflow</td></tr>
+      <tr><td>Primary GWAS</td><td>TASSEL 5.2.53</td><td>Full GUI + pipeline tutorial</td></tr>
+      <tr><td>Validation GWAS</td><td>GAPIT3</td><td>R template for model validation</td></tr>
+      <tr><td>GWAS figures</td><td>TASSEL outputs</td><td>R/ggplot2 QQ + Manhattan + MTA summaries</td></tr>
+      <tr><td>Genetic map</td><td>MapChart 2.32</td><td>R prepares the marker table for MapChart</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn"><div class="callout-ico">⚠️</div><div class="callout-body"><div class="callout-label">No invented results</div><p>The published values on this page are taken from the article. The R scripts are designed to regenerate the figures and tables from the underlying files; they do not fabricate the 58 MTAs or candidate genes when those files are not present in this repository.</p></div></div>
+</section>
+
+<span class="anchor" id="citation"></span>
+<section>
+  <div class="sec-header"><div class="sec-num badge-style">REF</div><div class="sec-title"><h2>Publication &amp; Data</h2><p>Original scientific source</p></div></div>
+  <div class="citation">
+    Amouzoune M, Rehman S, Benkirane R, Verma S, Gyawali S, Al-Jaboobi M, Verma RPS, Kehel Z, Amri A. (2022). <strong>Genome-Wide Association Study of Leaf Rust Resistance at Seedling and Adult Plant Stages in a Global Barley Panel.</strong> <em>Agriculture</em>, 12(11), 1829. DOI: 10.3390/agriculture12111829.
+  </div>
+  <div class="callout note"><div class="callout-ico">ℹ️</div><div class="callout-body"><div class="callout-label">Source</div><p>Published article: <a href="https://www.mdpi.com/2077-0472/12/11/1829" target="_blank" rel="noopener noreferrer">MDPI Agriculture 12(11), 1829</a>. The article is the authoritative source for the Materials and Methods and reported results used in this tutorial. citeturn2search0</p></div></div>
+  <div class="btn-row">
+    <a href="https://www.mdpi.com/2077-0472/12/11/1829" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Published article</a>
+    <a href="https://github.com/MariamAmouzoune/my_website" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Website repository</a>
+    <a href="../../portfolio.html" class="btn btn-soft">← Back to Portfolio</a>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner"><div class="footer-grid">
+    <div><h3 class="footer-heading">Mariam Amouzoune</h3><p class="footer-text">PhD Plant Breeding &amp; Molecular Biology<br>Bioinformatician · GWAS · NGS<br>Ibn Tofail University × ICARDA</p></div>
+    <div><h4 class="footer-subheading">Quick Links</h4><ul class="footer-list"><li><a href="../../index.html" class="footer-link">Home</a></li><li><a href="../../about.html" class="footer-link">About</a></li><li><a href="../../research.html" class="footer-link">Research</a></li><li><a href="../../portfolio.html" class="footer-link">Portfolio</a></li><li><a href="../../contact.html" class="footer-link">Contact</a></li></ul></div>
+    <div><h4 class="footer-subheading">Connect</h4><ul class="footer-list"><li><a href="mailto:mariam.amouzoune@gmail.com" class="footer-link">Email</a></li><li><a href="https://www.researchgate.net/profile/Mariam_Amouzoune" target="_blank" rel="noopener noreferrer" class="footer-link">ResearchGate</a></li><li><a href="https://www.linkedin.com/in/mariam-amouzoune-77bb02182/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li></ul></div>
+  </div><div class="copyright-bar"><span class="copyright-text">© 2026 Mariam Amouzoune. All rights reserved.</span><span class="copyright-accent">Plant Science &amp; Bioinformatics</span></div></div>
+</footer>
+
+<script>
+window.addEventListener('scroll',function(){
+  var s=document.documentElement, p=(s.scrollTop/(s.scrollHeight-s.clientHeight))*100;
+  var fill=document.getElementById('progress-fill'); if(fill) fill.style.width=p+'%';
+});
+function copyCode(btn){
+  var pre=btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(function(){
+    btn.textContent='Copied!'; setTimeout(function(){btn.textContent='Copy';},2000);
+  });
+}
+const anchors=document.querySelectorAll('.anchor'), tocLinks=document.querySelectorAll('#toc a');
+const io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){tocLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-60px 0px -70% 0px'});
+anchors.forEach(function(a){io.observe(a);});
+(function(){
+  var btn=document.getElementById('menuToggle'),menu=document.getElementById('mobileMenu'); if(!btn||!menu)return;
+  btn.addEventListener('click',function(){var open=menu.classList.toggle('show');btn.setAttribute('aria-expanded',String(open));});
+  document.addEventListener('click',function(e){if(!btn.contains(e.target)&&!menu.contains(e.target)){menu.classList.remove('show');btn.setAttribute('aria-expanded','false');}});
+  var hdr=document.getElementById('siteHeader'); if(hdr) window.addEventListener('scroll',function(){hdr.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+})();
+</script>
+</body>
+</html>
