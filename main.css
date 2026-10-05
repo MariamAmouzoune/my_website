@@ -1189,18 +1189,11 @@ td code { font-family: monospace; font-size: .82em; background: rgba(26,58,42,.0
 #lb-close:hover { background: rgba(255,255,255,.25); }
 
 
-/* Code block readability override */
+/* ── Code block readability ─────────────────────────────────── */
 .code-block pre,
-.code-block pre code {
-  color: #ffffff;
-}
-.code-block .kw,
-.code-block .fn,
-.code-block .rf,
-.code-block .rs,
-.code-block .rv,
-.code-block .nu,
-.code-block .op,
-.code-block .cm {
-  color: #ffffff;
+.code-block pre code,
+.code-block pre code span,
+.code-block pre code span[class] {
+  color: #ffffff !important;
+  text-shadow: none !important;
 }
