@@ -1,81 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../main.css"><title>Barley LD Decay | Mariam Amouzoune</title></head><body>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../../main.css"><title>Linkage Disequilibrium at Leaf-Rust Associations | Mariam Amouzoune</title></head><body>
 <header class="site-header" id="siteHeader"><div class="header-inner"><a href="../../index.html" class="logo-link"><span class="logo-text">Mariam Amouzoune</span></a><nav class="desktop-nav"><a href="../../index.html" class="nav-link">Home</a><a href="../../about.html" class="nav-link">About</a><a href="../../research.html" class="nav-link">Research</a><a href="../../portfolio.html" class="nav-link active">Portfolio</a><a href="../../contact.html" class="nav-link">Contact</a></nav><button class="hamburger-btn" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button></div><nav class="mobile-menu" id="mobileMenu"><a href="../../index.html">Home</a><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../portfolio.html">Portfolio</a><a href="../../contact.html">Contact</a></nav></header>
-<div id="progress-bar"><div id="progress-fill"></div></div><div class="hero"><div class="hero-inner"><div class="hero-breadcrumb"><a href="../../portfolio.html">Portfolio</a> › Linkage disequilibrium</div><div class="hero-badge">Population Genomics · PLINK + R</div><h1>Genome-wide Linkage Disequilibrium Decay in Barley</h1><p class="hero-desc">Estimate pairwise linkage disequilibrium, summarize SNP correlations by physical distance, and visualize how LD changes across the barley genome.</p><div class="hero-tags"><span class="hero-tag">PLINK 1.9</span><span class="hero-tag">r²</span><span class="hero-tag">10-kb bins</span><span class="hero-tag">ggplot2</span></div></div></div>
-<div class="page-layout"><aside class="sidebar"><div class="toc-card"><div class="toc-header">Table of Contents</div><div class="toc-body" id="toc"><a href="#overview">Overview</a><a href="#workflow">Workflow</a><a href="#code">R code</a><a href="#decay">Decay distance</a><a href="#repro">Reproducibility</a></div><div class="toc-links"><a href="../../portfolio.html">← Back to Portfolio</a></div></div></aside><main class="content">
-<span class="anchor" id="overview"></span><section><div class="prose"><p>Linkage disequilibrium (LD) measures non-random association between alleles at different loci. This workflow calculates pairwise (r^2) for SNP pairs, derives physical distance from their base-pair positions, then summarizes mean (r^2) in 10-kb bins.</p><p>PLINK must be installed and accessible at the path specified in the script. LD calculation can produce a very large file, so use a clearly stated window and retain QC-filtered variants.</p></div></section>
-<span class="anchor" id="workflow"></span><section><div class="sec-header"><div class="sec-num">01</div><div class="sec-title"><h2>Analysis workflow</h2><p>Genotype QC → pairwise r² → distance bins → curve</p></div></div><div class="workflow"><div class="wf-step"><div class="wf-box">VCF</div><span>Input genotypes</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">PLINK</div><span>Binary files</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">Pairwise r²</div><span>LD output</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">R plot</div><span>Decay curve</span></div></div></section>
-<span class="anchor" id="code"></span><section><div class="sec-header"><div class="sec-num">R</div><div class="sec-title"><h2>R code</h2><p>Run PLINK and plot mean LD by distance</p></div></div><div class="code-block"><div class="code-bar"><span class="code-lang">R · PLINK + LD</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div><pre><code>library(dplyr)
-library(ggplot2)
-
-# Update this path for your computer
-plink_path <- "C:/Users/DELL/Documents/plink_win64/plink.exe"
-vcf_file <- "5OK_AM17.vcf"
-
-stopifnot(file.exists(plink_path), file.exists(vcf_file))
-
-run_plink <- function(args) {
-  system2(plink_path, args = args)
-}
-
-# Convert VCF to PLINK binary format after marker QC
-run_plink(c("--vcf", vcf_file,
-            "--maf", "0.05",
-            "--geno", "0.10",
-            "--make-bed",
-            "--out", "geno_qc"))
-
-# Check PLINK created the files before proceeding
-stopifnot(file.exists("geno_qc.bed"),
-          file.exists("geno_qc.bim"),
-          file.exists("geno_qc.fam"))
-
-# Calculate pairwise LD within a maximum 1,000-kb window
-run_plink(c("--bfile", "geno_qc",
-            "--r2",
-            "--ld-window", "99999",
-            "--ld-window-kb", "1000",
-            "--ld-window-r2", "0",
-            "--out", "barley_LD"))
-
-LD <- read.table("barley_LD.ld", header = TRUE)
-
-LD <- LD %>%
-  mutate(Distance_kb = abs(BP_B - BP_A) / 1000) %>%
-  filter(is.finite(R2), Distance_kb > 0)
-
-# Mean r² per 10-kb bin, calculated genome-wide
-ld_decay <- LD %>%
-  mutate(Bin = floor(Distance_kb / 10) * 10) %>%
-  group_by(Bin) %>%
-  summarise(Mean_R2 = mean(R2, na.rm = TRUE),
-            Median_R2 = median(R2, na.rm = TRUE),
-            Pair_count = n(),
-            .groups = "drop") %>%
-  arrange(Bin)
-
-ggplot(ld_decay, aes(x = Bin, y = Mean_R2)) +
-  geom_line(colour = "#2d5c42", linewidth = 1) +
-  geom_point(colour = "#c8a84b", size = 1.5, alpha = 0.7) +
-  coord_cartesian(ylim = c(0, 1)) +
-  labs(title = "Genome-wide linkage disequilibrium decay in barley",
-       subtitle = "Mean pairwise r² within 10-kb physical-distance bins",
-       x = "Physical distance between SNPs (kb)",
-       y = expression("Mean linkage disequilibrium (" * r^2 * ")")) +
-  theme_classic(base_size = 13) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5),
-        axis.title = element_text(face = "bold"))</code></pre></div></section>
-<span class="anchor" id="published-result"></span><section><div class="sec-header"><div class="sec-num">FIG</div><div class="sec-title"><h2>Published LD-decay figure</h2><p>Reference result from the barley study</p></div></div><figure class="project-figure"><img src="figures/ld-decay-published.png" alt="Published linkage disequilibrium decay plot for barley" loading="lazy" style="display:block;width:100%;height:auto;max-width:900px;margin:auto;border-radius:8px;"><figcaption>Published LD-decay figure supplied for this project. The distance axis is in kilobases and the vertical axis reports r². Use the underlying data and original methods when reporting a numeric decay distance; the figure alone does not establish the exact threshold or estimation procedure.</figcaption></figure></section>
-<span class="anchor" id="decay"></span><section><div class="sec-header"><div class="sec-num">02</div><div class="sec-title"><h2>Estimating an LD-decay distance</h2><p>Choose and report a threshold transparently</p></div></div><div class="prose"><p>A common descriptive approach is to report the distance at which mean (r^2) falls below a preselected threshold. A single last bin above a threshold does not prove LD has “dropped and stayed” below it; inspect the curve and define a sustained-below rule before reporting a decay distance.</p></div><div class="code-block"><div class="code-bar"><span class="code-lang">R · Threshold summary</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div><pre><code># Example descriptive threshold; justify this choice in the methods
-threshold <- 0.20
-
-ld_cutoff <- ld_decay %>%
-  filter(Mean_R2 >= threshold) %>%
-  summarise(Last_bin_above_threshold_kb =
-              if (n() == 0) NA_real_ else max(Bin))
-
-print(ld_cutoff)</code></pre></div></section>
-<span class="anchor" id="repro"></span><section><div class="sec-header"><div class="sec-num">REF</div><div class="sec-title"><h2>Reproducibility notes</h2></div></div><div class="callout warn"><div class="callout-ico">⚠️</div><div class="callout-body"><div class="callout-label">Check chromosome coordinates</div><p>Do not group SNP pairs across chromosomes as if they were physically adjacent. The genome-wide curve here is a broad summary; for chromosome-specific curves, calculate distances only for pairs on the same chromosome and facet by chromosome. PLINK options and missingness filtering should be recorded with the results.</p></div></div><div class="btn-row"><a href="../../portfolio.html" class="btn btn-primary">← Back to Portfolio</a><a href="https://www.cog-genomics.org/plink/1.9/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">PLINK documentation</a></div></section>
-</main></div><footer class="site-footer"><div class="footer-inner"><div class="copyright-bar"><span class="copyright-text">© 2026 Mariam Amouzoune</span><span class="copyright-accent">Plant Science &amp; Bioinformatics</span></div></div></footer>
-<script>function copyCode(btn){const pre=btn.closest('.code-block').querySelector('pre');navigator.clipboard.writeText(pre.innerText).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',2000);});}(function(){var b=document.getElementById('menuToggle'),m=document.getElementById('mobileMenu');if(b&&m)b.addEventListener('click',function(){var o=m.classList.toggle('show');b.setAttribute('aria-expanded',String(o));});var h=document.getElementById('siteHeader');if(h)window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>60);},{passive:true});})();window.addEventListener('scroll',function(){var s=document.documentElement,p=(s.scrollTop/(s.scrollHeight-s.clientHeight))*100,f=document.getElementById('progress-fill');if(f)f.style.width=p+'%';});</script></body></html>
+<div class="hero"><div class="hero-inner"><div class="hero-breadcrumb"><a href="../../portfolio.html">Portfolio</a> › Linkage disequilibrium</div><div class="hero-badge">Association Mapping · SNP Relationships</div><h1>Linkage Disequilibrium and Resolution of Leaf-Rust Associations in Barley</h1><p class="hero-desc">Understand how linkage disequilibrium (LD) connects nearby SNPs and affects the interpretation and resolution of GWAS signals in the AM2017 barley panel.</p><div class="hero-tags"><span class="hero-tag">SNP markers</span><span class="hero-tag">r²</span><span class="hero-tag">GWAS interpretation</span><span class="hero-tag">Barley</span></div></div></div>
+<div class="page-layout"><aside class="sidebar"><div class="toc-card"><div class="toc-header">On this page</div><div class="toc-body"><a href="#overview">Overview</a><a href="#study">What the article establishes</a><a href="#interpretation">Interpretation</a><a href="#workflow">Reproducible workflow</a><a href="#limits">Important distinction</a></div><div class="toc-links"><a href="https://www.mdpi.com/2077-0472/12/11/1829" target="_blank" rel="noopener noreferrer">Read the article</a><a href="../../portfolio.html">← Back to Portfolio</a></div></div></aside><main class="content">
+<section id="overview"><div class="prose"><p>Linkage disequilibrium (LD) describes the non-random association of alleles at different loci. In association mapping, a significant SNP can tag a nearby causal variant because the alleles are inherited together more often than expected under independence. LD therefore influences the resolution and transferability of GWAS signals.</p><p>This project is framed around interpreting marker–trait associations for leaf-rust resistance in the AM2017 barley panel. It should not be presented as a published genome-wide LD-decay analysis: the article's main reported outcomes are 58 significant marker–trait associations (MTAs), not a single genome-wide LD-decay distance.</p></div></section>
+<section id="study"><div class="sec-header"><div class="sec-num">01</div><div class="sec-title"><h2>Context from the published study</h2><p>58 MTAs across seedling and adult-plant resistance</p></div></div><div class="prose"><p>The study combined disease-response phenotypes with 36,793 SNP markers and identified 58 significant MTAs: 34 associated with seedling resistance to the SRT-MRC and SRT-SAT isolates, and 24 associated with adult-plant resistance assessed at Sidi Allal Tazi in 2017 and 2019. Genomic regions on chromosome 2H (106.53 cM and 107.37 cM) and chromosome 7H (126.7 cM) were reported as shared between seedling and adult-plant resistance stages.</p><p>These overlaps indicate that some genomic regions may contribute to resistance measured at different stages. They do not, by themselves, prove that the same causal gene is responsible for every association.</p></div></section>
+<section id="interpretation"><div class="sec-header"><div class="sec-num">02</div><div class="sec-title"><h2>How to interpret LD</h2></div></div><div class="prose"><ul><li><strong>High r²:</strong> two markers carry similar allele information in the panel and may tag the same underlying region.</li><li><strong>Low r²:</strong> the markers provide less redundant information; a significant association at one marker should not automatically be extended to another.</li><li><strong>Physical proximity is not sufficient:</strong> nearby markers may have weak LD, and markers farther apart can sometimes show LD due to population history or structure.</li><li><strong>GWAS signal is not causality:</strong> an associated marker identifies a genomic clue, not proof that the SNP itself changes resistance.</li></ul></div></section>
+<section id="workflow"><div class="sec-header"><div class="sec-num">03</div><div class="sec-title"><h2>Recommended reproducible workflow</h2><p>Use consistent marker IDs and genome coordinates</p></div></div><div class="workflow"><div class="wf-step"><div class="wf-box">QC SNPs</div><span>MAF / missingness</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">Pairwise r²</div><span>Defined marker set</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">Coordinates</div><span>Same reference map</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">Interpret</div><span>LD + trait results</span></div></div><div class="prose"><p>For a targeted follow-up, calculate pairwise LD among the significant markers or within each candidate region using the original genotype calls and a consistent physical/genetic map. If estimating genome-wide LD decay as a separate exploratory analysis, label it clearly as an additional analysis and report the SNP filters, chromosome handling, distance window, summary statistic, and decay threshold.</p></div></section>
+<section id="limits"><div class="callout warn"><div class="callout-ico">⚠️</div><div class="callout-body"><div class="callout-label">Correction to the previous page</div><p>The earlier page described a generic PLINK genome-wide LD-decay curve and displayed a figure that was not established as a result from the 2022 AM2017 paper. That should not be attributed to this publication without verifying the underlying data and source. This revised page separates published GWAS findings from a possible additional LD analysis.</p></div></div><div class="btn-row"><a href="../../portfolio.html" class="btn btn-primary">← Back to Portfolio</a><a href="https://www.mdpi.com/2077-0472/12/11/1829" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Published article</a></div></section>
+</main></div><footer class="site-footer"><div class="footer-inner"><div class="copyright-bar"><span class="copyright-text">© 2026 Mariam Amouzoune</span><span class="copyright-accent">Plant Science & Bioinformatics</span></div></div></footer>
+<script>(function(){var b=document.getElementById('menuToggle'),m=document.getElementById('mobileMenu');if(b&&m)b.addEventListener('click',function(){var o=m.classList.toggle('show');b.setAttribute('aria-expanded',String(o));});var h=document.getElementById('siteHeader');if(h)window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>60);},{passive:true});})();</script></body></html>
