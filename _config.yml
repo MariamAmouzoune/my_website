@@ -1,0 +1,8 @@
+title: "Mariam Amouzoune | Plant Scientist & Bioinformatician"
+description: "Plant scientist and bioinformatician working in plant breeding, molecular biology, GWAS, and genomics."
+url: "https://mariamamouzoune.github.io"
+baseurl: "/my_website"
+markdown: kramdown
+permalink: pretty
+exclude:
+  - README.md
