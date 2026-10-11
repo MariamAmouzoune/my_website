@@ -1,22 +1,11 @@
-# Mariam Amouzoune — Jekyll website
+# Mariam Amouzoune — Personal Website
 
-This repository is configured as a Jekyll site for GitHub Pages.
+This repository contains the HTML/CSS website published with GitHub Pages.
 
 ## Structure
 
-- `_config.yml` — site title, description, URL, and project-site base URL.
-- `_layouts/default.html` — shared HTML document structure.
-- `_includes/header.html` and `_includes/footer.html` — shared navigation and footer.
-- HTML pages retain their existing filenames and paths and use Jekyll front matter.
-- `main.css` and existing project figures/assets remain in place.
+- Main pages: `index.html`, `about.html`, `research.html`, `portfolio.html`, and `contact.html`.
+- Shared styling: `main.css`.
+- Research project pages and figures are stored in the `portfolio/` directory.
 
-## Local preview
-
-Install Ruby and Jekyll, then run:
-
-```sh
-gem install jekyll
-jekyll serve
-```
-
-Open the local URL printed by Jekyll. GitHub Pages builds the site from the configured publishing branch and folder.
+The website uses its original HTML page structure and stylesheet. To preview locally, open `index.html` in a browser or run a local static web server from the repository root.
