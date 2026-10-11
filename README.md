@@ -12,11 +12,11 @@ This repository is configured as a Jekyll site for GitHub Pages.
 
 ## Local preview
 
-Install Ruby and Bundler, then run:
+Install Ruby and Jekyll, then run:
 
 ```sh
-gem install bundler jekyll
-bundle exec jekyll serve
+gem install jekyll
+jekyll serve
 ```
 
 Open the local URL printed by Jekyll. GitHub Pages builds the site from the configured publishing branch and folder.
