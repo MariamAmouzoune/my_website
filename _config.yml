@@ -1,0 +1,20 @@
+title: "Mariam Amouzoune | Plant Scientist & Bioinformatician"
+description: "Plant science, crop disease resistance, genomics, and bioinformatics portfolio."
+url: "https://mariamamouzoune.com"
+baseurl: ""
+
+# Keep the existing .html URLs and static assets unchanged during migration.
+permalink: pretty
+markdown: kramdown
+
+plugins:
+  - jekyll-seo-tag
+
+# Preserve the existing hand-authored HTML, CSS, JavaScript, and project assets.
+include:
+  - portfolio
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
