@@ -4,7 +4,6 @@ url: "https://mariamamouzoune.com"
 baseurl: ""
 
 # Keep the existing .html URLs and static assets unchanged during migration.
-permalink: pretty
 markdown: kramdown
 
 plugins:
