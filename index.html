@@ -360,5 +360,33 @@ title: "Home"
 })();
 </script>
 
+
+<script>
+/* Defensive cleanup for the obsolete setup-instructions block that was
+   previously appended to this page. */
+(function () {
+  var markers = ["How to use", "home11.jpg", "zero dependencies beyond Google Fonts"];
+  function removeObsoleteBlock(el) {
+    var text = el.innerText || el.textContent || "";
+    if (!markers.every(function (marker) { return text.indexOf(marker) !== -1; })) return false;
+    var children = Array.prototype.slice.call(el.children || []);
+    for (var i = 0; i < children.length; i++) {
+      if (removeObsoleteBlock(children[i])) return true;
+    }
+    if (el !== document.body) {
+      el.remove();
+      return true;
+    }
+    return false;
+  }
+  function cleanup() { removeObsoleteBlock(document.body); }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", cleanup);
+  } else {
+    cleanup();
+  }
+})();
+</script>
+
 </body>
 </html>
