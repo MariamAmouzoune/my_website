@@ -13,45 +13,47 @@ title: "Barley PCA"
 <div class="code-block"><div class="code-bar"><span class="code-lang">R · PCA</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div><pre><code>library(ggplot2)
 library(dplyr)
 
-# gt_qc: SNPs in rows, genotypes in columns
-stopifnot(!is.null(colnames(gt_qc)))
-stopifnot(all(c("Taxa", "RowType") %in% names(pheno)))
-
-# PCA expects individuals in rows and markers in columns
+# 1. Transpose the QC-filtered genotype matrix so individuals are rows and SNPs are columns
 geno_pca <- t(gt_qc)
 
-# Remove invariant markers to avoid zero-variance scaling
+# 2. Calculate each SNP's standard deviation and remove invariant SNPs
+#    because they cannot contribute to PCA and cause problems with scaling.
 marker_sd <- apply(geno_pca, 2, sd, na.rm = TRUE)
 geno_pca <- geno_pca[, is.finite(marker_sd) & marker_sd > 0, drop = FALSE]
 
-# Impute remaining missing genotypes with each marker's mean
+# 3. Impute missing genotype values using the mean dosage for each SNP
 for (j in seq_len(ncol(geno_pca))) {
   miss <- is.na(geno_pca[, j])
   if (any(miss)) geno_pca[miss, j] <- mean(geno_pca[, j], na.rm = TRUE)
 }
 
+# 4. Center and scale SNP dosages, then calculate principal components
 pca <- prcomp(geno_pca, center = TRUE, scale. = TRUE)
 
+# 5. Extract each individual's scores for the first two principal components
 PC <- data.frame(
   Taxa = rownames(pca$x),
   PC1 = pca$x[, 1],
   PC2 = pca$x[, 2]
 )
 
+# 6. Calculate the percentage of total variance explained by each PC
 pca_var <- summary(pca)$importance[2, ]
 PC1_var <- round(100 * pca_var["PC1"], 2)
 PC2_var <- round(100 * pca_var["PC2"], 2)
 
-# Make sure Taxa IDs use the same format in both tables
+# 7. Standardize sample IDs and encode row type as a labeled factor
 pheno_pca <- pheno %>%
   mutate(Taxa = as.character(Taxa),
          RowType = factor(RowType, levels = c(2, 6),
                           labels = c("Two-row", "Six-row")))
 
+# 8. Join PCA scores to phenotype metadata by the individual ID
 PC <- PC %>%
   mutate(Taxa = as.character(Taxa)) %>%
   inner_join(pheno_pca %>% select(Taxa, RowType), by = "Taxa")
 
+# 9. Plot PC1 against PC2 and distinguish the two row types by colour
 ggplot(PC, aes(PC1, PC2, colour = RowType)) +
   geom_point(size = 2.6, alpha = 0.85) +
   scale_colour_manual(values = c("Two-row" = "#2d5c42",
