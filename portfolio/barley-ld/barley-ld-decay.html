@@ -18,12 +18,9 @@ plink_path <- "C:/Users/DELL/Documents/plink_win64/plink.exe"
 
 setwd("C:/Users/DELL/Desktop/Articles_PhD/Article 2_AM17/Data")
 
-# 2. Test whether R can communicate with PLINK
-system2(plink_path, args = "--version")
-
 # Function to run PLINK
 runPLINK <- function(PLINKoptions = "") {
-  system(paste("C:/Users/DELL/Documents/plink_win64/plink", PLINKoptions))
+  system(paste(shQuote(plink_path), PLINKoptions))
 }
 
 # Convert VCF to PLINK binary files after marker QC
@@ -44,28 +41,11 @@ ld_decay <- LD %>%
   group_by(Bin) %>%
   summarise(
     Mean_R2 = mean(R2, na.rm = TRUE),
-    Median_R2 = median(R2, na.rm = TRUE)
+    Median_R2 = median(R2, na.rm = TRUE),
+    .groups = "drop"
   )
 
-# Plot 1: Green-and-gold LD-decay plot
-ggplot(ld_decay, aes(x = Bin, y = Mean_R2)) +
-  geom_line(colour = "#2d5c42", linewidth = 1) +
-  geom_point(colour = "#c8a84b", size = 1.5, alpha = 0.7) +
-  coord_cartesian(ylim = c(0, 1)) +
-  labs(
-    title = "Genome-wide linkage disequilibrium decay in barley",
-    subtitle = "Mean pairwise r² within 10-kb physical-distance bins",
-    x = "Physical distance between SNPs (kb)",
-    y = expression("Mean linkage disequilibrium (" * r^2 * ")")
-  ) +
-  theme_classic(base_size = 13) +
-  theme(
-    plot.title = element_text(hjust = 0.5, face = "bold"),
-    plot.subtitle = element_text(hjust = 0.5),
-    axis.title = element_text(face = "bold")
-  )
-
-# Plot 2: Blue-line LD-decay plot
+# Plot LD decay
 ggplot(ld_decay, aes(x = Bin, y = Mean_R2)) +
   geom_line(color = "blue", linewidth = 1.2) +
   labs(
@@ -83,7 +63,11 @@ ggplot(ld_decay, aes(x = Bin, y = Mean_R2)) +
 LD_cutoff_values <- ld_decay %>%
   filter(Mean_R2 >= 0.2) %>%
   summarise(
-    LDecay_Distance_Kb = max(Bin, na.rm = TRUE)
+    LDecay_Distance_Kb = if (any(Mean_R2 >= 0.2)) {
+      max(Bin[Mean_R2 >= 0.2], na.rm = TRUE)
+    } else {
+      NA_real_
+    }
   )
 
 print(LD_cutoff_values)</code></pre></div></section>
