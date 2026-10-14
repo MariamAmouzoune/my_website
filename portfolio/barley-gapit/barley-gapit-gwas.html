@@ -14,18 +14,12 @@ library(dplyr)
 library(stringr)
 library(GAPIT)
 
-# 1. Import phenotype data and standardize IDs
+# # # # 1. Import phenotypes
 pheno <- read.csv("pheno.csv", sep = ";", stringsAsFactors = FALSE)
-pheno <- pheno %>%
-  mutate(Taxa = str_replace(as.character(Taxa), "^AM-", ""))
+
 
 traits <- c("SRT_MRC", "SRT_SAT", "APR_SAT17", "APR_SAT19")
 required_cols <- c("Taxa", "RowType", traits)
-stopifnot(all(required_cols %in% names(pheno)))
-stopifnot(!anyDuplicated(pheno$Taxa))
-
-# Numeric row-type covariate (six-row = 1; two-row = 0)
-pheno$RowType_Num <- ifelse(pheno$RowType == 6, 1, 0)
 
 # 2. Read the actual VCF as a vcfR object
 geno <- read.vcfR("5OK_AM17.vcf", verbose = FALSE)
@@ -83,17 +77,11 @@ rownames(my_GD) <- NULL
 my_GM <- map_qc
 colnames(my_GM) <- c("SNP", "Chromosome", "Position")
 
-# Optional numeric row-type covariate as CV.
-# For sNMF ancestry covariates, replace this with an ID-aligned Q matrix.
-my_CV <- data.frame(Taxa = common_taxa,
-                    RowType_Num = pheno_gwas$RowType_Num)
-
 # 8. Run selected GAPIT models for the four traits
 myGAPIT <- GAPIT(
   Y = my_Y,
   GD = my_GD,
   GM = my_GM,
-  CV = my_CV,
   model = c("MLM", "FarmCPU", "Blink"),
   PCA.total = 0,
   Multiple_analysis = TRUE,
