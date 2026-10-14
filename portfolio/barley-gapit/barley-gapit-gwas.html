@@ -31,6 +31,7 @@ gt_numeric <- ifelse(gt %in% c("0/0", "0|0"), 0,
               ifelse(gt %in% c("1/1", "1|1"), 2, NA_real_)))
 gt_numeric <- matrix(as.numeric(gt_numeric), nrow = nrow(gt),
                      ncol = ncol(gt), dimnames = dimnames(gt))
+genotype_taxa_all <- colnames(gt_numeric)
 
 map <- data.frame(
   SNP = geno@fix[, "ID"],
@@ -77,15 +78,26 @@ rownames(my_GD) <- NULL
 my_GM <- map_qc
 colnames(my_GM) <- c("SNP", "Chromosome", "Position")
 
-# 8. Run selected GAPIT models for the four traits
+# 8. Import the LEA sNMF ancestry estimates and align them to sample IDs.
+#    The Q-matrix rows must follow the original VCF genotype-sample order.
+q_df <- read.csv("barley_Q_matrix.csv", stringsAsFactors = FALSE)
+stopifnot(nrow(q_df) == length(genotype_taxa_all))
+my_CV <- data.frame(
+  Taxa = common_taxa,
+  Ancestry_1 = q_df$Ancestry_1[match(common_taxa, genotype_taxa_all)]
+)
+stopifnot(!anyNA(my_CV$Ancestry_1))
+
+# 9. Execute multi-model GAPIT analysis
 myGAPIT <- GAPIT(
-  Y = my_Y,
-  GD = my_GD,
-  GM = my_GM,
-  model = c("MLM", "FarmCPU", "Blink"),
-  PCA.total = 0,
-  Multiple_analysis = TRUE,
-  file.output = TRUE
+  Y = my_Y,                            # Phenotype dataframe (Taxa + Traits)
+  GD = my_GD,                          # Genotype dataframe (Taxa + SNPs)
+  GM = my_GM,                          # SNP Map dataframe (SNP + Chrom + Pos)
+  CV = my_CV,                          # Fixed Covariates (sNMF Q1 column only) calculated with LEA package
+  model = c("MLM", "FarmCPU", "Blink"), # High-performance GWAS models
+  PCA.total = 0,                       # Set to 0 because we explicitly provide sNMF structure via CV
+  Multiple_analysis = TRUE,            # Enables seamless loop across all 4 traits
+  file.output = TRUE                   # Save Manhattan/QQ plots directly to your setwd()
 )</code></pre></div></section>
 <span class="anchor" id="results"></span><section><div class="sec-header"><div class="sec-num">FIG</div><div class="sec-title"><h2>GWAS results: Manhattan plots</h2><p>GAPIT association results across four leaf-rust traits</p></div></div><div class="prose"><p>The following figures are the association plots supplied for this GAPIT-in-R project: APR-SAT17, APR-SAT19, SRT-MRC, and SRT-SAT. Confirm the trait labels, model used to generate each plot, and the significance threshold against the analysis outputs before describing any marker as significant.</p></div><figure class="project-figure"><img src="figures/manhattan-apr-sat17.png" alt="Manhattan plot for APR-SAT17" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;"><figcaption>APR-SAT17 — adult-plant resistance phenotype from the 2016–2017 field season.</figcaption></figure><figure class="project-figure"><img src="figures/manhattan-apr-sat19.png" alt="Manhattan plot for APR-SAT19" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;"><figcaption>APR-SAT19 — adult-plant resistance phenotype from the 2018–2019 field season.</figcaption></figure><figure class="project-figure"><img src="figures/manhattan-srt-mch.png" alt="GAPIT Manhattan plot for seedling resistance to the SRT-MRC isolate" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;"><figcaption>SRT-MRC — seedling resistance to the MRC isolate. The image filename is retained for compatibility with the existing project asset.</figcaption></figure><figure class="project-figure"><img src="figures/manhattan-srt-sat.png" alt="Manhattan plot for SRT-SAT" loading="lazy" style="display:block;width:100%;height:auto;border-radius:8px;"><figcaption>SRT-SAT — seedling resistance to the SAT isolate.</figcaption></figure></section>
 <span class="anchor" id="models"></span><section><div class="sec-header"><div class="sec-num">02</div><div class="sec-title"><h2>Model interpretation</h2><p>Use complementary models, not just the smallest p-value</p></div></div><div class="prose"><ul><li><strong>MLM:</strong> accounts for relatedness through a kinship matrix; model configuration should be checked for the installed GAPIT version.</li><li><strong>FarmCPU and BLINK:</strong> multi-locus approaches that can complement the mixed model.</li><li>Review QQ plots, Manhattan plots, effect sizes, marker quality, and consistency across traits/models.</li><li>Control multiple testing and distinguish exploratory associations from independently validated markers.</li></ul></div></section>
