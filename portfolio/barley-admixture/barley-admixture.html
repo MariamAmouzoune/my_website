@@ -11,11 +11,6 @@ title: "Barley Admixture"
 <span class="anchor" id="workflow"></span><section><div class="sec-header"><div class="sec-num">01</div><div class="sec-title"><h2>Analysis workflow</h2><p>VCF conversion → sNMF → cross-entropy → Q matrix</p></div></div><div class="workflow"><div class="wf-step"><div class="wf-box">VCF</div><span>Genotypes</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">.geno</div><span>LEA input</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">sNMF</div><span>K = 1–5</span></div><div class="wf-arrow">→</div><div class="wf-step"><div class="wf-box">Q matrix</div><span>Ancestry</span></div></div></section>
 <span class="anchor" id="code"></span><section><div class="sec-header"><div class="sec-num">R</div><div class="sec-title"><h2>R code</h2><p>Run candidate K values and extract a Q matrix</p></div></div><div class="code-block"><div class="code-bar"><span class="code-lang">R · LEA / sNMF</span><button class="code-copy" onclick="copyCode(this)">Copy</button></div><pre><code>library(LEA)
 
-vcf_file <- "5OK_AM17.vcf"
-geno_file <- "5OK_AM17.geno"
-
-stopifnot(file.exists(vcf_file))
-
 # Convert VCF genotypes to LEA's .geno format
 vcf2geno(vcf_file, output = geno_file)
 
@@ -28,7 +23,7 @@ plot(project, col = "#2d5c42", pch = 19, type = "b",
      xlab = "Number of ancestral clusters (K)",
      ylab = "Cross-entropy")
 
-# Select K=2 only if supported by cross-entropy and biology
+# We will select K = 2 for this analysis
 selected_K <- 2
 ce <- cross.entropy(project, K = selected_K)
 best_run <- which.min(ce)
